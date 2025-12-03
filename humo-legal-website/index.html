@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HUMO LEGAL — Law Firm</title>
+  <meta name="description" content="HUMO LEGAL — Professional lawyers providing civil, economic, and administrative law services." />
+
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       CSS VARIABLES & THEME SETUP
+       ========================================= */
+    :root {
+      /* Brand Colors */
+      --primary: #0b3b5a;
+      --primary-hover: #135680;
+      --accent: #8b1e3f;
+
+      /* Light Mode Defaults */
+      --bg-body: #ffffff;
+      --bg-surface: #ffffff;
+      --bg-alt: #f8f9fa;
+      --text-main: #212529;
+      --text-muted: #6c757d;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-bs-theme="dark"] {
+      /* Dark Mode Overrides */
+      --bg-body: #121212;
+      --bg-surface: #1e1e1e;
+      --bg-alt: #181818;
+      --text-main: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    /* =========================================
+       GLOBAL STYLES
+       ========================================= */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden; /* Prevent horizontal scroll from AOS */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--text-muted);
+    }
+
+    a {
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    /* Utility Classes for Theme */
+    .bg-surface { background-color: var(--bg-surface) !important; }
+    .bg-alt { background-color: var(--bg-alt) !important; }
+    .text-main { color: var(--text-main) !important; }
+
+    /* =========================================
+       NAVBAR — Frosted Glass Effect
+       ========================================= */
+    .custom-navbar {
+      background: rgba(255, 255, 255, 0.75);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+    }
+
+    [data-bs-theme="dark"] .custom-navbar {
+      background: rgba(30, 30, 30, 0.75);
+    }
+
+    .navbar-brand span { color: var(--text-main); }
+    .nav-link { color: var(--text-main); font-weight: 500; cursor: pointer; }
+    .nav-link:hover, .nav-link.active { color: var(--primary); }
+    
+    /* Toggle Button */
+    #theme-toggle { border-color: var(--border-color); color: var(--text-main); }
+    #theme-toggle:hover { background-color: var(--bg-alt); }
+
+    /* Language Switcher */
+    .lang-btn { cursor: pointer; }
+
+    /* =========================================
+       HERO SECTION
+       ========================================= */
+    .hero {
+      position: relative;
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #0b3b5a 0%, #082b42 50%, #135680 100%);
+      color: white;
+    }
+
+    /* Force text to white in Hero regardless of theme */
+    .hero h1, .hero p, .hero .lead, .hero .h2, .hero small {
+      color: white !important;
+    }
+
+    .hero .stats {
+      margin-top: 2rem;
+    }
+    .hero .btn-primary {
+      background-color: white;
+      color: #0b3b5a;
+      border: none;
+      font-weight: 600;
+    }
+    .hero .btn-primary:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+    }
+    .hero .btn-outline-secondary {
+      color: white;
+      border-color: rgba(255,255,255,0.5);
+    }
+    .hero .btn-outline-secondary:hover {
+      background-color: white;
+      color: #0b3b5a;
+      border-color: white;
+    }
+
+    /* =========================================
+       CARDS & COMPONENTS
+       ========================================= */
+    .practice-card, .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .practice-card h5 { color: var(--text-main); }
+    .card-body { color: var(--text-main); }
+
+    .practice-card:hover, .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow);
+      border-color: transparent;
+    }
+
+    /* Icon containers in cards */
+    .practice-card .bg-alt {
+        background-color: rgba(11, 59, 90, 0.08) !important;
+    }
+    [data-bs-theme="dark"] .practice-card .bg-alt {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* Partners */
+    .partner-wrapper {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    .partner-wrapper:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow);
+    }
+    /* Dark mode adjustment for partner logos if transparent pngs are dark */
+    [data-bs-theme="dark"] .partner-logo {
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+    }
+
+    /* Contact Form & Inputs */
+    .form-control {
+      background-color: var(--bg-surface);
+      border-color: var(--border-color);
+      color: var(--text-main);
+      padding: 0.8rem;
+    }
+    .form-control:focus {
+      background-color: var(--bg-surface);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(11, 59, 90, 0.2);
+      color: var(--text-main);
+    }
+    .form-label { color: var(--text-main); }
+
+    /* Footer */
+    footer {
+      background-color: #0b3b5a;
+      color: rgba(255,255,255,0.9);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    [data-bs-theme="dark"] footer {
+      background-color: #082b42;
+    }
+    footer a { color: white; opacity: 0.8; }
+    footer a:hover { opacity: 1; color: white; }
+    footer .fw-bold { color: white !important; }
+
+    /* =========================================
+   LANGUAGE ANIMATION
+   ========================================= */
+    [data-lang] {
+        /* Smoothly transition opacity over 0.3 seconds */
+        transition: opacity 0.3s ease-in-out;
+        opacity: 1; 
+    }
+
+    /* This class is added by JS to hide text temporarily */
+    .lang-switching {
+        opacity: 0 !important;
+        transform: translateY(5px); /* Optional: slight slide effect */
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top custom-navbar">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="imgs/logo.png" alt="HUMO LEGAL" class="me-2" 
+           style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 6px; padding: 4px;">
+      <span class="fw-bold fs-5">HUMO LEGAL</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#services" data-lang="nav_services">Practice Areas</a></li>
+        <li class="nav-item"><a class="nav-link" href="#cases" data-lang="nav_cases">Case Results</a></li>
+        <li class="nav-item"><a class="nav-link" href="#partners" data-lang="nav_partners">Partners</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about" data-lang="nav_about">About</a></li>
+        
+        <li class="nav-item dropdown ms-lg-2">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-globe me-1"></i> <span id="currentLang">EN</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item lang-btn" data-lang-select="en">English</a></li>
+                <li><a class="dropdown-item lang-btn" data-lang-select="ru">Русский</a></li>
+                <li><a class="dropdown-item lang-btn" data-lang-select="uz">O'zbek</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+          <button id="theme-toggle" class="btn btn-sm btn-outline-secondary ms-lg-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" aria-label="Toggle dark mode">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary px-4 ms-lg-3 mt-2 mt-lg-0" href="#contact" data-lang="nav_contact">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" data-aos="fade-up">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1 class="display-4 fw-bold mb-3" data-lang="hero_title">HUMO LEGAL <br>law firm</h1>
+        <p class="lead mb-4 opacity-75" data-lang="hero_desc">We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.</p>
+
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#contact" class="btn btn-primary btn-lg px-4 border-light" data-aos="fade-right" data-aos-delay="100" data-lang="btn_consult">Request Consultation</a>
+          <a href="#cases" class="btn btn-outline-secondary btn-lg px-4" data-aos="fade-left" data-aos-delay="200" data-lang="btn_results">View Results</a>
+        </div>
+
+        <div class="mt-5 stats d-flex gap-5 flex-wrap" data-aos="fade-up" data-aos-delay="300">
+          <div>
+            <div class="h2 mb-0">3000+</div>
+            <small class="text-white opacity-75" data-lang="stats_cases">Successful Cases</small>
+          </div>
+          <div>
+            <div class="h2 mb-0">220+</div>
+            <small class="text-white opacity-75" data-lang="stats_clients">Trusted Clients</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="card border-0 shadow-lg overflow-hidden" data-aos="fade-left" data-aos-delay="400" style="border-radius: 20px;">
+           <img src="imgs/hero.png" class="card-img-top" alt="Law Office" style="height: 400px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="services" class="py-5 bg-alt" data-aos="fade-up">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="fw-bold" data-lang="sec_services_title">Our Practice Areas</h2>
+        <p class="text-muted" data-lang="sec_services_desc">Comprehensive legal solutions tailored to your specific business needs.</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="practice-card p-4 h-100 d-flex flex-column">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-3 p-2 rounded bg-alt">
+                <i class="bi bi-building fs-3 text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-0" data-lang="serv_corp_title">Corporate<br>Compliance</h5>
+          </div>
+          <p class="flex-grow-1" data-lang="serv_corp_desc">Navigating complex regulations and ensuring your business stays compliant with evolving laws.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="practice-card p-4 h-100 d-flex flex-column">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-3 p-2 rounded bg-alt">
+                <i class="bi bi-people fs-3 text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-0" data-lang="serv_labor_title">Labor &<br>Employment</h5>
+          </div>
+          <p class="flex-grow-1" data-lang="serv_labor_desc">Expert advice on employment contracts, disputes, and workplace safety regulations.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="practice-card p-4 h-100 d-flex flex-column">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-3 p-2 rounded bg-alt">
+                <i class="bi bi-hammer fs-3 text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-0" data-lang="serv_disp_title">Dispute<br>Resolution</h5>
+          </div>
+          <p class="flex-grow-1" data-lang="serv_disp_desc">Strategic representation in litigation and arbitration to protect your interests.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="practice-card p-4 h-100 d-flex flex-column">
+          <div class="d-flex align-items-center mb-4">
+             <div class="me-3 p-2 rounded bg-alt">
+                <i class="bi bi-lightbulb fs-3 text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-0" data-lang="serv_ip_title">Intellectual<br>Property</h5>
+          </div>
+          <p class="flex-grow-1" data-lang="serv_ip_desc">Protecting your innovations, trademarks, and creative assets from infringement.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="practice-card p-4 h-100 d-flex flex-column">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-3 p-2 rounded bg-alt">
+                <i class="bi bi-diagram-3 fs-3 text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-0" data-lang="serv_ma_title">Mergers &<br>Acquisitions</h5>
+          </div>
+          <p class="flex-grow-1" data-lang="serv_ma_desc">Guiding you through complex transactions, due diligence, and integration processes.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+        <div class="practice-card p-4 h-100 d-flex flex-column">
+          <div class="d-flex align-items-center mb-4">
+             <div class="me-3 p-2 rounded bg-alt">
+                <i class="bi bi-graph-up-arrow fs-3 text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-0" data-lang="serv_tax_title">Business<br>Taxation</h5>
+          </div>
+          <p class="flex-grow-1" data-lang="serv_tax_desc">Optimizing tax strategies and resolving disputes with tax authorities efficiently.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cases" class="py-5" data-aos="fade-up">
+  <div class="container">
+    <h2 class="mb-5 text-center fw-bold" data-aos="fade-up" data-lang="sec_cases_title">Selected Case Results</h2>
+    <div class="row gy-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100">
+          <div class="card-body p-4 text-center">
+            <h3 class="display-6 fw-bold mb-3">5.5 <span class="fs-5" data-lang="case_sums">billion sums</span></h3>
+            <hr class="w-25 mx-auto opacity-25">
+            <p class="mb-0 mt-3" data-lang="case_1_desc">Victory in the Supreme Court: Fine recovery case canceled successfully.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100">
+          <div class="card-body p-4 text-center">
+            <h3 class="display-6 fw-bold mb-3">9.6 <span class="fs-5" data-lang="case_sums">billion sums</span></h3>
+            <hr class="w-25 mx-auto opacity-25">
+            <p class="mb-0 mt-3" data-lang="case_2_desc">Supreme Court win for returning NDS tax to the company's account.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100">
+          <div class="card-body p-4 text-center">
+            <h3 class="display-6 fw-bold mb-3">11 <span class="fs-5" data-lang="case_sums">billion sums</span></h3>
+            <hr class="w-25 mx-auto opacity-25">
+            <p class="mb-0 mt-3" data-lang="case_3_desc">Leasing company debt collection case — funds returned to client.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 text-center" data-aos="fade-up" data-aos-delay="400">
+      <a href="#contact" class="btn btn-outline-primary px-4 py-2" data-lang="btn_case_review">Request a Case Review</a>
+    </div>
+  </div>
+</section>
+
+<section id="partners" class="py-5 bg-alt" data-aos="fade-up">
+  <div class="container">
+    <h2 class="mb-5 text-center fw-bold" data-aos="fade-up" data-lang="sec_partners_title">Our Trusted Partners</h2>
+    <div class="row g-4">
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">MaxProduct</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="300">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="400">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Astellas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-1">
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Statura</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="300">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="400">
+        <div class="partner-wrapper d-flex align-items-center">
+          <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
+          <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="py-5" data-aos="fade-up">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+         <h2 class="mb-3" data-lang="sec_about_title">About HUMO LEGAL</h2>
+         <p class="lead text-primary" data-lang="sec_about_lead">Your strategic legal partner in Uzbekistan.</p>
+         <p data-lang="sec_about_text">“HUMO LEGAL” law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.</p>
+         
+         <div class="row mt-4">
+            <div class="col-md-6">
+               <h5 class="fw-bold"><i class="bi bi-shield-check me-2 text-primary"></i><span data-lang="about_val_title">Core Values</span></h5>
+               <p class="small" data-lang="about_val_text">Client-first approach, full confidentiality, and deep legal expertise across multiple domains.</p>
+            </div>
+            <div class="col-md-6">
+               <h5 class="fw-bold"><i class="bi bi-briefcase me-2 text-primary"></i><span data-lang="about_exp_title">Experience</span></h5>
+               <p class="small" data-lang="about_exp_text">Successful representation in lease disputes, tax claims, and corporate reorganizations.</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-6 ps-lg-5">
+         <div class="card border-0 shadow-sm bg-alt p-4">
+            <h5 class="mb-3" data-lang="why_title">Why Choose Us?</h5>
+            <ul class="list-unstyled">
+               <li class="mb-3 d-flex"><i class="bi bi-check-circle-fill text-success me-2"></i> <span data-lang="why_1">98% Success Rate in Economic Courts</span></li>
+               <li class="mb-3 d-flex"><i class="bi bi-check-circle-fill text-success me-2"></i> <span data-lang="why_2">24/7 Client Support Availability</span></li>
+               <li class="mb-3 d-flex"><i class="bi bi-check-circle-fill text-success me-2"></i> <span data-lang="why_3">Transparent Fee Structure</span></li>
+               <li class="mb-0 d-flex"><i class="bi bi-check-circle-fill text-success me-2"></i> <span data-lang="why_4">International Legal Standards</span></li>
+            </ul>
+         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="py-5 bg-alt" data-aos="fade-up">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2 data-lang="sec_contact_title">Get a Free Consultation</h2>
+        <p class="text-muted mb-4" data-lang="sec_contact_desc">Call us, send an email, or use the contact form below. We will get back within one business day.</p>
+
+        <div class="d-flex mb-3 align-items-center">
+            <div class="bg-surface p-3 rounded-circle shadow-sm me-3 text-primary">
+                <i class="bi bi-telephone-fill fs-5"></i>
+            </div>
+            <div>
+                <small class="text-muted d-block" data-lang="contact_label_call">Call Us</small>
+                <strong>+(998 90) 351-12-79</strong>
+            </div>
+        </div>
+        
+        <div class="d-flex mb-3 align-items-center">
+            <div class="bg-surface p-3 rounded-circle shadow-sm me-3 text-primary">
+                <i class="bi bi-envelope-fill fs-5"></i>
+            </div>
+            <div>
+                <small class="text-muted d-block" data-lang="contact_label_email">Email Us</small>
+                <a href="mailto:humolegal@mail.ru" class="text-decoration-none fw-bold text-main">humolegal@mail.ru</a>
+            </div>
+        </div>
+
+        <div class="d-flex mb-3 align-items-center">
+            <div class="bg-surface p-3 rounded-circle shadow-sm me-3 text-primary">
+                <i class="bi bi-geo-alt-fill fs-5"></i>
+            </div>
+            <div>
+                <small class="text-muted d-block" data-lang="contact_label_visit">Visit Us</small>
+                <span>Atlas Business Tower, 25 Mirzo Ulugbek St., Tashkent</span>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="card border-0 shadow-lg">
+           <div class="card-body p-4 p-md-5">
+             <h4 class="mb-4" data-lang="form_title">Send us a message</h4>
+             <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+               <div class="mb-3">
+                 <label for="name" class="form-label" data-lang="form_name">Full name</label>
+                 <input type="text" class="form-control" id="name" name="name" required />
+               </div>
+
+               <div class="mb-3">
+                 <label for="email" class="form-label" data-lang="form_email">Email address</label>
+                 <input type="email" class="form-control" id="email" name="_replyto" required />
+               </div>
+
+               <div class="mb-3">
+                 <label for="message" class="form-label" data-lang="form_msg">Brief message</label>
+                 <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+               </div>
+
+               <button type="submit" class="btn btn-primary w-100 py-2" id="submitBtn">
+                 <span id="submitText" data-lang="form_btn">Send message</span>
+               </button>
+             </form>
+           </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="ratio ratio-21x9 shadow-sm rounded overflow-hidden border border-secondary border-opacity-25">
+               <iframe 
+                 src="https://www.google.com/maps?q=Atlas%20Business%20Tower%2025%20Mirzo%20Ulugbek%20St.%20Tashkent&output=embed" 
+                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-4 text-center text-md-start" data-aos="fade-up">
+  <div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-4 mb-3 mb-md-0">
+             <div class="fw-bold fs-5">HUMO LEGAL</div>
+             <small class="opacity-75">© <span id="year"></span> <span data-lang="footer_rights">All rights reserved.</span></small>
+        </div>
+        
+        <div class="col-md-4 mb-3 mb-md-0 text-center">
+            <div class="d-inline-flex gap-3">
+              <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram"><i class="bi bi-telegram fs-5"></i></a>
+              <a href="https://www.instagram.com/humolegal/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram fs-5"></i></a>
+              <a href="https://www.linkedin.com/company/humolegal/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+            </div>
+            <small class="d-block opacity-75 mt-2">
+                 Powered by <a href="https://github.com/Asrorbek-Abrorov" target="_blank" class="text-white fw-bold opacity-100" style="text-decoration: underline;">AAJ</a>
+             </small>
+        </div>
+        
+        <div class="col-md-4 text-md-end">
+            <small class="d-block opacity-75">Atlas Business Tower, Tashkent</small>
+            <small class="d-block opacity-75">humolegal@mail.ru</small>
+        </div>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const icon = themeToggle.querySelector('i');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        html.setAttribute('data-bs-theme', savedTheme);
+        updateIcon(savedTheme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-bs-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcon(newTheme);
+    });
+
+    function updateIcon(theme) {
+        if (theme === 'dark') {
+            icon.classList.remove('bi-moon-stars-fill');
+            icon.classList.add('bi-sun-fill');
+            icon.style.color = 'yellow';
+        } else {
+            icon.classList.remove('bi-sun-fill');
+            icon.classList.add('bi-moon-stars-fill');
+            icon.style.color = '';
+        }
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===================================
+    // MULTI-LANGUAGE DATA
+    // ===================================
+    const translationsData = {
+      "en": {
+        "nav_services": "Practice Areas",
+        "nav_cases": "Case Results",
+        "nav_partners": "Partners",
+        "nav_about": "About",
+        "nav_contact": "Contact Us",
+        "hero_title": "HUMO LEGAL <br>law firm",
+        "hero_desc": "We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.",
+        "btn_consult": "Request Consultation",
+        "btn_results": "View Results",
+        "stats_cases": "Successful Cases",
+        "stats_clients": "Trusted Clients",
+        "sec_services_title": "Our Practice Areas",
+        "sec_services_desc": "Comprehensive legal solutions tailored to your specific business needs.",
+        "serv_corp_title": "Corporate<br>Compliance",
+        "serv_corp_desc": "Navigating complex regulations and ensuring your business stays compliant with evolving laws.",
+        "serv_labor_title": "Labor &<br>Employment",
+        "serv_labor_desc": "Expert advice on employment contracts, disputes, and workplace safety regulations.",
+        "serv_disp_title": "Dispute<br>Resolution",
+        "serv_disp_desc": "Strategic representation in litigation and arbitration to protect your interests.",
+        "serv_ip_title": "Intellectual<br>Property",
+        "serv_ip_desc": "Protecting your innovations, trademarks, and creative assets from infringement.",
+        "serv_ma_title": "Mergers &<br>Acquisitions",
+        "serv_ma_desc": "Guiding you through complex transactions, due diligence, and integration processes.",
+        "serv_tax_title": "Business<br>Taxation",
+        "serv_tax_desc": "Optimizing tax strategies and resolving disputes with tax authorities efficiently.",
+        "sec_cases_title": "Selected Case Results",
+        "case_1_desc": "Victory in the Supreme Court: Fine recovery case canceled successfully.",
+        "case_sums": "Billion sums",
+        "case_2_desc": "Supreme Court win for returning NDS tax to the company's account.",
+        "case_3_desc": "Leasing company debt collection case — funds returned to client.",
+        "btn_case_review": "Request a Case Review",
+        "sec_partners_title": "Our Trusted Partners",
+        "sec_about_title": "About HUMO LEGAL",
+        "sec_about_lead": "Your strategic legal partner in Uzbekistan.",
+        "sec_about_text": "“HUMO LEGAL” law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.",
+        "about_val_title": "Core Values",
+        "about_val_text": "Client-first approach, full confidentiality, and deep legal expertise across multiple domains.",
+        "about_exp_title": "Experience",
+        "about_exp_text": "Successful representation in lease disputes, tax claims, and corporate reorganizations.",
+        "why_title": "Why Choose Us?",
+        "why_1": "98% Success Rate in Economic Courts",
+        "why_2": "24/7 Client Support Availability",
+        "why_3": "Transparent Fee Structure",
+        "why_4": "International Legal Standards",
+        "sec_contact_title": "Get a Free Consultation",
+        "sec_contact_desc": "Call us, send an email, or use the contact form below. We will get back within one business day.",
+        "contact_label_call": "Call Us",
+        "contact_label_email": "Email Us",
+        "contact_label_visit": "Visit Us",
+        "form_title": "Send us a message",
+        "form_name": "Full name",
+        "form_email": "Email address",
+        "form_msg": "Brief message",
+        "form_btn": "Send message",
+        "footer_rights": "All rights reserved."
+      },
+      "ru": {
+        "nav_services": "Сферы практики",
+        "nav_cases": "Результаты дел",
+        "nav_partners": "Партнеры",
+        "nav_about": "О нас",
+        "nav_contact": "Контакты",
+        "hero_title": "Юридическая фирма <br>HUMO LEGAL",
+        "hero_desc": "Мы не просто оказываем юридические услуги. Мы заботимся о наших клиентах! Нам доверяют сотни компаний по всему Узбекистану.",
+        "btn_consult": "Заказать консультацию",
+        "btn_results": "Смотреть результаты",
+        "stats_cases": "Успешных дел",
+        "stats_clients": "Довольных клиентов",
+        "sec_services_title": "Наши сферы практики",
+        "sec_services_desc": "Комплексные юридические решения, адаптированные под нужды вашего бизнеса.",
+        "serv_corp_title": "Корпоративный<br>Комплаенс",
+        "serv_corp_desc": "Навигация в сложных правилах и обеспечение соответствия вашего бизнеса законам.",
+        "serv_labor_title": "Трудовое<br>Право",
+        "serv_labor_desc": "Экспертные консультации по трудовым договорам, спорам и правилам безопасности.",
+        "serv_disp_title": "Разрешение<br>Споров",
+        "serv_disp_desc": "Стратегическое представительство в судах и арбитраже для защиты ваших интересов.",
+        "serv_ip_title": "Интеллектуальная<br>Собственность",
+        "serv_ip_desc": "Защита ваших инноваций, торговых марок и творческих активов от нарушений.",
+        "serv_ma_title": "Слияния и<br>Поглощения",
+        "serv_ma_desc": "Сопровождение сложных сделок, due diligence и процессов интеграции.",
+        "serv_tax_title": "Бизнес<br>Налогообложение",
+        "serv_tax_desc": "Оптимизация налоговых стратегий и эффективное разрешение споров с налоговыми органами.",
+        "sec_cases_title": "Избранные результаты",
+        "case_1_desc": "Победа в Верховном суде: Дело о взыскании штрафа успешно отменено.",
+        "case_sums": "Миллиард сумов",
+        "case_2_desc": "Победа в Верховном суде по возврату НДС на счет компании.",
+        "case_3_desc": "Дело о взыскании долга с лизинговой компании — средства возвращены клиенту.",
+        "btn_case_review": "Запросить обзор дела",
+        "sec_partners_title": "Наши партнеры",
+        "sec_about_title": "О HUMO LEGAL",
+        "sec_about_lead": "Ваш стратегический юридический партнер в Узбекистане.",
+        "sec_about_text": "Юридическая фирма «HUMO LEGAL» предоставляет услуги в области гражданского, экономического и административного права. Наши адвокаты готовят сложные документы, представляют клиентов в суде и добиваются результатов.",
+        "about_val_title": "Ценности",
+        "about_val_text": "Интересы клиента на первом месте, полная конфиденциальность и глубокая экспертиза.",
+        "about_exp_title": "Опыт",
+        "about_exp_text": "Успешное представительство в спорах об аренде, налоговых исках и реорганизации.",
+        "why_title": "Почему мы?",
+        "why_1": "98% Успешных дел в экономических судах",
+        "why_2": "Поддержка клиентов 24/7",
+        "why_3": "Прозрачная структура оплаты",
+        "why_4": "Международные стандарты",
+        "sec_contact_title": "Бесплатная консультация",
+        "sec_contact_desc": "Позвоните нам, отправьте email или используйте форму ниже. Мы ответим в течение дня.",
+        "contact_label_call": "Позвонить",
+        "contact_label_email": "Написать",
+        "contact_label_visit": "Приехать",
+        "form_title": "Отправить сообщение",
+        "form_name": "ФИО",
+        "form_email": "Email адрес",
+        "form_msg": "Краткое сообщение",
+        "form_btn": "Отправить",
+        "footer_rights": "Все права защищены."
+      },
+      "uz": {
+        "nav_services": "Xizmatlar",
+        "nav_cases": "Natijalar",
+        "nav_partners": "Hamkorlar",
+        "nav_about": "Biz haqimizda",
+        "nav_contact": "Aloqa",
+        "hero_title": "HUMO LEGAL <br>yuridik firmasi",
+        "hero_desc": "Biz shunchaki yuridik xizmat ko'rsatmaymiz. Biz mijozlarimiz haqida qayg'uramiz! O'zbekiston bo'ylab yuzlab bizneslarning ishonchi.",
+        "btn_consult": "Konsultatsiya olish",
+        "btn_results": "Natijalarni ko'rish",
+        "stats_cases": "Muvaffaqiyatli ishlar",
+        "stats_clients": "Ishonchli mijozlar",
+        "sec_services_title": "Bizning xizmatlar",
+        "sec_services_desc": "Sizning biznes ehtiyojlaringizga moslashtirilgan keng qamrovli yuridik yechimlar.",
+        "serv_corp_title": "Korporativ<br>Muvofiqlik",
+        "serv_corp_desc": "Murakkab qoidalarni tushunish va biznesingiz qonunlarga muvofiq bo'lishini ta'minlash.",
+        "serv_labor_title": "Mehnat<br>Huquqi",
+        "serv_labor_desc": "Mehnat shartnomalari, nizolar va ish joyi xavfsizligi bo'yicha ekspert maslahatlari.",
+        "serv_disp_title": "Nizolarni<br>Hal qilish",
+        "serv_disp_desc": "Manfaatlaringizni himoya qilish uchun sud va arbitrajda strategik vakillik.",
+        "serv_ip_title": "Intellektual<br>Mulk",
+        "serv_ip_desc": "Innovatsiyalar, savdo belgilari va ijodiy aktivlaringizni himoya qilish.",
+        "serv_ma_title": "Birlashish va<br>Sotib olish",
+        "serv_ma_desc": "Murakkab bitimlar, tekshiruvlar va integratsiya jarayonlarida yordam.",
+        "serv_tax_title": "Biznes<br>Soliq",
+        "serv_tax_desc": "Soliq strategiyalarini optimallashtirish va soliq organlari bilan nizolarni hal qilish.",
+        "sec_cases_title": "Tanlangan natijalar",
+        "case_1_desc": "Oliy sudda g'alaba: Jarimani undirish ishi muvaffaqiyatli bekor qilindi.",
+        "case_sums": "Milliard so'm",
+        "case_2_desc": "QQS solig'ini kompaniya hisobiga qaytarish bo'yicha Oliy sud qarori.",
+        "case_3_desc": "Lizing kompaniyasidan qarz undirish ishi — mablag'lar mijozga qaytarildi.",
+        "btn_case_review": "Ishni ko'rib chiqish",
+        "sec_partners_title": "Ishonchli hamkorlar",
+        "sec_about_title": "HUMO LEGAL haqida",
+        "sec_about_lead": "O'zbekistondagi strategik yuridik hamkoringiz.",
+        "sec_about_text": "“HUMO LEGAL” yuridik firmasi fuqarolik, iqtisodiy va ma'muriy huquq bo'yicha xizmatlar ko'rsatadi. Advokatlarimiz murakkab hujjatlarni tayyorlaydi va sudda mijoz manfaatlarini himoya qiladi.",
+        "about_val_title": "Qadriyatlar",
+        "about_val_text": "Mijoz manfaati birinchi o'rinda, to'liq maxfiylik va chuqur yuridik tajriba.",
+        "about_exp_title": "Tajriba",
+        "about_exp_text": "Ijara nizolari, soliq da'volari va korporativ qayta tashkil etishda muvaffaqiyatli vakillik.",
+        "why_title": "Nega aynan biz?",
+        "why_1": "Iqtisodiy sudlarda 98% muvaffaqiyat",
+        "why_2": "24/7 Mijozlarni qo'llab-quvvatlash",
+        "why_3": "Shaffof to'lov tizimi",
+        "why_4": "Xalqaro yuridik standartlar",
+        "sec_contact_title": "Bepul konsultatsiya",
+        "sec_contact_desc": "Bizga qo'ng'iroq qiling, xat yozing yoki formani to'ldiring. Bir ish kuni ichida javob beramiz.",
+        "contact_label_call": "Qo'ng'iroq",
+        "contact_label_email": "Email",
+        "contact_label_visit": "Manzil",
+        "form_title": "Xabar yuborish",
+        "form_name": "To'liq ismingiz",
+        "form_email": "Elektron pochta",
+        "form_msg": "Qisqacha xabar",
+        "form_btn": "Yuborish",
+        "footer_rights": "Barcha huquqlar himoyalangan."
+      }
+    };
+
+    let currentLanguage = localStorage.getItem("lang") || "en";
+
+    function loadLanguage(lang) {
+        const translations = translationsData[lang];
+        if (!translations) return;
+
+        // 1. Select all text elements
+        const elements = document.querySelectorAll("[data-lang]");
+
+        // 2. Add 'lang-switching' class (triggers fade-out via CSS)
+        elements.forEach(el => {
+            el.classList.add("lang-switching");
+        });
+
+        // 3. Wait 300ms (matches CSS transition time), then swap text & fade in
+        setTimeout(() => {
+            elements.forEach(el => {
+                const key = el.getAttribute("data-lang");
+                if (translations[key]) {
+                    el.innerHTML = translations[key];
+                }
+            });
+
+            // Update dropdown text
+            const langLabels = { "en": "EN", "ru": "RU", "uz": "UZ" };
+            document.getElementById("currentLang").textContent = langLabels[lang] || lang.toUpperCase();
+
+            // 4. Remove 'lang-switching' class (triggers fade-in)
+            elements.forEach(el => {
+                el.classList.remove("lang-switching");
+            });
+            
+        }, 300);
+    }
+
+    // Load initial language immediately (no animation needed on load)
+    const initialTrans = translationsData[currentLanguage];
+    if(initialTrans) {
+        document.querySelectorAll("[data-lang]").forEach(el => {
+            const key = el.getAttribute("data-lang");
+            if (initialTrans[key]) el.innerHTML = initialTrans[key];
+        });
+        const langLabels = { "en": "EN", "ru": "RU", "uz": "UZ" };
+        document.getElementById("currentLang").textContent = langLabels[currentLanguage] || currentLanguage.toUpperCase();
+    }
+
+    // Event listeners
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const lang = btn.getAttribute("data-lang-select");
+            // Only animate if language actually changed
+            if (lang !== currentLanguage) {
+                currentLanguage = lang;
+                localStorage.setItem("lang", lang);
+                loadLanguage(lang);
+            }
+        });
+    });
+  </script>
+</body>
+</html>
