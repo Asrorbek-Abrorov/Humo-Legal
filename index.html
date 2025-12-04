@@ -248,18 +248,79 @@
     }
 
     /* Partners */
-    .partner-wrapper {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100px;
-      width: 100%;
-      transition: all 0.3s ease;
-    }
+    /* =========================================
+       PARTNER SCROLLER ANIMATION
+       ========================================= */
+/* Each cloned list container */
+.partner-list {
+    display: inline-flex; /* Keeps lists side-by-side */
+    gap: 200px; /* Space between partner items */
+    padding-right: 20px; /* Separator space */
+}
+
+.partner-item {
+    flex-shrink: 0;
+    width: 320px;
+    padding: 12px 0;
+}
+
+.partner-wrapper {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 450px !important; 
+    height: 130px;        
+    margin-right: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Bigger text */
+.partner-logo {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.partner-scroller-inner {
+    display: flex;
+}
+
+.partner-marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* *** CRITICAL CHANGE: ENFORCE SPEED WITH NEW ANIMATION NAME AND 1s DURATION *** */
+.partner-track {
+    display: flex;
+    width: max-content;
+    /* Using 'fast-scroll' to ensure override, 25s for max speed */
+    animation: fast-scroll 25s linear infinite; 
+}
+
+/* When hovering pause scrolling */
+.partner-marquee:hover .partner-track {
+    animation-play-state: paused;
+}
+
+/* *** CRITICAL CHANGE: NEW KEYFRAMES DEFINITION *** */
+@keyframes fast-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Duplicate trick: track content repeats infinitely */
+/* I've removed the redundant duplicate declarations */
+.partner-track::after {
+    content: attr(data-duplicate);
+}
+
+
     .partner-wrapper:hover {
       transform: translateY(-3px);
       /* Added Red Shadow/Glow on hover */
@@ -593,68 +654,162 @@
 </section>
 
 <section id="partners" class="py-5 bg-alt" data-aos="fade-up">
-  <div class="container">
-    <h2 class="mb-5 text-center fw-bold" data-aos="fade-up" data-lang="sec_partners_title">Our Trusted Partners</h2>
-    <div class="row g-4">
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">MaxProduct</span>
-        </div>
-      </div>
-
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
-        </div>
-      </div>
-
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="300">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
-        </div>
-      </div>
-
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="400">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Astellas</span>
-        </div>
-      </div>
+    <div class="container">
+        <h2 class="mb-5 text-center fw-bold" data-aos="fade-up" data-lang="sec_partners_title">Our Trusted Partners</h2>
     </div>
+    
+    <div class="partner-marquee">
+        <div class="partner-track">
+            <div class="partner-list">
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 128px; height: 128px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">MaxProduct</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Astellas</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 90px; height: 90px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Statura</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
+                    </div>
+                </div>
 
-    <div class="row g-4 mt-1">
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Statura</span>
-        </div>
-      </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 128px; height: 128px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">MaxProduct</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Astellas</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Statura</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
+                    </div>
+                </div>
 
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 128px; height: 128px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">MaxProduct</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Astellas</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Statura</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-wrapper d-flex align-items-center">
+                        <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
+                        <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="300">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
-        </div>
-      </div>
-
-      <div class="col-6 col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="400">
-        <div class="partner-wrapper d-flex align-items-center">
-          <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-          <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <section id="about" class="py-5" data-aos="fade-up">
@@ -913,7 +1068,7 @@ const darkMap  = lightMap; // same url, but styled with CSS filter
         "case_2_desc": "Supreme Court win for returning NDS tax to the company's account.",
         "case_3_desc": "Leasing company debt collection case — funds returned to client.",
         "btn_case_review": "Request a Case Review",
-        "sec_partners_title": "Our Trusted Partners",
+        "sec_partners_title": "Our Partners",
         "sec_about_title": "About HUMO LEGAL",
         "sec_about_lead": "Your strategic legal partner in Uzbekistan.",
         "sec_about_text": "“HUMO LEGAL” law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.",
@@ -1027,7 +1182,7 @@ const darkMap  = lightMap; // same url, but styled with CSS filter
         "case_2_desc": "QQS solig'ini kompaniya hisobiga qaytarish bo'yicha Oliy sud qarori.",
         "case_3_desc": "Lizing kompaniyasidan qarz undirish ishi — mablag'lar mijozga qaytarildi.",
         "btn_case_review": "Ishni ko'rib chiqish",
-        "sec_partners_title": "Ishonchli hamkorlar",
+        "sec_partners_title": "Bizning hamkorlar",
         "sec_about_title": "HUMO LEGAL haqida",
         "sec_about_lead": "O'zbekistondagi strategik yuridik hamkoringiz.",
         "sec_about_text": "“HUMO LEGAL” yuridik firmasi fuqarolik, iqtisodiy va ma'muriy huquq bo'yicha xizmatlar ko'rsatadi. Advokatlarimiz murakkab hujjatlarni tayyorlaydi va sudda mijoz manfaatlarini himoya qiladi.",
@@ -1133,6 +1288,42 @@ const darkMap  = lightMap; // same url, but styled with CSS filter
         // 4. Create the mailto link with encoded parameters
         window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
     });
+
+const scroller = document.querySelector('.partner-scroller-inner');
+const list = document.querySelector('.partner-list');
+
+// Clone for infinite loop
+const clone = list.cloneNode(true);
+scroller.appendChild(clone);
+
+// REAL measured width of one item
+const itemWidth = document.querySelector(".partner-item").offsetWidth;
+
+// Total items including clone
+const totalItems = document.querySelectorAll('.partner-item').length;
+
+let current = 0;
+const speed = 2000;
+const slideTime = 800;
+
+function slide() {
+    current++;
+
+    scroller.style.transition = `transform ${slideTime}ms ease`;
+    scroller.style.transform = `translateX(-${itemWidth * current}px)`;
+
+    // When reaching end of original list, reset
+    if (current >= totalItems / 2) {
+        setTimeout(() => {
+            scroller.style.transition = "none";
+            scroller.style.transform = "translateX(0px)";
+            current = 0;
+        }, slideTime);
+    }
+}
+
+setInterval(slide, speed + slideTime);
+
   </script>
 </body>
 </html>
