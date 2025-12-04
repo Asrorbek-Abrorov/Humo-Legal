@@ -585,32 +585,33 @@
       </div>
 
       <div class="col-lg-6" data-aos="fade-left">
-        <div class="card border-0 shadow-lg">
-           <div class="card-body p-4 p-md-5">
-             <h4 class="mb-4" data-lang="form_title">Send us a message</h4>
-             <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
-               <div class="mb-3">
-                 <label for="name" class="form-label" data-lang="form_name">Full name</label>
-                 <input type="text" class="form-control" id="name" name="name" required />
-               </div>
+          <div class="card border-0 shadow-lg">
+              <div class="card-body p-4 p-md-5">
+                  <h4 class="mb-4" data-lang="form_title">Send us a message</h4>
+                  
+                  <form id="contactForm">
+                      <div class="mb-3">
+                          <label for="name" class="form-label" data-lang="form_name">Full name</label>
+                          <input type="text" class="form-control" id="name" name="name" required />
+                      </div>
 
-               <div class="mb-3">
-                 <label for="email" class="form-label" data-lang="form_email">Email address</label>
-                 <input type="email" class="form-control" id="email" name="_replyto" required />
-               </div>
+                      <div class="mb-3">
+                          <label for="email" class="form-label" data-lang="form_email">Email address</label>
+                          <input type="email" class="form-control" id="email" name="email" required />
+                      </div>
 
-               <div class="mb-3">
-                 <label for="message" class="form-label" data-lang="form_msg">Brief message</label>
-                 <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-               </div>
+                      <div class="mb-3">
+                          <label for="message" class="form-label" data-lang="form_msg">Brief message</label>
+                          <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                      </div>
 
-               <button type="submit" class="btn btn-primary w-100 py-2" id="submitBtn">
-                 <span id="submitText" data-lang="form_btn">Send message</span>
-               </button>
-             </form>
-           </div>
-        </div>
-      </div>
+                      <button type="submit" class="btn btn-primary w-100 py-2" id="submitBtn">
+                          <span id="submitText" data-lang="form_btn">Send message</span>
+                      </button>
+                  </form>
+              </div>
+            </div>
+          </div>
     </div>
     
     <div class="row mt-5">
@@ -931,6 +932,26 @@
                 loadLanguage(lang);
             }
         });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // 1. Setup your destination email here
+        const recipientEmail = "humolegal@mail.ru"; 
+        const subject = "Consultation Request from HUMO LEGAL";
+
+        // 2. Get values from the form
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // 3. Construct the email body
+        // We include the user's email in the body so you know who to reply to
+        const emailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+        // 4. Create the mailto link with encoded parameters
+        window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
     });
   </script>
 </body>
