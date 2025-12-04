@@ -143,71 +143,87 @@
     }
     /* === Primary Button Update (Covers Submit Button) === */
 
+/* === PRIMARY BUTTONS === */
 .btn-primary {
-    /* Set background and border to the deep red primary color */
-    background-color: var(--primary); /* Should be #A30000 */
+    background-color: var(--primary); /* #A30000 */
     border-color: var(--primary);
-    color: white; /* Ensure text is white for contrast */
+    color: white;
 }
 
 .btn-primary:hover {
-    /* Use the slightly darker red variable for a distinct hover effect */
-    background-color: var(--primary-hover); /* Should be #7c0000 */
+    background-color: var(--primary-hover); /* #7c0000 */
     border-color: var(--primary-hover);
-    /* Subtle vertical lift for polish */
-    transform: translateY(-1px); 
+    transform: translateY(-1px);
 }
 
 .btn-primary:focus, 
 .btn-primary.focus {
-    /* Ensure the focus ring is a matching red tint */
     box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.5);
 }
-    /* === HERO SECTION UPDATES === */
 
-    /* 1. Change the main background gradient from blue to Red-to-Black */
+/* Pressed/active state */
+.btn-primary:active {
+    background-color: #7c0000; /* pressed red */
+    border-color: #7c0000;
+    transform: translateY(1px); /* subtle “pressed down” effect */
+}
 
-    /* 2. Update the "Request Consultation" white button text color */
-    .hero .btn-primary {
-      background-color: white;
-      /* Use the new red variable for text */
-      color: var(--primary); 
-      border: none;
-      font-weight: 600;
-    }
+/* === HERO SECTION BUTTONS === */
+.hero .btn-primary {
+    background-color: white;
+    color: var(--primary);
+    border: none;
+    font-weight: 600;
+}
 
-    .hero .btn-primary:hover {
-      background-color: #f0f0f0;
-      transform: translateY(-2px);
-      /* Ensure hover text stays red */
-      color: var(--primary-hover);
-    }
+.hero .btn-primary:hover {
+    background-color: #f0f0f0;
+    color: var(--primary-hover);
+    transform: translateY(-2px);
+}
 
-    /* 3. Update the "View Results" outline button hover state */
-    .hero .btn-outline-secondary:hover {
-      background-color: white;
-      /* Change hover text from blue to the new red */
-      color: var(--primary);
-      border-color: white;
-    }
+.hero .btn-primary:active {
+    background-color: var(--primary-hover); /* dark red pressed */
+    color: white;
+    transform: translateY(1px);
+}
 
-    /* === Button Outline Color Update (for Request a Case Review) === */
+/* Outline buttons */
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
 
-      /* Target the outline primary button specifically */
-      .btn-outline-primary {
-          /* Set the border and text color to the brand primary red */
-          color: var(--primary); /* Should be #A30000 */
-          border-color: var(--primary);
-      }
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    color: white !important;
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
 
-      .btn-outline-primary:hover,
-      .btn-outline-primary:active,
-      .btn-outline-primary:focus {
-          /* Change background to red and text to white on hover/active */
-          color: white !important;
-          background-color: var(--primary-hover); /* Should be #7c0000 or similar dark red */
-          border-color: var(--primary-hover);
-      }
+.btn-outline-primary:active {
+    background-color: #7c0000; /* pressed dark red */
+    color: white !important;
+    border-color: #7c0000;
+}
+
+/* PRIMARY BUTTONS */
+.btn-primary,
+.hero .btn-primary,
+.btn-outline-primary {
+    transition: all 0.2s ease; /* smooth hover/press animation */
+}
+
+.btn-primary:active,
+.hero .btn-primary:active,
+.btn-outline-primary:active {
+    background-color: var(--primary-hover) !important; /* dark red pressed */
+    border-color: var(--primary-hover) !important;
+    color: white !important;
+    transform: translateY(2px); /* pressed-down effect */
+    box-shadow: none !important; /* remove focus shadow while pressing */
+}
+
 
     /* =========================================
        CARDS & COMPONENTS
