@@ -122,6 +122,56 @@
     /* Language Switcher */
     .lang-btn { cursor: pointer; }
 
+/* Custom Social Icon Button Base Style */
+.btn-social-icon {
+    /* Set a fixed size to make it square */
+    width: 45px;
+    height: 45px;
+    
+    /* Make it a flex container to center the icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Rounded corners, like the image */
+    border-radius: 8px; 
+    
+    /* BACKGROUND: Use the main body background color (theme-aware) */
+    background-color: var(--bs-body-bg); 
+    
+    /* BORDER: Use the theme-aware border color */
+    border: 1px solid var(--bs-border-color); 
+    
+    /* ICON COLOR: Use the primary color variable for the icon */
+    color: var(--primary); 
+    
+    /* Smooth transition for hover effects */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style the icon itself */
+.btn-social-icon i {
+    font-size: 1.25rem; /* Equivalent to fs-5 */
+    line-height: 1; 
+    color: inherit; 
+}
+
+/* Hover Effect: Changes to a more visible state */
+.btn-social-icon:hover {
+    /* BACKGROUND: Use a slightly darker/lighter background color for contrast (theme-aware) */
+    /* This uses the secondary background color utility, which provides slight contrast */
+    background-color: rgba(255, 0, 0, 0.116); 
+    
+    /* BORDER: Highlight the border with the primary color */
+    border-color: var(--primary-hover); 
+    
+    /* ICON COLOR: Maintain the primary color */
+    color: var(--primary-hover); 
+    
+    /* Optional: A slight lift effect */
+    transform: translateY(-1px); 
+}
+
     /* =========================================
        HERO SECTION
        ========================================= */
@@ -230,7 +280,7 @@
        ========================================= */
     .practice-card, .card {
       background-color: var(--bg-surface);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--bs-border-color);
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
@@ -282,7 +332,7 @@
 
 .partner-wrapper {
     background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--bs-border-color);
     border-radius: 12px;
     padding: 1.5rem;
     display: flex;
@@ -446,9 +496,12 @@
     footer a:hover { opacity: 1; color: white; }
     footer .fw-bold { color: white !important; }
     /* Example CSS to make social icons red */
-    .d-inline-flex a i {
-        color: var(--primary) !important;
-    }
+    /* Default state: color is set to the CSS variable --primary */
+.d-inline-flex a i {
+    /* color: var(--primary) !important; */
+    /* Optional: Add a transition for a smooth color change */
+    transition: color 0.3s ease; 
+}
     /* =========================================
    LANGUAGE ANIMATION
    ========================================= */
@@ -463,6 +516,94 @@
         opacity: 0 !important;
         transform: translateY(5px); /* Optional: slight slide effect */
     }
+    /* Base styles for the background image tag */
+.bg-logo-animate-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* This centers the image perfectly */
+    transform: translate(-50%, -50%);
+
+    /* Mimics background-size: contain */
+    max-width: 95%;
+    max-height: 95%;
+    width: auto;
+    height: auto;
+
+    /* Your specified opacity */
+    opacity: 0.15;
+
+    /* Helps with performance during animation */
+    will-change: transform;
+}
+
+.bg-logo-animate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* This centers the image perfectly */
+    transform: translate(-50%, -50%);
+
+    /* Mimics background-size: contain */
+    max-width: 95%;
+    max-height: 95%;
+    width: auto;
+    height: auto;
+
+    /* Your specified opacity */
+    opacity: 0.15;
+
+    /* Helps with performance during animation */
+    will-change: transform;
+}
+
+/* =========================================
+   CHOOSE ONE ANIMATION STYLE BELOW
+========================================= */
+
+/* --- OPTION A: Slow Breathing Pulse --- */
+/* It slowly gets slightly bigger and smaller */
+
+.bg-logo-animate-pulse {
+     /* Total duration 6s, loops infinitely, eases in and out */
+    animation: logoPulse 6s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0% {
+        /* IMPORTANT: We must keep the centering translate in the keyframe */
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        /* Scale up by 5% */
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+/* --- OPTION B: Gentle Floating --- (Alternative)
+/* Uncomment this section and comment out Option A if you prefer floating */
+/**/
+.bg-logo-animate {
+    animation: logoFloat 8s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        /* Move up by 30px combined with centering */
+        transform: translate(-50%, calc(-50% - 30px));
+    }
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
   </style>
 </head>
 <body>
@@ -470,11 +611,11 @@
 <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="imgs/logo.png" alt="HUMO LEGAL" class="me-2" 
+      <img src="imgs/humoLegalLogo-rm-ups1.png" alt="HUMO LEGAL logo" class="me-2" 
            style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 6px; padding: 4px;">
       <span class="fw-bold fs-5">HUMO LEGAL</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -485,15 +626,25 @@
         <li class="nav-item"><a class="nav-link" href="#partners" data-lang="nav_partners">Partners</a></li>
         <li class="nav-item"><a class="nav-link" href="#about" data-lang="nav_about">About</a></li>
         
+        <li class="nav-item d-flex align-items-center ms-lg-3 mt-2 mt-lg-0">
+          <div class="d-inline-flex gap-2"> 
+            <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn" class="btn btn-social-icon"><i class="bi bi-linkedin fs-5"></i></a>
+            <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram" class="btn btn-social-icon"><i class="bi bi-instagram fs-5"></i></a>
+            <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram" class="btn btn-social-icon"><i class="bi bi-telegram fs-5"></i></a>
+            <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube" class="btn btn-social-icon"><i class="bi bi-youtube fs-5"></i></a>
+            <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" class="btn btn-social-icon"><i class="bi bi-facebook fs-5"></i></a>
+          </div>
+        </li>
+        
         <li class="nav-item dropdown ms-lg-2">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-globe me-1"></i> <span id="currentLang">EN</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item lang-btn" data-lang-select="en">English</a></li>
-                <li><a class="dropdown-item lang-btn" data-lang-select="ru">Русский</a></li>
-                <li><a class="dropdown-item lang-btn" data-lang-select="uz">O'zbek</a></li>
-            </ul>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language selection">
+            <i class="bi bi-globe me-1"></i> <span id="currentLang">EN</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item lang-btn" data-lang-select="en">English</a></li>
+            <li><a class="dropdown-item lang-btn" data-lang-select="ru">Русский</a></li>
+            <li><a class="dropdown-item lang-btn" data-lang-select="uz">O'zbek</a></li>
+          </ul>
         </li>
 
         <li class="nav-item">
@@ -511,7 +662,10 @@
 </nav>
 
 <header class="hero" data-aos="fade-up">
-  <div class="container">
+    <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style="z-index: 0; pointer-events: none;">
+      <img src="imgs/humoLegalLogo-rm-ups1.png" alt="Background Logo" class="bg-logo-animate">
+    </div>
+   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-7">
         <h1 class="display-4 fw-bold mb-3" data-lang="hero_title">HUMO LEGAL <br>law firm</h1>
@@ -866,6 +1020,9 @@
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-6" data-aos="fade-right">
+        <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style="z-index: 0; pointer-events: none;">
+          <img src="imgs/humoLegalLogo-rm-ups1.png" alt="Background Logo" class="bg-logo-animate-pulse">
+        </div>
         <h2 data-lang="sec_contact_title">Get a Free Consultation</h2>
         <p class="text-muted mb-4" data-lang="sec_contact_desc">Call us, send an email, or use the contact form below. We will get back within one business day.</p>
 
@@ -963,7 +1120,7 @@
               <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube"><i class="bi bi-youtube fs-5"></i></a>
             </div>
             <small class="d-block opacity-75 mt-2">
-                 Powered by <a href="https://github.com/Asrorbek-Abrorov" target="_blank" class="text-white fw-bold opacity-100" style="text-decoration: underline;">AAJ</a>
+                 Powered by <a href="https://t.me/as_abrorov" target="_blank" class="text-white fw-bold opacity-100" style="text-decoration: underline;">A A</a>
              </small>
         </div>
         
