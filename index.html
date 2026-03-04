@@ -15,599 +15,1949 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================================
-       CSS VARIABLES & THEME SETUP
-       ========================================= */
-    /* Find this section at the top of your CSS and update the brand colors */
-    :root {
-      /* === NEW BRAND COLORS (Red & Black theme) === */
-      /* A deep, rich red sampled from the logo wings */
-      --primary: #A30000; 
-      /* A slightly darker shade for hover states */
-      --primary-hover: #7c0000; 
-      /* Black used for secondary accents if needed */
-      --accent: #000000; 
-
-      /* Keep the rest the same... */
-      --bg-body: #ffffff;
-      --bg-surface: #ffffff;
-      /* ... etc ... */
-    }
-
-    [data-bs-theme="dark"] {
-      /* Dark Mode Overrides */
-      --bg-body: #121212;
-      --bg-surface: #1e1e1e;
-      --bg-alt: #181818;
-      --text-main: #e0e0e0;
-      --text-muted: #a0a0a0;
-      --border-color: rgba(255, 255, 255, 0.1);
-      --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-    /* === Global Text Selection Highlight (Browser default blue to Brand Red) === */
-    ::selection {
-        /* Set the background color to the brand's primary red */
-        background: var(--primary); /* Should be #A30000 */
-        /* Set the text color to white for high contrast */
-        color: white; 
-    }
-
-    /* Also ensure compatibility with older WebKit browsers (Chrome, Safari) */
-    ::-moz-selection {
-        background: var(--primary); /* Should be #A30000 */
-        color: white;
-    }
-    /* =========================================
-       GLOBAL STYLES
-       ========================================= */
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-body);
-      color: var(--text-main);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      overflow-x: hidden; /* Prevent horizontal scroll from AOS */
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--text-main);
-      font-weight: 700;
-    }
-
-    p {
-      color: var(--text-muted);
-    }
-
-    a {
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    /* Utility Classes for Theme */
-    .bg-surface { background-color: var(--bg-surface) !important; }
-    .bg-alt { background-color: var(--bg-alt) !important; }
-    .text-main { color: var(--text-main) !important; }
-
-    /* =========================================
-       NAVBAR — Frosted Glass Effect
-       ========================================= */
-    .custom-navbar {
-      background: rgba(255, 255, 255, 0.75);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-      transition: all 0.3s ease;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1030;
-    }
-
-    [data-bs-theme="dark"] .custom-navbar {
-      background: rgba(30, 30, 30, 0.75);
-    }
-
-    .navbar-brand span { color: var(--text-main); }
-    .nav-link { color: var(--text-main); font-weight: 500; cursor: pointer; }
-    .nav-link:hover, .nav-link.active { color: var(--primary); }
-    
-    /* Toggle Button */
-    #theme-toggle { border-color: var(--border-color); color: var(--text-main); }
-    #theme-toggle:hover { background-color: var(--bg-alt); }
-
-    /* Language Switcher */
-    .lang-btn { cursor: pointer; }
-
-/* Custom Social Icon Button Base Style */
-.btn-social-icon {
-    /* Set a fixed size to make it square */
-    width: 45px;
-    height: 45px;
-    
-    /* Make it a flex container to center the icon */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Rounded corners, like the image */
-    border-radius: 8px; 
-    
-    /* BACKGROUND: Use the main body background color (theme-aware) */
-    background-color: var(--bs-body-bg); 
-    
-    /* BORDER: Use the theme-aware border color */
-    border: 1px solid var(--bs-border-color); 
-    
-    /* ICON COLOR: Use the primary color variable for the icon */
-    color: var(--primary); 
-    
-    /* Smooth transition for hover effects */
-    transition: all 0.2s ease-in-out;
+/* =========================================
+   1. CSS VARIABLES & THEME SETUP
+   ========================================= */
+:root {
+  /* Brand Colors */
+  --primary: #A30000;
+  --primary-hover: #7c0000;
+  --accent: #000000;
+  
+  /* Light Theme */
+  --bg-body: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-alt: #f8f9fa;
+  --text-main: #1a1a1a;
+  --text-muted: #6c757d;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Style the icon itself */
-.btn-social-icon i {
-    font-size: 1.25rem; /* Equivalent to fs-5 */
-    line-height: 1; 
-    color: inherit; 
+/* =========================================
+   PREMIUM LOADING SCREEN - COMPLETE & FIXED
+   ========================================= */
+
+/* Loader Container - Perfect Centering */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #050505;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  overflow: hidden;
 }
 
-/* Hover Effect: Changes to a more visible state */
-.btn-social-icon:hover {
-    /* BACKGROUND: Use a slightly darker/lighter background color for contrast (theme-aware) */
-    /* This uses the secondary background color utility, which provides slight contrast */
-    background-color: rgba(255, 0, 0, 0.116); 
-    
-    /* BORDER: Highlight the border with the primary color */
-    border-color: var(--primary-hover); 
-    
-    /* ICON COLOR: Maintain the primary color */
-    color: var(--primary-hover); 
-    
-    /* Optional: A slight lift effect */
-    transform: translateY(-1px); 
+/* Loader Content Wrapper */
+.loader-wrapper {
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-    /* =========================================
-       HERO SECTION
-       ========================================= */
-       .hero {
-         position: relative;
-         padding: 6rem 0;
-         /* New Gradient: Rich Red transitioning to dark charcoal/black */
-         background: linear-gradient(135deg, #A30000 0%, #5e0000 50%, #1a1a1a 100%);
-         color: white;
-       }
+/* Logo Box - Centered Container */
+.loader-logo-box {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* Force text to white in Hero regardless of theme */
-    .hero h1, .hero p, .hero .lead, .hero .h2, .hero small {
-      color: white !important;
-    }
+/* Loader Logo - FIXED: Uses loaderLogoPulse (NOT logoPulse) */
+.loader-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  /* KEY FIX: Unique animation name to avoid conflict with background logos */
+  animation: loaderLogoPulse 2s ease-in-out infinite;
+  display: block;
+  margin: 0 auto;
+}
 
-    .hero .stats {
-      margin-top: 2rem;
-    }
-    /* === Primary Button Update (Covers Submit Button) === */
+/* Glow Effect Behind Logo */
+.glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  filter: blur(30px);
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: glowPulse 3s ease-in-out infinite;
+  z-index: 1;
+}
 
-/* === PRIMARY BUTTONS === */
+/* Text Section */
+.loader-text {
+  margin-bottom: 2rem;
+}
+
+.loader-heading {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.5s;
+}
+
+.loader-line {
+  width: 60px;
+  height: 2px;
+  background: var(--primary);
+  margin: 0 auto 1rem;
+  opacity: 0;
+  animation: expandWidth 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.7s;
+}
+
+.loader-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.9s;
+}
+
+/* Progress Bar */
+.loader-bar {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: 1s;
+}
+
+.loader-bar-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #ff4d4d);
+  animation: loadProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 1.2s;
+}
+
+/* Hide Loader When Loaded */
+#preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* =========================================
+   KEYFRAME ANIMATIONS
+   ========================================= */
+
+/* Loader content fade in */
+@keyframes loaderFadeIn {
+  to { opacity: 1; }
+}
+
+/* Text slide up */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Divider line expand */
+@keyframes expandWidth {
+  from { 
+    width: 0;
+    opacity: 0;
+  }
+  to { 
+    width: 60px;
+    opacity: 1;
+  }
+}
+
+/* Progress bar fill */
+@keyframes loadProgress {
+  0% { width: 0; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+/* 🔑 KEY FIX: Loader logo pulse - SCALE ONLY, NO TRANSLATE */
+@keyframes loaderLogoPulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+/* Glow pulse - uses translate because it's absolutely positioned */
+@keyframes glowPulse {
+  0%, 100% { 
+    opacity: 0.4; 
+    transform: translate(-50%, -50%) scale(1); 
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: translate(-50%, -50%) scale(1.2); 
+  }
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+  .loader-logo-box {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .loader-img {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+  
+  .loader-heading {
+    font-size: 1.5rem;
+  }
+  
+  .loader-bar {
+    width: 150px;
+  }
+}
+
+[data-bs-theme="dark"] {
+  --bg-body: #121212;
+  --bg-surface: #1e1e1e;
+  --bg-alt: #181818;
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+/* Add this after your existing :root variables */
+.fullscreen-menu-overlay {
+  --overlay-text: #f0f0f0;
+  --overlay-text-muted: #b0b0b0;
+  --overlay-border: rgba(255, 255, 255, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.12);
+}
+
+[data-bs-theme="light"] .fullscreen-menu-overlay {
+  --overlay-text: #1a1a1a;
+  --overlay-text-muted: #6c757d;
+  --overlay-border: rgba(0, 0, 0, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.06);
+}
+/* Text Selection */
+::selection,
+::-moz-selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* =========================================
+   2. GLOBAL STYLES
+   ========================================= */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+p { color: var(--text-muted); }
+
+a {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Utility Classes */
+.bg-surface { background-color: var(--bg-surface) !important; }
+.bg-alt { background-color: var(--bg-alt) !important; }
+.text-main { color: var(--text-main) !important; }
+
+/* =========================================
+   3. BUTTONS (Consolidated)
+   ========================================= */
+/* Primary Button */
 .btn-primary {
-    background-color: var(--primary); /* #A30000 */
-    border-color: var(--primary);
-    color: white;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-hover); /* #7c0000 */
-    border-color: var(--primary-hover);
-    transform: translateY(-1px);
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
 }
 
-.btn-primary:focus, 
+.btn-primary:focus,
 .btn-primary.focus {
-    box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.5);
 }
 
-/* Pressed/active state */
 .btn-primary:active {
-    background-color: #7c0000; /* pressed red */
-    border-color: #7c0000;
-    transform: translateY(1px); /* subtle “pressed down” effect */
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(1px);
 }
 
-/* === HERO SECTION BUTTONS === */
-.hero .btn-primary {
-    background-color: white;
-    color: var(--primary);
-    border: none;
-    font-weight: 600;
-}
-
-.hero .btn-primary:hover {
-    background-color: #f0f0f0;
-    color: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-.hero .btn-primary:active {
-    background-color: var(--primary-hover); /* dark red pressed */
-    color: white;
-    transform: translateY(1px);
-}
-
-/* Outline buttons */
+/* Outline Primary */
 .btn-outline-primary {
-    color: var(--primary);
-    border-color: var(--primary);
+  color: var(--primary);
+  border-color: var(--primary);
+  transition: all 0.2s ease;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-    color: white !important;
-    background-color: var(--primary-hover);
-    border-color: var(--primary-hover);
+  color: white !important;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .btn-outline-primary:active {
-    background-color: #7c0000; /* pressed dark red */
-    color: white !important;
-    border-color: #7c0000;
+  background-color: var(--primary-hover) !important;
+  color: white !important;
+  border-color: var(--primary-hover) !important;
+  transform: translateY(2px);
+  box-shadow: none !important;
 }
 
-/* PRIMARY BUTTONS */
-.btn-primary,
-.hero .btn-primary,
-.btn-outline-primary {
-    transition: all 0.2s ease; /* smooth hover/press animation */
+/* Hero Button Overrides */
+.hero .btn-primary {
+  background-color: white;
+  color: var(--primary);
+  border: none;
+  font-weight: 600;
 }
 
-.btn-primary:active,
-.hero .btn-primary:active,
-.btn-outline-primary:active {
-    background-color: var(--primary-hover) !important; /* dark red pressed */
-    border-color: var(--primary-hover) !important;
-    color: white !important;
-    transform: translateY(2px); /* pressed-down effect */
-    box-shadow: none !important; /* remove focus shadow while pressing */
+.hero .btn-primary:hover {
+  background-color: #f0f0f0;
+  color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.hero .btn-primary:active {
+  background-color: var(--primary-hover);
+  color: white;
+  transform: translateY(1px);
 }
 
 
-    /* =========================================
-       CARDS & COMPONENTS
-       ========================================= */
-    .practice-card, .card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--bs-border-color);
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    }
+/* =========================================
+   4. NAVBAR
+   ========================================= */
+.custom-navbar {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--navbar-shadow);
+  transition: all 0.3s ease;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
 
-    .practice-card h5 { color: var(--text-main); }
-    .card-body { color: var(--text-main); }
+[data-bs-theme="dark"] .custom-navbar {
+  background: rgba(30, 30, 30, 0.75);
+}
 
-    .practice-card:hover, .card:hover {
-      transform: translateY(-5px);
-      /* NEW: Use a faint red shadow and a slight border highlight on hover */
-      box-shadow: 0 8px 25px rgba(163, 0, 0, 0.2); 
-      border-color: rgba(163, 0, 0, 0.3); /* Slight red border */
-    }
+.navbar-brand span { color: var(--text-main); }
 
-    /* --- Icon Container Colors --- */
-  /* Icon containers in cards (LIGHT MODE) */
-    .practice-card .bg-alt {
-      /* Faint Red background for icons */
-            background-color: rgba(163, 0, 0, 0.08) !important;
-    }
-    /* Icon containers in cards (DARK MODE) */
-    [data-bs-theme="dark"] .practice-card .bg-alt {
-    /* Light grey background for contrast in dark mode */
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    }
+.nav-link {
+  color: var(--text-main);
+  font-weight: 500;
+  cursor: pointer;
+}
 
-    /* --- Icon Color (Force Dark Red) --- */
-    .practice-card i.text-primary {
-        /* Force the icons themselves to be the dark red */
-        color: #8B0000 !important; 
-    }
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary);
+}
 
-    /* Partners */
-    /* =========================================
-       PARTNER SCROLLER ANIMATION
-       ========================================= */
-/* Each cloned list container */
+/* ✅ FIX: Navbar Primary Button (Contact Us) */
+.navbar .btn-primary {
+  color: white !important;
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.navbar .btn-primary:hover {
+  color: white !important;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.navbar .btn-primary:active {
+  color: white !important;
+  background-color: var(--primary-hover);
+  transform: translateY(1px);
+}
+
+/* Social Icons */
+.btn-social-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  color: var(--primary);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-social-icon i {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: inherit;
+}
+
+.btn-social-icon:hover {
+  background-color: rgba(255, 0, 0, 0.116);
+  border-color: var(--primary-hover);
+  color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   NAVBAR LANGUAGE SELECTOR - FIXED
+   ========================================= */
+.navbar-language-toggle {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-main) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  min-width: 110px !important;
+  cursor: pointer !important;
+}
+
+.navbar-language-toggle:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background: rgba(163, 0, 0, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+.navbar-language-toggle[aria-expanded="true"] {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background: rgba(163, 0, 0, 0.1) !important;
+}
+
+.navbar-language-toggle .dropdown-arrow {
+  font-size: 0.7rem !important;
+  transition: transform 0.3s ease !important;
+  color: inherit !important;
+}
+
+.navbar-language-toggle[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg) !important;
+}
+
+/* Navbar dropdown menu - theme aware */
+.navbar .language-dropdown-menu {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  padding: 0.5rem !important;
+  margin-top: 0.5rem !important;
+  min-width: 200px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+  animation: navbarDropdownSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Dark mode specific overrides */
+[data-bs-theme="dark"] .navbar .language-dropdown-menu {
+  background: rgba(30, 30, 30, 0.98) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+@keyframes navbarDropdownSlide {
+  from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.navbar .language-dropdown-menu .dropdown-item {
+  color: var(--text-main) !important;
+  border-radius: 8px !important;
+  padding: 0.7rem 1rem !important;
+  margin-bottom: 0.25rem !important;
+  transition: all 0.25s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  position: relative !important;
+}
+
+.navbar .language-dropdown-menu .dropdown-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary);
+  transform: scaleY(0);
+  transition: transform 0.25s ease;
+  border-radius: 2px;
+}
+
+.navbar .language-dropdown-menu .dropdown-item:hover {
+  background: rgba(163, 0, 0, 0.1) !important;
+  color: var(--primary) !important;
+  padding-left: 1.25rem !important;
+}
+
+.navbar .language-dropdown-menu .dropdown-item:hover::before {
+  transform: scaleY(1) !important;
+}
+
+.navbar .language-dropdown-menu .dropdown-item.active {
+  background: rgba(163, 0, 0, 0.15) !important;
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+}
+
+.navbar .language-dropdown-menu .dropdown-item.active::before {
+  transform: scaleY(1) !important;
+}
+
+.navbar .language-dropdown-menu .lang-flag {
+  font-size: 1.1rem !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: rgba(163, 0, 0, 0.1) !important;
+  border-radius: 5px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* Dark mode: adjust flag background for contrast */
+[data-bs-theme="dark"] .navbar .language-dropdown-menu .lang-flag {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar .language-dropdown-menu .lang-check {
+  margin-left: auto !important;
+  opacity: 0 !important;
+  transform: translateX(-5px) !important;
+  transition: all 0.25s ease !important;
+  color: var(--primary) !important;
+  font-size: 1rem !important;
+}
+
+.navbar .language-dropdown-menu .dropdown-item.active .lang-check {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .navbar-language-toggle {
+    min-width: 100px !important;
+    padding: 0.4rem 0.9rem !important;
+    font-size: 0.85rem !important;
+  }
+  
+  .navbar .language-dropdown-menu {
+    min-width: 180px !important;
+  }
+}
+/* =========================================
+   FULLSCREEN MENU OVERLAY - TRANSPARENT + ALIGNED
+   ========================================= */
+.fullscreen-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  /* More transparent background */
+  background: var(--bg-overlay, rgba(0, 0, 0, 0.75));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  padding: 2rem 4rem;
+}
+
+.fullscreen-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Light theme overlay - more transparent */
+[data-bs-theme="light"] .fullscreen-menu-overlay {
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --overlay-text: #1a1a1a;
+  --overlay-text-muted: #6c757d;
+  --overlay-border: rgba(0, 0, 0, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.06);
+}
+
+/* Dark theme overlay - more transparent */
+[data-bs-theme="dark"] .fullscreen-menu-overlay,
+.fullscreen-menu-overlay {
+  --bg-overlay: rgba(18, 18, 18, 0.75);
+  --overlay-text: #f0f0f0;
+  --overlay-text-muted: #b0b0b0;
+  --overlay-border: rgba(255, 255, 255, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.12);
+}
+
+/* Close Button */
+.menu-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--overlay-accent);
+  border: 1px solid var(--overlay-border);
+  color: var(--overlay-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10000;
+}
+
+.menu-close-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.4);
+}
+
+.menu-close-btn:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.menu-close-btn i {
+  font-size: 1.5rem;
+}
+
+/* Menu Content Layout - FIXED ALIGNMENT */
+.menu-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  min-height: calc(100vh - 4rem);
+  align-items: start;
+}
+
+/* =========================================
+   LEFT SIDE - ENHANCED ANIMATION
+   ========================================= */
+
+/* Left Side - Main Links Container */
+.menu-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  /* Add subtle entrance animation to container */
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Trigger container animation when menu opens */
+.fullscreen-menu-overlay.active .menu-left {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.1s;
+}
+
+/* Main Navigation Links - Enhanced Animation */
+.menu-link {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--overlay-text);
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  position: relative;
+  
+  /* Initial hidden state - slide from left + fade */
+  opacity: 0;
+  transform: translateX(-80px) scale(0.9);
+  filter: blur(4px);
+}
+
+/* Animate links in when menu is active */
+.fullscreen-menu-overlay.active .menu-link {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: blur(0);
+  /* Add slight bounce at end */
+  animation: linkBounce 0.3s ease-out forwards;
+  animation-delay: inherit; /* Respect stagger delay */
+}
+
+@keyframes linkBounce {
+  0% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(5px) scale(1.02); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* Staggered entrance animation for each link */
+.fullscreen-menu-overlay.active .menu-link:nth-child(1) { transition-delay: 0.2s; }
+.fullscreen-menu-overlay.active .menu-link:nth-child(2) { transition-delay: 0.3s; }
+.fullscreen-menu-overlay.active .menu-link:nth-child(3) { transition-delay: 0.4s; }
+.fullscreen-menu-overlay.active .menu-link:nth-child(4) { transition-delay: 0.5s; }
+.fullscreen-menu-overlay.active .menu-link:nth-child(5) { transition-delay: 0.6s; }
+
+/* Underline animation */
+.menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--primary);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.menu-link:hover::after {
+  width: 100%;
+}
+
+/* Hover effects */
+.menu-link:hover {
+  color: var(--primary);
+  transform: translateX(10px) scale(1.02);
+  text-shadow: 0 0 20px rgba(163, 0, 0, 0.3);
+}
+
+.menu-link:active {
+  transform: translateX(5px) scale(0.98);
+}
+
+/* Optional: Add a subtle glow effect on hover (light theme only) */
+[data-bs-theme="light"] .fullscreen-menu-overlay .menu-link:hover {
+  text-shadow: 0 0 25px rgba(163, 0, 0, 0.2);
+}
+
+/* Optional: Add a red accent bar that slides in */
+.menu-link::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 24px;
+  background: var(--primary);
+  border-radius: 0 4px 4px 0;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-link:hover::before {
+  width: 4px;
+  opacity: 1;
+}
+/* Right Side - Practices & Industries */
+.menu-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-content: start;
+  padding-top: 2rem;
+}
+
+.menu-column {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fullscreen-menu-overlay.active .menu-column {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fullscreen-menu-overlay.active .menu-column:nth-child(1) { transition-delay: 0.35s; }
+.fullscreen-menu-overlay.active .menu-column:nth-child(2) { transition-delay: 0.4s; }
+
+.menu-column-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--overlay-text-muted);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.menu-column:hover .menu-column-title { color: var(--primary); }
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.menu-list li {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fullscreen-menu-overlay.active .menu-list li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered list animation */
+.fullscreen-menu-overlay.active .menu-list li:nth-child(1) { transition-delay: 0.45s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(2) { transition-delay: 0.47s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(3) { transition-delay: 0.49s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(4) { transition-delay: 0.51s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(5) { transition-delay: 0.53s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(6) { transition-delay: 0.55s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(7) { transition-delay: 0.57s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(8) { transition-delay: 0.59s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(9) { transition-delay: 0.61s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(10) { transition-delay: 0.63s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(11) { transition-delay: 0.65s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(12) { transition-delay: 0.67s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(13) { transition-delay: 0.69s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(14) { transition-delay: 0.71s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(15) { transition-delay: 0.73s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(16) { transition-delay: 0.75s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(17) { transition-delay: 0.77s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(18) { transition-delay: 0.79s; }
+.fullscreen-menu-overlay.active .menu-list li:nth-child(19) { transition-delay: 0.81s; }
+
+.menu-list li a {
+  color: var(--overlay-text);
+  opacity: 0.95;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.menu-list li a::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-list li a:hover {
+  color: var(--primary);
+  opacity: 1;
+  padding-left: 15px;
+}
+
+.menu-list li a:hover::before { width: 10px; }
+.menu-list li a:active { transform: scale(0.98); }
+
+/* Bottom Section - FIXED ALIGNMENT */
+.menu-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid var(--overlay-border);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.5s;
+}
+
+.fullscreen-menu-overlay.active .menu-bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-social-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.menu-social-icons .btn-social-icon {
+  width: 45px;
+  height: 45px;
+  background: var(--overlay-accent);
+  border: 1px solid var(--overlay-border);
+  color: var(--overlay-text);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-social-icons .btn-social-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.menu-social-icons .btn-social-icon i {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-social-icons .btn-social-icon:hover {
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(163, 0, 0, 0.4);
+}
+
+.menu-social-icons .btn-social-icon:hover::before { transform: scale(1); }
+.menu-social-icons .btn-social-icon:hover i { transform: scale(1.15); }
+
+/* Language Selector in Overlay */
+.menu-language-selector {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.btn-language {
+  background: var(--overlay-accent);
+  border: 1px solid var(--overlay-border);
+  color: var(--overlay-text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 140px;
+}
+
+.btn-language::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.btn-language i,
+.btn-language span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-language .dropdown-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-language:hover {
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.4);
+}
+
+.btn-language:hover::before { transform: scaleX(1); }
+.btn-language:hover i,
+.btn-language:hover span { transform: translateY(-2px); }
+.btn-language:hover .dropdown-arrow { transform: rotate(180deg); }
+
+/* Overlay Dropdown Menu */
+.language-dropdown-menu {
+  background: var(--bg-surface);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0.75rem;
+  margin-top: 0.75rem !important;
+  min-width: 220px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  transform-origin: top left;
+  animation: languageDropdownSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+@keyframes languageDropdownSlide {
+  from { opacity: 0; transform: translateY(-15px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.language-dropdown-menu .dropdown-item {
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.language-dropdown-menu .dropdown-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  transform: scaleY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+}
+
+.language-dropdown-menu .dropdown-item:hover {
+  background: rgba(163, 0, 0, 0.1);
+  color: var(--primary);
+  transform: translateX(8px);
+  padding-left: 1.5rem;
+}
+
+.language-dropdown-menu .dropdown-item:hover::before { transform: scaleY(1); }
+.language-dropdown-menu .dropdown-item:active { transform: translateX(5px) scale(0.98); }
+
+.lang-flag {
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(163, 0, 0, 0.1);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.lang-name { flex-grow: 1; }
+
+.lang-check {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.language-dropdown-menu .dropdown-item:hover .lang-check {
+  opacity: 0.5;
+  transform: translateX(0);
+}
+
+.language-dropdown-menu .dropdown-item.active {
+  background: rgba(163, 0, 0, 0.15);
+  color: var(--primary);
+}
+
+.language-dropdown-menu .dropdown-item.active .lang-check {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.language-dropdown-menu .dropdown-item.active::before {
+  transform: scaleY(1);
+}
+
+/* Theme Toggle */
+.btn-theme-toggle {
+  width: 45px;
+  height: 45px;
+  background: var(--overlay-accent);
+  border: 1px solid var(--overlay-border);
+  color: var(--overlay-text);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.btn-theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.btn-theme-toggle i {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-theme-toggle:hover {
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-3px) rotate(15deg);
+  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.3);
+}
+
+.btn-theme-toggle:hover::before { transform: scale(1); }
+.btn-theme-toggle:hover i { transform: scale(1.15); }
+
+/* Responsive - Keep Original Alignment */
+@media (max-width: 992px) {
+  .fullscreen-menu-overlay { padding: 1.5rem; }
+  
+  .menu-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 5rem;
+  }
+  
+  .menu-left { gap: 1rem; }
+  .menu-link { font-size: 1.75rem; }
+  
+  .menu-right {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .menu-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .menu-social-icons { justify-content: center; }
+  .menu-language-selector { justify-content: center; }
+  
+  .menu-close-btn { top: 1rem; right: 1rem; }
+}
+
+/* Body blur when menu is open */
+body.menu-open { overflow: hidden; }
+body.menu-open::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 9998;
+}
+
+
+/* =========================================
+   7. OVERLAY LANGUAGE DROPDOWN - THEME AWARE
+   ========================================= */
+.menu-language-selector {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Language Button - Theme Aware */
+.btn-language {
+  background: var(--overlay-accent, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--overlay-border, rgba(255, 255, 255, 0.2));
+  color: var(--overlay-text, white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 140px;
+}
+
+.btn-language::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.btn-language i,
+.btn-language span {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.btn-language .dropdown-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: inherit;
+}
+
+.btn-language:hover {
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.4);
+}
+
+.btn-language:hover::before { transform: scaleX(1); }
+.btn-language:hover i,
+.btn-language:hover span { transform: translateY(-2px); }
+.btn-language:hover .dropdown-arrow { transform: rotate(180deg); }
+.btn-language:active { transform: translateY(-1px) scale(0.98); }
+
+.btn-language[aria-expanded="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.btn-language[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu - Theme Aware */
+.language-dropdown-menu {
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0.75rem;
+  margin-top: 0.75rem !important;
+  min-width: 220px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transform-origin: top left;
+  animation: languageDropdownSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+@keyframes languageDropdownSlide {
+  from { opacity: 0; transform: translateY(-15px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.language-dropdown-menu .dropdown-item {
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.language-dropdown-menu .dropdown-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  transform: scaleY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+}
+
+.language-dropdown-menu .dropdown-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(163, 0, 0, 0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.language-dropdown-menu .dropdown-item:hover {
+  background: rgba(163, 0, 0, 0.1);
+  color: var(--primary);
+  transform: translateX(8px);
+  padding-left: 1.5rem;
+}
+
+.language-dropdown-menu .dropdown-item:hover::before { transform: scaleY(1); }
+.language-dropdown-menu .dropdown-item:hover::after { transform: translateX(0); }
+.language-dropdown-menu .dropdown-item:active { transform: translateX(5px) scale(0.98); }
+
+/* Language Flag - Theme Aware */
+.lang-flag {
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(163, 0, 0, 0.1);
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.language-dropdown-menu .dropdown-item:hover .lang-flag {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.lang-name {
+  flex-grow: 1;
+  transition: transform 0.3s ease;
+}
+
+.language-dropdown-menu .dropdown-item:hover .lang-name {
+  transform: translateX(3px);
+}
+
+.lang-check {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.language-dropdown-menu .dropdown-item:hover .lang-check {
+  opacity: 0.5;
+  transform: translateX(0);
+}
+
+.language-dropdown-menu .dropdown-item.active {
+  background: rgba(163, 0, 0, 0.15);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.language-dropdown-menu .dropdown-item.active .lang-check {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.language-dropdown-menu .dropdown-item.active::before {
+  transform: scaleY(1);
+}
+
+/* =========================================
+   OVERLAY THEME VARIABLES (Add to your CSS)
+   ========================================= */
+/* Dark theme overlay (default) */
+.fullscreen-menu-overlay {
+  --overlay-text: #f0f0f0;
+  --overlay-text-muted: #b0b0b0;
+  --overlay-border: rgba(255, 255, 255, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.12);
+}
+
+/* Light theme overlay */
+[data-bs-theme="light"] .fullscreen-menu-overlay {
+  --overlay-text: #1a1a1a;
+  --overlay-text-muted: #6c757d;
+  --overlay-border: rgba(0, 0, 0, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .language-dropdown-menu {
+    min-width: 200px;
+  }
+  
+  .btn-language {
+    min-width: 130px;
+    padding: 0.65rem 1.25rem;
+  }
+}
+
+/* =========================================
+   8. TOGGLE BUTTONS (Theme & Menu)
+   ========================================= */
+/* Shared Toggle Base */
+.btn-theme-toggle,
+#theme-toggle,
+.btn-menu-toggle {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-theme-toggle::before,
+#theme-toggle::before,
+.btn-menu-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.btn-theme-toggle i,
+#theme-toggle i,
+.btn-menu-toggle i {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Theme Toggle Specific */
+.btn-theme-toggle,
+#theme-toggle {
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  background: transparent;
+}
+
+.btn-theme-toggle {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+}
+
+.btn-theme-toggle::before { border-radius: 12px; }
+
+#theme-toggle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+#theme-toggle::before { border-radius: 50%; }
+
+.btn-theme-toggle:hover,
+#theme-toggle:hover {
+  border-color: var(--primary);
+  box-shadow: 0 5px 20px rgba(163, 0, 0, 0.3);
+}
+
+.btn-theme-toggle:hover {
+  transform: translateY(-3px) rotate(15deg);
+  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.3);
+}
+
+#theme-toggle:hover { transform: scale(1.05); }
+
+.btn-theme-toggle:hover::before,
+#theme-toggle:hover::before { transform: scale(1); }
+.btn-theme-toggle:hover i,
+#theme-toggle:hover i { transform: scale(1.15); }
+.btn-theme-toggle:active,
+#theme-toggle:active { transform: translateY(-1px) scale(0.95); }
+
+/* Menu Toggle Specific */
+.btn-menu-toggle {
+  width: 45px;
+  height: 45px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  background: transparent;
+  border-radius: 50%;
+}
+
+.btn-menu-toggle::before { border-radius: 50%; }
+
+.btn-menu-toggle:hover {
+  border-color: var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(163, 0, 0, 0.3);
+}
+
+.btn-menu-toggle:hover::before { transform: scale(1); }
+.btn-menu-toggle:hover i { transform: scale(1.1); }
+.btn-menu-toggle:active { transform: scale(0.95); }
+
+/* =========================================
+   9. HERO SECTION
+   ========================================= */
+.hero {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #A30000 0%, #5e0000 50%, #1a1a1a 100%);
+  color: white;
+}
+
+.hero h1, .hero p, .hero .lead, .hero .h2, .hero small {
+  color: white !important;
+}
+
+.hero .stats { margin-top: 2rem; }
+
+/* =========================================
+   10. CARDS & COMPONENTS
+   ========================================= */
+.practice-card, .card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.practice-card h5,
+.card-body { color: var(--text-main); }
+
+.practice-card:hover,
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.2);
+  border-color: rgba(163, 0, 0, 0.3);
+}
+
+/* Icon Containers */
+.practice-card .bg-alt {
+  background-color: rgba(163, 0, 0, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .practice-card .bg-alt {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Icon Color */
+.practice-card i.text-primary {
+  color: #8B0000 !important;
+}
+
+/* =========================================
+   11. PARTNER SCROLLER
+   ========================================= */
 .partner-list {
-    display: inline-flex; /* Keeps lists side-by-side */
-    gap: 200px; /* Space between partner items */
-    padding-right: 20px; /* Separator space */
+  display: inline-flex;
+  gap: 200px;
+  padding-right: 20px;
 }
 
 .partner-item {
-    flex-shrink: 0;
-    width: 320px;
-    padding: 12px 0;
+  flex-shrink: 0;
+  width: 320px;
+  padding: 12px 0;
 }
 
 .partner-wrapper {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--bs-border-color);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 450px !important; 
-    height: 130px;        
-    margin-right: 12px;
-    transition: all 0.3s ease;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 450px !important;
+  height: 130px;
+  margin-right: 12px;
+  transition: all 0.3s ease;
 }
 
-/* Bigger text */
 .partner-logo {
-    font-size: 2rem;
-    font-weight: 600;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-.partner-scroller-inner {
-    display: flex;
-}
+.partner-scroller-inner { display: flex; }
 
 .partner-marquee {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
 }
 
-/* *** CRITICAL CHANGE: ENFORCE SPEED WITH NEW ANIMATION NAME AND 1s DURATION *** */
 .partner-track {
-    display: flex;
-    width: max-content;
-    /* Using 'fast-scroll' to ensure override, 25s for max speed */
-    animation: fast-scroll 25s linear infinite; 
+  display: flex;
+  width: max-content;
+  animation: fast-scroll 25s linear infinite;
 }
 
-/* When hovering pause scrolling */
 .partner-marquee:hover .partner-track {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
-/* *** CRITICAL CHANGE: NEW KEYFRAMES DEFINITION *** */
 @keyframes fast-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-/* Duplicate trick: track content repeats infinitely */
-/* I've removed the redundant duplicate declarations */
-.partner-track::after {
-    content: attr(data-duplicate);
+.partner-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(163, 0, 0, 0.1);
+  border-color: var(--primary);
 }
 
-
-    .partner-wrapper:hover {
-      transform: translateY(-3px);
-      /* Added Red Shadow/Glow on hover */
-      box-shadow: 0 4px 15px rgba(163, 0, 0, 0.1); 
-      border-color: var(--primary); /* Highlight border with primary red */
-    }
-    /* Dark mode adjustment for partner logos if transparent pngs are dark */
-    [data-bs-theme="dark"] .partner-logo {
-        filter: brightness(0) invert(1);
-        opacity: 0.8;
-    }
-
-    /* === ABOUT SECTION COLORS UPDATE (Red Theme) === */
-
-/* 1. Change the lead text color (text-primary) */
-#about p.text-primary {
-    color: var(--primary) !important; 
+[data-bs-theme="dark"] .partner-logo {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
 }
 
-/* 2. Change the icons in Core Values/Experience section (text-primary) */
-#about .row .text-primary {
-    color: var(--primary) !important;
-}
-
-/* 3. Change the checkmark icons in the "Why Choose Us" list from success (green) to primary (red) */
-#about .list-unstyled .text-success {
-    /* Use the dark red for the checkmarks */
-    color: #8B0000 !important; 
-}
-
-/* 4. Update the card container in "Why Choose Us" to use the red tint */
-#about .card.bg-alt {
-    /* Ensure the card background is the light red tint for consistency */
-    background-color: rgba(163, 0, 0, 0.03) !important;
-    border-color: rgba(163, 0, 0, 0.2); 
-}
 /* =========================================
-       Contact Form & Inputs (Updated for Red Theme)
-       ========================================= */
-    /* === CONTACT INFO ICONS & COLORS UPDATE (Red Theme) === */
+   12. ABOUT SECTION
+   ========================================= */
+#about p.text-primary,
+#about .row .text-primary {
+  color: var(--primary) !important;
+}
 
-/* 1. Force the icons themselves to be Dark Red */
+#about .list-unstyled .text-success {
+  color: #8B0000 !important;
+}
+
+#about .card.bg-alt {
+  background-color: rgba(163, 0, 0, 0.03) !important;
+  border-color: rgba(163, 0, 0, 0.2);
+}
+
+/* =========================================
+   13. CONTACT FORM
+   ========================================= */
 #contact .text-primary i {
-    color: #8B0000 !important; /* Dark Red / Maroon */
-    transition: color 0.3s ease;
+  color: #8B0000 !important;
+  transition: color 0.3s ease;
 }
 
-/* 2. Ensure the icon container background and icon color are styled correctly */
 #contact .d-flex .bg-surface {
-    /* Set the icon color within the container to the primary red */
-    color: var(--primary) !important;
-    transition: all 0.3s ease;
+  color: var(--primary) !important;
+  transition: all 0.3s ease;
 }
 
-/* 3. Apply a subtle red tint hover effect to the icon circle */
 #contact .d-flex .bg-surface:hover {
-    background-color: rgba(163, 0, 0, 0.05) !important;
+  background-color: rgba(163, 0, 0, 0.05) !important;
 }
 
-/* 4. Ensure the Email Link uses the Primary Red Color */
 #contact a.text-main {
-    color: var(--primary) !important;
+  color: var(--primary) !important;
 }
 
 #contact a.text-main:hover {
-    color: var(--primary-hover) !important;
+  color: var(--primary-hover) !important;
 }
 
-    .form-control {
-      background-color: var(--bg-surface);
-      border-color: var(--border-color);
-      color: var(--text-main);
-      padding: 0.8rem;
-    }
-    .form-control:focus {
-      background-color: var(--bg-surface);
-      border-color: var(--primary); /* Uses the deep red primary color */
-      /* NEW: Box shadow uses a reddish tint (based on #A30000 with 20% opacity) */
-      box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.2); 
-      color: var(--text-main);
-    }
-    .form-label { color: var(--text-main); }
-    
-    [data-bs-theme="dark"] #map {
-      filter: invert(90%) hue-rotate(180deg) brightness(80%);
-    }
-    [data-bs-theme="light"] #map {
-      filter: none;
-    }
-
-
-    /* Footer */
-    /* === FOOTER UPDATES === */
-
-/* Change footer background from blue to dark charcoal/black */
-    footer {
-      background-color: #1a1a1a;
-      color: rgba(255,255,255,0.9);
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    /* Dark mode footer can be pure black */
-    [data-bs-theme="dark"] footer {
-      background-color: #000000;
-    }
-    footer a { color: white; opacity: 0.8; }
-    footer a:hover { opacity: 1; color: white; }
-    footer .fw-bold { color: white !important; }
-    /* Example CSS to make social icons red */
-    /* Default state: color is set to the CSS variable --primary */
-.d-inline-flex a i {
-    /* color: var(--primary) !important; */
-    /* Optional: Add a transition for a smooth color change */
-    transition: color 0.3s ease; 
+.form-control {
+  background-color: var(--bg-surface);
+  border-color: var(--border-color);
+  color: var(--text-main);
+  padding: 0.8rem;
 }
-    /* =========================================
-   LANGUAGE ANIMATION
+
+.form-control:focus {
+  background-color: var(--bg-surface);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.2);
+  color: var(--text-main);
+}
+
+.form-label { color: var(--text-main); }
+
+[data-bs-theme="dark"] #map {
+  filter: invert(90%) hue-rotate(180deg) brightness(80%);
+}
+
+[data-bs-theme="light"] #map { filter: none; }
+
+/* =========================================
+   14. FOOTER
    ========================================= */
-    [data-lang] {
-        /* Smoothly transition opacity over 0.3 seconds */
-        transition: opacity 0.3s ease-in-out;
-        opacity: 1; 
-    }
-
-    /* This class is added by JS to hide text temporarily */
-    .lang-switching {
-        opacity: 0 !important;
-        transform: translateY(5px); /* Optional: slight slide effect */
-    }
-    /* Base styles for the background image tag */
-.bg-logo-animate-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* This centers the image perfectly */
-    transform: translate(-50%, -50%);
-
-    /* Mimics background-size: contain */
-    max-width: 95%;
-    max-height: 95%;
-    width: auto;
-    height: auto;
-
-    /* Your specified opacity */
-    opacity: 0.15;
-
-    /* Helps with performance during animation */
-    will-change: transform;
+footer {
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.bg-logo-animate {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* This centers the image perfectly */
-    transform: translate(-50%, -50%);
+[data-bs-theme="dark"] footer { background-color: #000000; }
 
-    /* Mimics background-size: contain */
-    max-width: 95%;
-    max-height: 95%;
-    width: auto;
-    height: auto;
+footer a { color: white; opacity: 0.8; }
+footer a:hover { opacity: 1; color: white; }
+footer .fw-bold { color: white !important; }
 
-    /* Your specified opacity */
-    opacity: 0.15;
-
-    /* Helps with performance during animation */
-    will-change: transform;
+.d-inline-flex a i {
+  transition: color 0.3s ease;
 }
 
 /* =========================================
-   CHOOSE ONE ANIMATION STYLE BELOW
-========================================= */
+   15. LANGUAGE ANIMATION
+   ========================================= */
+[data-lang] {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
 
-/* --- OPTION A: Slow Breathing Pulse --- */
-/* It slowly gets slightly bigger and smaller */
+.lang-switching {
+  opacity: 0 !important;
+  transform: translateY(5px);
+}
 
+/* =========================================
+   16. BACKGROUND LOGO ANIMATIONS
+   ========================================= */
+.bg-logo-animate-pulse,
+.bg-logo-animate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 95%;
+  max-height: 95%;
+  width: auto;
+  height: auto;
+  opacity: 0.15;
+  will-change: transform;
+}
+
+/* Pulse Animation */
 .bg-logo-animate-pulse {
-     /* Total duration 6s, loops infinitely, eases in and out */
-    animation: logoPulse 6s ease-in-out infinite;
+  animation: logoPulse 6s ease-in-out infinite;
 }
 
 @keyframes logoPulse {
-    0% {
-        /* IMPORTANT: We must keep the centering translate in the keyframe */
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        /* Scale up by 5% */
-        transform: translate(-50%, -50%) scale(1.05);
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
 }
 
-
-/* --- OPTION B: Gentle Floating --- (Alternative)
-/* Uncomment this section and comment out Option A if you prefer floating */
-/**/
+/* Float Animation */
 .bg-logo-animate {
-    animation: logoFloat 8s ease-in-out infinite;
+  animation: logoFloat 8s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
-    0% {
-        transform: translate(-50%, -50%);
-    }
-    50% {
-        /* Move up by 30px combined with centering */
-        transform: translate(-50%, calc(-50% - 30px));
-    }
-    100% {
-        transform: translate(-50%, -50%);
-    }
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, calc(-50% - 30px)); }
 }
 
-  </style>
+/* =========================================
+   17. RESPONSIVE QUERIES (Consolidated)
+   ========================================= */
+@media (max-width: 992px) {
+  /* Navbar Language */
+  .navbar-language-toggle {
+    min-width: 100px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+  }
+  
+  .navbar .language-dropdown-menu { min-width: 180px; }
+  
+  /* Overlay Language */
+  .language-dropdown-menu { min-width: 200px; }
+  .btn-language {
+    min-width: 130px;
+    padding: 0.65rem 1.25rem;
+  }
+  
+  /* Fullscreen Menu */
+  .fullscreen-menu-overlay { padding: 1.5rem; }
+  
+  .menu-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 5rem;
+  }
+  
+  .menu-left { gap: 1rem; }
+  .menu-link { font-size: 1.75rem; }
+  
+  .menu-right {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .menu-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .menu-social-icons { justify-content: center; }
+  .menu-close-btn {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Body blur when menu is open */
+body.menu-open { overflow: hidden; }
+
+body.menu-open::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9998;
+  transition: backdrop-filter 0.5s ease;
+}
+
+</style>
+
 </head>
 <body>
 
+<!-- =========================================
+     PREMIUM LOADING SCREEN
+     ========================================= -->
+<div id="preloader">
+  <div class="loader-wrapper">
+    <div class="loader-logo-box">
+      <img src="imgs/humoLegalLogo-rm-ups1.png" alt="HUMO LEGAL" class="loader-img">
+      <div class="glow-effect"></div>
+    </div>
+    
+    <div class="loader-text">
+      <h1 class="loader-heading">HUMO LEGAL</h1>
+      <div class="loader-line"></div>
+      <p class="loader-tag">LAW FIRM</p>
+    </div>
+    
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
 <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="#">
@@ -626,24 +1976,37 @@
         <li class="nav-item"><a class="nav-link" href="#partners" data-lang="nav_partners">Partners</a></li>
         <li class="nav-item"><a class="nav-link" href="#about" data-lang="nav_about">About</a></li>
         
-        <li class="nav-item d-flex align-items-center ms-lg-3 mt-2 mt-lg-0">
-          <div class="d-inline-flex gap-2"> 
-            <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn" class="btn btn-social-icon"><i class="bi bi-linkedin fs-5"></i></a>
-            <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram" class="btn btn-social-icon"><i class="bi bi-instagram fs-5"></i></a>
-            <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram" class="btn btn-social-icon"><i class="bi bi-telegram fs-5"></i></a>
-            <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube" class="btn btn-social-icon"><i class="bi bi-youtube fs-5"></i></a>
-            <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" class="btn btn-social-icon"><i class="bi bi-facebook fs-5"></i></a>
-          </div>
-        </li>
         
+        
+        <!-- Custom Language Selector -->
         <li class="nav-item dropdown ms-lg-2">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language selection">
-            <i class="bi bi-globe me-1"></i> <span id="currentLang">EN</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item lang-btn" data-lang-select="en">English</a></li>
-            <li><a class="dropdown-item lang-btn" data-lang-select="ru">Русский</a></li>
-            <li><a class="dropdown-item lang-btn" data-lang-select="uz">O'zbek</a></li>
+          <button class="navbar-language-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language selection">
+            <i class="bi bi-globe me-2"></i>
+            <span id="currentLang">EN</span>
+            <i class="bi bi-chevron-down ms-1 dropdown-arrow"></i>
+          </button>
+          <ul class="dropdown-menu language-dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item lang-btn" data-lang-select="en">
+                <span class="lang-flag">🇬🇧</span>
+                <span class="lang-name">English</span>
+                <i class="bi bi-check lang-check"></i>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item lang-btn" data-lang-select="ru">
+                <span class="lang-flag">🇷🇺</span>
+                <span class="lang-name">Русский</span>
+                <i class="bi bi-check lang-check"></i>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item lang-btn" data-lang-select="uz">
+                <span class="lang-flag">🇺</span>
+                <span class="lang-name">O'zbek</span>
+                <i class="bi bi-check lang-check"></i>
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -656,10 +2019,135 @@
         <li class="nav-item">
           <a class="nav-link btn btn-primary px-4 ms-lg-3 mt-2 mt-lg-0" href="#contact" data-lang="nav_contact">Contact Us</a>
         </li>
+
+        <li class="nav-item">
+          <button id="menu-toggle" class="btn btn-menu-toggle ms-lg-3 rounded-circle d-flex align-items-center justify-content-center" 
+                  style="width: 45px; height: 45px;" aria-label="Toggle menu">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- Full Screen Menu Overlay -->
+<div class="fullscreen-menu-overlay" id="fullscreenMenu">
+  <div class="menu-close-btn" id="menuClose">
+    <i class="bi bi-x-lg"></i>
+  </div>
+  
+  <div class="menu-content">
+    <!-- Left Side - Main Navigation -->
+    <div class="menu-left">
+      <a href="#services" class="menu-link" data-menu-close data-lang="nav_services">Practice Areas</a>
+      <a href="#cases" class="menu-link" data-menu-close data-lang="nav_cases">Case Results</a>
+      <a href="#partners" class="menu-link" data-menu-close data-lang="nav_partners">Partners</a>
+      <a href="#about" class="menu-link" data-menu-close data-lang="nav_about">About</a>
+      <a href="#contact" class="menu-link" data-menu-close data-lang="nav_contact">Contact Us</a>
+    </div>
+    
+    <!-- Right Side - Practices & Industries -->
+    <div class="menu-right">
+      <div class="menu-column">
+        <h6 class="menu-column-title">PRACTICES</h6>
+        <ul class="menu-list">
+          <li><a href="#" data-menu-close>Corporate Law and M&A</a></li>
+          <li><a href="#" data-menu-close>International Arbitration and Cross-Border Disputes</a></li>
+          <li><a href="#" data-menu-close>Capital Markets</a></li>
+          <li><a href="#" data-menu-close>Special Situations</a></li>
+          <li><a href="#" data-menu-close>Healthcare and Life Science</a></li>
+          <li><a href="#" data-menu-close>Infrastructure and PPP</a></li>
+          <li><a href="#" data-menu-close>Banking and Finance Law</a></li>
+          <li><a href="#" data-menu-close>Dispute Resolution</a></li>
+          <li><a href="#" data-menu-close>Sanctions Law</a></li>
+          <li><a href="#" data-menu-close>Real Estate. Land. Construction</a></li>
+          <li><a href="#" data-menu-close>Tax Advisory and Litigation</a></li>
+          <li><a href="#" data-menu-close>Employment Law</a></li>
+          <li><a href="#" data-menu-close>Private Clients</a></li>
+          <li><a href="#" data-menu-close>Intellectual Property</a></li>
+          <li><a href="#" data-menu-close>Customs Law and Foreign Economic Activity</a></li>
+          <li><a href="#" data-menu-close>Compliance</a></li>
+          <li><a href="#" data-menu-close>Currency Regulation</a></li>
+          <li><a href="#" data-menu-close>Investment Support</a></li>
+          <li><a href="#" data-menu-close>Bankruptcy</a></li>
+        </ul>
+      </div>
+      
+      <div class="menu-column">
+        <h6 class="menu-column-title">INDUSTRIES</h6>
+        <ul class="menu-list">
+          <li><a href="#" data-menu-close>Energy and Natural Resources</a></li>
+          <li><a href="#" data-menu-close>Agriculture</a></li>
+          <li><a href="#" data-menu-close>Retail</a></li>
+          <li><a href="#" data-menu-close>Transport and Logistics</a></li>
+          <li><a href="#" data-menu-close>Technology, Media and Telecommunications</a></li>
+          <li><a href="#" data-menu-close>Healthcare and Life Sciences</a></li>
+          <li><a href="#" data-menu-close>Real Estate</a></li>
+          <li><a href="#" data-menu-close>Financial Services and Fintech</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Bottom Section - Social, Language, Theme -->
+    <div class="menu-bottom">
+      <div class="menu-social-icons">
+        <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn" class="btn btn-social-icon">
+          <i class="bi bi-linkedin fs-5"></i>
+        </a>
+        <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram" class="btn btn-social-icon">
+          <i class="bi bi-instagram fs-5"></i>
+        </a>
+        <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram" class="btn btn-social-icon">
+          <i class="bi bi-telegram fs-5"></i>
+        </a>
+        <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube" class="btn btn-social-icon">
+          <i class="bi bi-youtube fs-5"></i>
+        </a>
+        <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" class="btn btn-social-icon">
+          <i class="bi bi-facebook fs-5"></i>
+        </a>
+      </div>
+      
+      <div class="menu-language-selector">
+        <div class="dropdown">
+          <button class="btn btn-language dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-globe me-2"></i>
+            <span id="overlayCurrentLang">EN</span>
+            <i class="bi bi-chevron-down ms-2 dropdown-arrow"></i>
+          </button>
+          <ul class="dropdown-menu language-dropdown-menu">
+            <li>
+              <a class="dropdown-item lang-btn" data-lang-select="en" data-menu-close>
+                <span class="lang-flag">🇬🇧</span>
+                <span class="lang-name">English</span>
+                <i class="bi bi-check lang-check"></i>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item lang-btn" data-lang-select="ru" data-menu-close>
+                <span class="lang-flag">🇷🇺</span>
+                <span class="lang-name">Русский</span>
+                <i class="bi bi-check lang-check"></i>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item lang-btn" data-lang-select="uz" data-menu-close>
+                <span class="lang-flag">🇺🇿</span>
+                <span class="lang-name">O'zbek</span>
+                <i class="bi bi-check lang-check"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+        
+      <button id="overlay-theme-toggle" class="btn btn-theme-toggle rounded-circle d-flex align-items-center justify-content-center" aria-label="Toggle dark mode">
+        <i class="bi bi-moon-stars-fill"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
 <header class="hero" data-aos="fade-up">
     <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style="z-index: 0; pointer-events: none;">
@@ -1135,368 +2623,386 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Initialize AOS
-    AOS.init({
-        duration: 800,
-        once: true
-    });
-
-    // Theme Toggle Logic
-    const themeToggle = document.getElementById('theme-toggle');
-    const icon = themeToggle.querySelector('i');
-    const html = document.documentElement;
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        html.setAttribute('data-bs-theme', savedTheme);
-        updateIcon(savedTheme);
-    }
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-bs-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
-    });
-
-    function updateIcon(theme) {
-        if (theme === 'dark') {
-            icon.classList.remove('bi-moon-stars-fill');
-            icon.classList.add('bi-sun-fill');
-            icon.style.color = 'yellow';
-        } else {
-            icon.classList.remove('bi-sun-fill');
-            icon.classList.add('bi-moon-stars-fill');
-            icon.style.color = '';
-        }
-    }
-
-    // MAP THEMES
-const lightMap = "https://www.google.com/maps?q=Atlas%20Business%20Tower%2025%20Mirzo%20Ulugbek%20St.%20Tashkent&output=embed";
-const darkMap  = lightMap; // same url, but styled with CSS filter
-
-    // Choose the map based on theme
-    function updateMap(theme) {
-      const mapFrame = document.getElementById("humoMap");
-
-      if (theme === "dark") {
-        mapFrame.src = lightMap; // same URL
-        mapFrame.style.filter = "invert(90%) hue-rotate(180deg) brightness(80%)";
-      } else {
-        mapFrame.src = lightMap;
-        mapFrame.style.filter = "none";
-      }
-    }
-
-    // initial load
-    const currentTheme = document.documentElement.getAttribute("data-bs-theme") || "light";
-    updateMap(currentTheme);
-
-    // when toggling theme
-    themeToggle.addEventListener("click", () => {
-      const newTheme = document.documentElement.getAttribute("data-bs-theme");
-      updateMap(newTheme);
-    });
-
-
-
+  
+  <!-- =========================================
+     JAVASCRIPT - ORGANIZED & FORMATTED
+     ========================================= -->
+<script>
+  // =========================================
+  // 1. PAGE LOAD INITIALIZATIONS
+  // =========================================
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Initialize theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+    updateThemeIcons(savedTheme === 'dark');
+    
+    // Initialize language from localStorage
+    const savedLang = localStorage.getItem('lang') || 'en';
+    initLanguage(savedLang);
+    
+    // Initialize map based on theme
+    updateMap(savedTheme);
+    
+    // Initialize AOS animations
+    AOS.init({ duration: 800, once: true });
+  });
 
-    // ===================================
-    // MULTI-LANGUAGE DATA
-    // ===================================
-    const translationsData = {
-      "en": {
-        "nav_services": "Practice Areas",
-        "nav_cases": "Case Results",
-        "nav_partners": "Partners",
-        "nav_about": "About",
-        "nav_contact": "Contact Us",
-        "hero_title": "HUMO LEGAL <br>law firm",
-        "hero_desc": "We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.",
-        "btn_consult": "Request Consultation",
-        "btn_results": "View Results",
-        "stats_cases": "Successful Cases",
-        "stats_clients": "Trusted Clients",
-        "sec_services_title": "Our Practice Areas",
-        "sec_services_desc": "Comprehensive legal solutions tailored to your specific business needs.",
-        "serv_corp_title": "Corporate<br>Compliance",
-        "serv_corp_desc": "Navigating complex regulations and ensuring your business stays compliant with evolving laws.",
-        "serv_labor_title": "Labor &<br>Employment",
-        "serv_labor_desc": "Expert advice on employment contracts, disputes, and workplace safety regulations.",
-        "serv_disp_title": "Dispute<br>Resolution",
-        "serv_disp_desc": "Strategic representation in litigation and arbitration to protect your interests.",
-        "serv_ip_title": "Intellectual<br>Property",
-        "serv_ip_desc": "Protecting your innovations, trademarks, and creative assets from infringement.",
-        "serv_ma_title": "Mergers &<br>Acquisitions",
-        "serv_ma_desc": "Guiding you through complex transactions, due diligence, and integration processes.",
-        "serv_tax_title": "Business<br>Taxation",
-        "serv_tax_desc": "Optimizing tax strategies and resolving disputes with tax authorities efficiently.",
-        "sec_cases_title": "Selected Case Results",
-        "case_1_desc": "Victory in the Supreme Court: Fine recovery case canceled successfully.",
-        "case_sums": "Billion sums",
-        "case_2_desc": "Supreme Court win for returning NDS tax to the company's account.",
-        "case_3_desc": "Leasing company debt collection case — funds returned to client.",
-        "btn_case_review": "Request a Case Review",
-        "sec_partners_title": "Our Partners",
-        "sec_about_title": "About HUMO LEGAL",
-        "sec_about_lead": "Your strategic legal partner in Uzbekistan.",
-        "sec_about_text": "“HUMO LEGAL” law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.",
-        "about_val_title": "Core Values",
-        "about_val_text": "Client-first approach, full confidentiality, and deep legal expertise across multiple domains.",
-        "about_exp_title": "Experience",
-        "about_exp_text": "Successful representation in lease disputes, tax claims, and corporate reorganizations.",
-        "why_title": "Why Choose Us?",
-        "why_1": "98% Success Rate in Economic Courts",
-        "why_2": "24/7 Client Support Availability",
-        "why_3": "Transparent Fee Structure",
-        "why_4": "International Legal Standards",
-        "sec_contact_title": "Get a Free Consultation",
-        "sec_contact_desc": "Call us, send an email, or use the contact form below. We will get back within one business day.",
-        "contact_label_call": "Call Us",
-        "contact_label_email": "Email Us",
-        "contact_label_visit": "Visit Us",
-        "form_title": "Send us a message",
-        "form_name": "Full name",
-        "form_email": "Email address",
-        "form_msg": "Brief message",
-        "form_btn": "Send message",
-        "footer_rights": "All rights reserved."
-      },
-      "ru": {
-        "nav_services": "Сферы практики",
-        "nav_cases": "Результаты дел",
-        "nav_partners": "Партнеры",
-        "nav_about": "О нас",
-        "nav_contact": "Контакты",
-        "hero_title": "Юридическая фирма <br>HUMO LEGAL",
-        "hero_desc": "Мы не просто оказываем юридические услуги. Мы заботимся о наших клиентах! Нам доверяют сотни компаний по всему Узбекистану.",
-        "btn_consult": "Заказать консультацию",
-        "btn_results": "Смотреть результаты",
-        "stats_cases": "Успешных дел",
-        "stats_clients": "Довольных клиентов",
-        "sec_services_title": "Наши сферы практики",
-        "sec_services_desc": "Комплексные юридические решения, адаптированные под нужды вашего бизнеса.",
-        "serv_corp_title": "Корпоративный<br>Комплаенс",
-        "serv_corp_desc": "Навигация в сложных правилах и обеспечение соответствия вашего бизнеса законам.",
-        "serv_labor_title": "Трудовое<br>Право",
-        "serv_labor_desc": "Экспертные консультации по трудовым договорам, спорам и правилам безопасности.",
-        "serv_disp_title": "Разрешение<br>Споров",
-        "serv_disp_desc": "Стратегическое представительство в судах и арбитраже для защиты ваших интересов.",
-        "serv_ip_title": "Интеллектуальная<br>Собственность",
-        "serv_ip_desc": "Защита ваших инноваций, торговых марок и творческих активов от нарушений.",
-        "serv_ma_title": "Слияния и<br>Поглощения",
-        "serv_ma_desc": "Сопровождение сложных сделок, due diligence и процессов интеграции.",
-        "serv_tax_title": "Бизнес<br>Налогообложение",
-        "serv_tax_desc": "Оптимизация налоговых стратегий и эффективное разрешение споров с налоговыми органами.",
-        "sec_cases_title": "Избранные результаты",
-        "case_1_desc": "Победа в Верховном суде: Дело о взыскании штрафа успешно отменено.",
-        "case_sums": "Миллиард сумов",
-        "case_2_desc": "Победа в Верховном суде по возврату НДС на счет компании.",
-        "case_3_desc": "Дело о взыскании долга с лизинговой компании — средства возвращены клиенту.",
-        "btn_case_review": "Запросить обзор дела",
-        "sec_partners_title": "Наши партнеры",
-        "sec_about_title": "О HUMO LEGAL",
-        "sec_about_lead": "Ваш стратегический юридический партнер в Узбекистане.",
-        "sec_about_text": "Юридическая фирма «HUMO LEGAL» предоставляет услуги в области гражданского, экономического и административного права. Наши адвокаты готовят сложные документы, представляют клиентов в суде и добиваются результатов.",
-        "about_val_title": "Ценности",
-        "about_val_text": "Интересы клиента на первом месте, полная конфиденциальность и глубокая экспертиза.",
-        "about_exp_title": "Опыт",
-        "about_exp_text": "Успешное представительство в спорах об аренде, налоговых исках и реорганизации.",
-        "why_title": "Почему мы?",
-        "why_1": "98% Успешных дел в экономических судах",
-        "why_2": "Поддержка клиентов 24/7",
-        "why_3": "Прозрачная структура оплаты",
-        "why_4": "Международные стандарты",
-        "sec_contact_title": "Бесплатная консультация",
-        "sec_contact_desc": "Позвоните нам, отправьте email или используйте форму ниже. Мы ответим в течение дня.",
-        "contact_label_call": "Позвонить",
-        "contact_label_email": "Написать",
-        "contact_label_visit": "Приехать",
-        "form_title": "Отправить сообщение",
-        "form_name": "ФИО",
-        "form_email": "Email адрес",
-        "form_msg": "Краткое сообщение",
-        "form_btn": "Отправить",
-        "footer_rights": "Все права защищены."
-      },
-      "uz": {
-        "nav_services": "Xizmatlar",
-        "nav_cases": "Natijalar",
-        "nav_partners": "Hamkorlar",
-        "nav_about": "Biz haqimizda",
-        "nav_contact": "Aloqa",
-        "hero_title": "HUMO LEGAL <br>yuridik firmasi",
-        "hero_desc": "Biz shunchaki yuridik xizmat ko'rsatmaymiz. Biz mijozlarimiz haqida qayg'uramiz! O'zbekiston bo'ylab yuzlab bizneslarning ishonchi.",
-        "btn_consult": "Konsultatsiya olish",
-        "btn_results": "Natijalarni ko'rish",
-        "stats_cases": "Muvaffaqiyatli ishlar",
-        "stats_clients": "Ishonchli mijozlar",
-        "sec_services_title": "Bizning xizmatlar",
-        "sec_services_desc": "Sizning biznes ehtiyojlaringizga moslashtirilgan keng qamrovli yuridik yechimlar.",
-        "serv_corp_title": "Korporativ<br>Muvofiqlik",
-        "serv_corp_desc": "Murakkab qoidalarni tushunish va biznesingiz qonunlarga muvofiq bo'lishini ta'minlash.",
-        "serv_labor_title": "Mehnat<br>Huquqi",
-        "serv_labor_desc": "Mehnat shartnomalari, nizolar va ish joyi xavfsizligi bo'yicha ekspert maslahatlari.",
-        "serv_disp_title": "Nizolarni<br>Hal qilish",
-        "serv_disp_desc": "Manfaatlaringizni himoya qilish uchun sud va arbitrajda strategik vakillik.",
-        "serv_ip_title": "Intellektual<br>Mulk",
-        "serv_ip_desc": "Innovatsiyalar, savdo belgilari va ijodiy aktivlaringizni himoya qilish.",
-        "serv_ma_title": "Birlashish va<br>Sotib olish",
-        "serv_ma_desc": "Murakkab bitimlar, tekshiruvlar va integratsiya jarayonlarida yordam.",
-        "serv_tax_title": "Biznes<br>Soliq",
-        "serv_tax_desc": "Soliq strategiyalarini optimallashtirish va soliq organlari bilan nizolarni hal qilish.",
-        "sec_cases_title": "Tanlangan natijalar",
-        "case_1_desc": "Oliy sudda g'alaba: Jarimani undirish ishi muvaffaqiyatli bekor qilindi.",
-        "case_sums": "Milliard so'm",
-        "case_2_desc": "QQS solig'ini kompaniya hisobiga qaytarish bo'yicha Oliy sud qarori.",
-        "case_3_desc": "Lizing kompaniyasidan qarz undirish ishi — mablag'lar mijozga qaytarildi.",
-        "btn_case_review": "Ishni ko'rib chiqish",
-        "sec_partners_title": "Bizning hamkorlar",
-        "sec_about_title": "HUMO LEGAL haqida",
-        "sec_about_lead": "O'zbekistondagi strategik yuridik hamkoringiz.",
-        "sec_about_text": "“HUMO LEGAL” yuridik firmasi fuqarolik, iqtisodiy va ma'muriy huquq bo'yicha xizmatlar ko'rsatadi. Advokatlarimiz murakkab hujjatlarni tayyorlaydi va sudda mijoz manfaatlarini himoya qiladi.",
-        "about_val_title": "Qadriyatlar",
-        "about_val_text": "Mijoz manfaati birinchi o'rinda, to'liq maxfiylik va chuqur yuridik tajriba.",
-        "about_exp_title": "Tajriba",
-        "about_exp_text": "Ijara nizolari, soliq da'volari va korporativ qayta tashkil etishda muvaffaqiyatli vakillik.",
-        "why_title": "Nega aynan biz?",
-        "why_1": "Iqtisodiy sudlarda 98% muvaffaqiyat",
-        "why_2": "24/7 Mijozlarni qo'llab-quvvatlash",
-        "why_3": "Shaffof to'lov tizimi",
-        "why_4": "Xalqaro yuridik standartlar",
-        "sec_contact_title": "Bepul konsultatsiya",
-        "sec_contact_desc": "Bizga qo'ng'iroq qiling, xat yozing yoki formani to'ldiring. Bir ish kuni ichida javob beramiz.",
-        "contact_label_call": "Qo'ng'iroq",
-        "contact_label_email": "Email",
-        "contact_label_visit": "Manzil",
-        "form_title": "Xabar yuborish",
-        "form_name": "To'liq ismingiz",
-        "form_email": "Elektron pochta",
-        "form_msg": "Qisqacha xabar",
-        "form_btn": "Yuborish",
-        "footer_rights": "Barcha huquqlar himoyalangan."
+  // =========================================
+  // 2. PREMIUM LOADER LOGIC
+  // =========================================
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    
+    setTimeout(() => {
+      preloader.classList.add('loaded');
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 600); // Match CSS transition duration
+    }, 1500); // Minimum display time for premium feel
+  });
+
+  // =========================================
+  // 3. THEME TOGGLE FUNCTIONALITY
+  // =========================================
+  const themeToggle = document.getElementById('theme-toggle');
+  const overlayThemeToggle = document.getElementById('overlay-theme-toggle');
+  const themeIcon = themeToggle?.querySelector('i');
+  const overlayThemeIcon = overlayThemeToggle?.querySelector('i');
+
+  function updateThemeIcons(isDark) {
+    const iconClass = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+    if (themeIcon) themeIcon.className = iconClass;
+    if (overlayThemeIcon) overlayThemeIcon.className = iconClass;
+  }
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-bs-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-bs-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcons(newTheme === 'dark');
+    updateMap(newTheme); // Update map theme
+  }
+
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (overlayThemeToggle) overlayThemeToggle.addEventListener('click', toggleTheme);
+
+  // =========================================
+  // 4. LANGUAGE SELECTION FUNCTIONALITY
+  // =========================================
+  const translationsData = {
+    "en": {
+      "nav_services": "Practice Areas", "nav_cases": "Case Results",
+      "nav_partners": "Partners", "nav_about": "About", "nav_contact": "Contact Us",
+      "hero_title": "HUMO LEGAL <br>law firm",
+      "hero_desc": "We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.",
+      "btn_consult": "Request Consultation", "btn_results": "View Results",
+      "stats_cases": "Successful Cases", "stats_clients": "Trusted Clients",
+      "sec_services_title": "Our Practice Areas",
+      "sec_services_desc": "Comprehensive legal solutions tailored to your specific business needs.",
+      "serv_corp_title": "Corporate<br>Compliance",
+      "serv_corp_desc": "Navigating complex regulations and ensuring your business stays compliant with evolving laws.",
+      "serv_labor_title": "Labor &<br>Employment",
+      "serv_labor_desc": "Expert advice on employment contracts, disputes, and workplace safety regulations.",
+      "serv_disp_title": "Dispute<br>Resolution",
+      "serv_disp_desc": "Strategic representation in litigation and arbitration to protect your interests.",
+      "serv_ip_title": "Intellectual<br>Property",
+      "serv_ip_desc": "Protecting your innovations, trademarks, and creative assets from infringement.",
+      "serv_ma_title": "Mergers &<br>Acquisitions",
+      "serv_ma_desc": "Guiding you through complex transactions, due diligence, and integration processes.",
+      "serv_tax_title": "Business<br>Taxation",
+      "serv_tax_desc": "Optimizing tax strategies and resolving disputes with tax authorities efficiently.",
+      "sec_cases_title": "Selected Case Results",
+      "case_1_desc": "Victory in the Supreme Court: Fine recovery case canceled successfully.",
+      "case_sums": "Billion sums",
+      "case_2_desc": "Supreme Court win for returning NDS tax to the company's account.",
+      "case_3_desc": "Leasing company debt collection case — funds returned to client.",
+      "btn_case_review": "Request a Case Review",
+      "sec_partners_title": "Our Partners",
+      "sec_about_title": "About HUMO LEGAL",
+      "sec_about_lead": "Your strategic legal partner in Uzbekistan.",
+      "sec_about_text": "“HUMO LEGAL” law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.",
+      "about_val_title": "Core Values",
+      "about_val_text": "Client-first approach, full confidentiality, and deep legal expertise across multiple domains.",
+      "about_exp_title": "Experience",
+      "about_exp_text": "Successful representation in lease disputes, tax claims, and corporate reorganizations.",
+      "why_title": "Why Choose Us?",
+      "why_1": "98% Success Rate in Economic Courts",
+      "why_2": "24/7 Client Support Availability",
+      "why_3": "Transparent Fee Structure",
+      "why_4": "International Legal Standards",
+      "sec_contact_title": "Get a Free Consultation",
+      "sec_contact_desc": "Call us, send an email, or use the contact form below. We will get back within one business day.",
+      "contact_label_call": "Call Us", "contact_label_email": "Email Us", "contact_label_visit": "Visit Us",
+      "form_title": "Send us a message", "form_name": "Full name", "form_email": "Email address",
+      "form_msg": "Brief message", "form_btn": "Send message",
+      "footer_rights": "All rights reserved."
+    },
+    "ru": {
+      "nav_services": "Сферы практики", "nav_cases": "Результаты дел",
+      "nav_partners": "Партнеры", "nav_about": "О нас", "nav_contact": "Контакты",
+      "hero_title": "Юридическая фирма <br>HUMO LEGAL",
+      "hero_desc": "Мы не просто оказываем юридические услуги. Мы заботимся о наших клиентах! Нам доверяют сотни компаний по всему Узбекистану.",
+      "btn_consult": "Заказать консультацию", "btn_results": "Смотреть результаты",
+      "stats_cases": "Успешных дел", "stats_clients": "Довольных клиентов",
+      "sec_services_title": "Наши сферы практики",
+      "sec_services_desc": "Комплексные юридические решения, адаптированные под нужды вашего бизнеса.",
+      "serv_corp_title": "Корпоративный<br>Комплаенс",
+      "serv_corp_desc": "Навигация в сложных правилах и обеспечение соответствия вашего бизнеса законам.",
+      "serv_labor_title": "Трудовое<br>Право",
+      "serv_labor_desc": "Экспертные консультации по трудовым договорам, спорам и правилам безопасности.",
+      "serv_disp_title": "Разрешение<br>Споров",
+      "serv_disp_desc": "Стратегическое представительство в судах и арбитраже для защиты ваших интересов.",
+      "serv_ip_title": "Интеллектуальная<br>Собственность",
+      "serv_ip_desc": "Защита ваших инноваций, торговых марок и творческих активов от нарушений.",
+      "serv_ma_title": "Слияния и<br>Поглощения",
+      "serv_ma_desc": "Сопровождение сложных сделок, due diligence и процессов интеграции.",
+      "serv_tax_title": "Бизнес<br>Налогообложение",
+      "serv_tax_desc": "Оптимизация налоговых стратегий и эффективное разрешение споров с налоговыми органами.",
+      "sec_cases_title": "Избранные результаты",
+      "case_1_desc": "Победа в Верховном суде: Дело о взыскании штрафа успешно отменено.",
+      "case_sums": "Миллиард сумов",
+      "case_2_desc": "Победа в Верховном суде по возврату НДС на счет компании.",
+      "case_3_desc": "Дело о взыскании долга с лизинговой компании — средства возвращены клиенту.",
+      "btn_case_review": "Запросить обзор дела",
+      "sec_partners_title": "Наши партнеры",
+      "sec_about_title": "О HUMO LEGAL",
+      "sec_about_lead": "Ваш стратегический юридический партнер в Узбекистане.",
+      "sec_about_text": "Юридическая фирма «HUMO LEGAL» предоставляет услуги в области гражданского, экономического и административного права. Наши адвокаты готовят сложные документы, представляют клиентов в суде и добиваются результатов.",
+      "about_val_title": "Ценности",
+      "about_val_text": "Интересы клиента на первом месте, полная конфиденциальность и глубокая экспертиза.",
+      "about_exp_title": "Опыт",
+      "about_exp_text": "Успешное представительство в спорах об аренде, налоговых исках и реорганизации.",
+      "why_title": "Почему мы?",
+      "why_1": "98% Успешных дел в экономических судах",
+      "why_2": "Поддержка клиентов 24/7",
+      "why_3": "Прозрачная структура оплаты",
+      "why_4": "Международные стандарты",
+      "sec_contact_title": "Бесплатная консультация",
+      "sec_contact_desc": "Позвоните нам, отправьте email или используйте форму ниже. Мы ответим в течение дня.",
+      "contact_label_call": "Позвонить", "contact_label_email": "Написать", "contact_label_visit": "Приехать",
+      "form_title": "Отправить сообщение", "form_name": "ФИО", "form_email": "Email адрес",
+      "form_msg": "Краткое сообщение", "form_btn": "Отправить",
+      "footer_rights": "Все права защищены."
+    },
+    "uz": {
+      "nav_services": "Xizmatlar", "nav_cases": "Natijalar",
+      "nav_partners": "Hamkorlar", "nav_about": "Biz haqimizda", "nav_contact": "Aloqa",
+      "hero_title": "HUMO LEGAL <br>yuridik firmasi",
+      "hero_desc": "Biz shunchaki yuridik xizmat ko'rsatmaymiz. Biz mijozlarimiz haqida qayg'uramiz! O'zbekiston bo'ylab yuzlab bizneslarning ishonchi.",
+      "btn_consult": "Konsultatsiya olish", "btn_results": "Natijalarni ko'rish",
+      "stats_cases": "Muvaffaqiyatli ishlar", "stats_clients": "Ishonchli mijozlar",
+      "sec_services_title": "Bizning xizmatlar",
+      "sec_services_desc": "Sizning biznes ehtiyojlaringizga moslashtirilgan keng qamrovli yuridik yechimlar.",
+      "serv_corp_title": "Korporativ<br>Muvofiqlik",
+      "serv_corp_desc": "Murakkab qoidalarni tushunish va biznesingiz qonunlarga muvofiq bo'lishini ta'minlash.",
+      "serv_labor_title": "Mehnat<br>Huquqi",
+      "serv_labor_desc": "Mehnat shartnomalari, nizolar va ish joyi xavfsizligi bo'yicha ekspert maslahatlari.",
+      "serv_disp_title": "Nizolarni<br>Hal qilish",
+      "serv_disp_desc": "Manfaatlaringizni himoya qilish uchun sud va arbitrajda strategik vakillik.",
+      "serv_ip_title": "Intellektual<br>Mulk",
+      "serv_ip_desc": "Innovatsiyalar, savdo belgilari va ijodiy aktivlaringizni himoya qilish.",
+      "serv_ma_title": "Birlashish va<br>Sotib olish",
+      "serv_ma_desc": "Murakkab bitimlar, tekshiruvlar va integratsiya jarayonlarida yordam.",
+      "serv_tax_title": "Biznes<br>Soliq",
+      "serv_tax_desc": "Soliq strategiyalarini optimallashtirish va soliq organlari bilan nizolarni hal qilish.",
+      "sec_cases_title": "Tanlangan natijalar",
+      "case_1_desc": "Oliy sudda g'alaba: Jarimani undirish ishi muvaffaqiyatli bekor qilindi.",
+      "case_sums": "Milliard so'm",
+      "case_2_desc": "QQS solig'ini kompaniya hisobiga qaytarish bo'yicha Oliy sud qarori.",
+      "case_3_desc": "Lizing kompaniyasidan qarz undirish ishi — mablag'lar mijozga qaytarildi.",
+      "btn_case_review": "Ishni ko'rib chiqish",
+      "sec_partners_title": "Bizning hamkorlar",
+      "sec_about_title": "HUMO LEGAL haqida",
+      "sec_about_lead": "O'zbekistondagi strategik yuridik hamkoringiz.",
+      "sec_about_text": "“HUMO LEGAL” yuridik firmasi fuqarolik, iqtisodiy va ma'muriy huquq bo'yicha xizmatlar ko'rsatadi. Advokatlarimiz murakkab hujjatlarni tayyorlaydi va sudda mijoz manfaatlarini himoya qiladi.",
+      "about_val_title": "Qadriyatlar",
+      "about_val_text": "Mijoz manfaati birinchi o'rinda, to'liq maxfiylik va chuqur yuridik tajriba.",
+      "about_exp_title": "Tajriba",
+      "about_exp_text": "Ijara nizolari, soliq da'volari va korporativ qayta tashkil etishda muvaffaqiyatli vakillik.",
+      "why_title": "Nega aynan biz?",
+      "why_1": "Iqtisodiy sudlarda 98% muvaffaqiyat",
+      "why_2": "24/7 Mijozlarni qo'llab-quvvatlash",
+      "why_3": "Shaffof to'lov tizimi",
+      "why_4": "Xalqaro yuridik standartlar",
+      "sec_contact_title": "Bepul konsultatsiya",
+      "sec_contact_desc": "Bizga qo'ng'iroq qiling, xat yozing yoki formani to'ldiring. Bir ish kuni ichida javob beramiz.",
+      "contact_label_call": "Qo'ng'iroq", "contact_label_email": "Email", "contact_label_visit": "Manzil",
+      "form_title": "Xabar yuborish", "form_name": "To'liq ismingiz", "form_email": "Elektron pochta",
+      "form_msg": "Qisqacha xabar", "form_btn": "Yuborish",
+      "footer_rights": "Barcha huquqlar himoyalangan."
+    }
+  };
+
+  let currentLanguage = localStorage.getItem("lang") || "en";
+
+  function initLanguage(lang) {
+    const translations = translationsData[lang];
+    if (!translations) return;
+    
+    document.querySelectorAll("[data-lang]").forEach(el => {
+      const key = el.getAttribute("data-lang");
+      if (translations[key]) el.innerHTML = translations[key];
+    });
+    
+    const langLabels = { "en": "EN", "ru": "RU", "uz": "UZ" };
+    const currentLangDisplay = document.getElementById("currentLang");
+    const overlayCurrentLangDisplay = document.getElementById("overlayCurrentLang");
+    
+    if (currentLangDisplay) currentLangDisplay.textContent = langLabels[lang] || lang.toUpperCase();
+    if (overlayCurrentLangDisplay) overlayCurrentLangDisplay.textContent = langLabels[lang] || lang.toUpperCase();
+    
+    // Update active state in dropdowns
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.closest('.dropdown-item')?.classList.remove('active');
+      if (btn.getAttribute('data-lang-select') === lang) {
+        btn.closest('.dropdown-item')?.classList.add('active');
       }
-    };
-
-    let currentLanguage = localStorage.getItem("lang") || "en";
-
-    function loadLanguage(lang) {
-        const translations = translationsData[lang];
-        if (!translations) return;
-
-        // 1. Select all text elements
-        const elements = document.querySelectorAll("[data-lang]");
-
-        // 2. Add 'lang-switching' class (triggers fade-out via CSS)
-        elements.forEach(el => {
-            el.classList.add("lang-switching");
-        });
-
-        // 3. Wait 300ms (matches CSS transition time), then swap text & fade in
-        setTimeout(() => {
-            elements.forEach(el => {
-                const key = el.getAttribute("data-lang");
-                if (translations[key]) {
-                    el.innerHTML = translations[key];
-                }
-            });
-
-            // Update dropdown text
-            const langLabels = { "en": "EN", "ru": "RU", "uz": "UZ" };
-            document.getElementById("currentLang").textContent = langLabels[lang] || lang.toUpperCase();
-
-            // 4. Remove 'lang-switching' class (triggers fade-in)
-            elements.forEach(el => {
-                el.classList.remove("lang-switching");
-            });
-            
-        }, 300);
-    }
-
-    // Load initial language immediately (no animation needed on load)
-    const initialTrans = translationsData[currentLanguage];
-    if(initialTrans) {
-        document.querySelectorAll("[data-lang]").forEach(el => {
-            const key = el.getAttribute("data-lang");
-            if (initialTrans[key]) el.innerHTML = initialTrans[key];
-        });
-        const langLabels = { "en": "EN", "ru": "RU", "uz": "UZ" };
-        document.getElementById("currentLang").textContent = langLabels[currentLanguage] || currentLanguage.toUpperCase();
-    }
-
-    // Event listeners
-    document.querySelectorAll(".lang-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
-            const lang = btn.getAttribute("data-lang-select");
-            // Only animate if language actually changed
-            if (lang !== currentLanguage) {
-                currentLanguage = lang;
-                localStorage.setItem("lang", lang);
-                loadLanguage(lang);
-            }
-        });
     });
+  }
 
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent page reload
+  function loadLanguage(lang) {
+    const translations = translationsData[lang];
+    if (!translations) return;
 
-        // 1. Setup your destination email here
-        const recipientEmail = "humolegal@mail.ru"; 
-        const subject = "Consultation Request from HUMO LEGAL";
+    const elements = document.querySelectorAll("[data-lang]");
+    elements.forEach(el => el.classList.add("lang-switching"));
 
-        // 2. Get values from the form
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
+    setTimeout(() => {
+      elements.forEach(el => {
+        const key = el.getAttribute("data-lang");
+        if (translations[key]) el.innerHTML = translations[key];
+      });
+      initLanguage(lang);
+      elements.forEach(el => el.classList.remove("lang-switching"));
+    }, 300);
+  }
 
-        // 3. Construct the email body
-        // We include the user's email in the body so you know who to reply to
-        const emailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-
-        // 4. Create the mailto link with encoded parameters
-        window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const lang = btn.getAttribute("data-lang-select");
+      if (lang !== currentLanguage) {
+        currentLanguage = lang;
+        localStorage.setItem("lang", lang);
+        loadLanguage(lang);
+      }
     });
+  });
 
-const scroller = document.querySelector('.partner-scroller-inner');
-const list = document.querySelector('.partner-list');
+  // =========================================
+  // 5. MAP THEME UPDATES
+  // =========================================
+  const lightMap = "https://www.google.com/maps?q=Atlas%20Business%20Tower%2025%20Mirzo%20Ulugbek%20St.%20Tashkent&output=embed";
 
-// Clone for infinite loop
-const clone = list.cloneNode(true);
-scroller.appendChild(clone);
+  function updateMap(theme) {
+    const mapFrame = document.getElementById("humoMap");
+    if (!mapFrame) return;
+    
+    mapFrame.src = lightMap;
+    mapFrame.style.filter = theme === "dark" 
+      ? "invert(90%) hue-rotate(180deg) brightness(80%)" 
+      : "none";
+  }
 
-// REAL measured width of one item
-const itemWidth = document.querySelector(".partner-item").offsetWidth;
+  // =========================================
+  // 6. CONTACT FORM HANDLER
+  // =========================================
+  document.getElementById('contactForm')?.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const recipientEmail = "humolegal@mail.ru";
+    const subject = "Consultation Request from HUMO LEGAL";
+    
+    const name = document.getElementById('name')?.value || '';
+    const email = document.getElementById('email')?.value || '';
+    const message = document.getElementById('message')?.value || '';
+    
+    const emailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    
+    window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+  });
 
-// Total items including clone
-const totalItems = document.querySelectorAll('.partner-item').length;
+  // =========================================
+  // 7. PARTNER SCROLLER ANIMATION
+  // =========================================
+  document.addEventListener('DOMContentLoaded', () => {
+    const scroller = document.querySelector('.partner-scroller-inner');
+    const list = document.querySelector('.partner-list');
+    
+    if (scroller && list) {
+      const clone = list.cloneNode(true);
+      scroller.appendChild(clone);
+      
+      const itemWidth = document.querySelector(".partner-item")?.offsetWidth || 320;
+      const totalItems = document.querySelectorAll('.partner-item').length;
+      
+      let current = 0;
+      const speed = 2000;
+      const slideTime = 800;
 
-let current = 0;
-const speed = 2000;
-const slideTime = 800;
+      function slide() {
+        current++;
+        scroller.style.transition = `transform ${slideTime}ms ease`;
+        scroller.style.transform = `translateX(-${itemWidth * current}px)`;
 
-function slide() {
-    current++;
-
-    scroller.style.transition = `transform ${slideTime}ms ease`;
-    scroller.style.transform = `translateX(-${itemWidth * current}px)`;
-
-    // When reaching end of original list, reset
-    if (current >= totalItems / 2) {
-        setTimeout(() => {
+        if (current >= totalItems / 2) {
+          setTimeout(() => {
             scroller.style.transition = "none";
             scroller.style.transform = "translateX(0px)";
             current = 0;
-        }, slideTime);
+          }, slideTime);
+        }
+      }
+      setInterval(slide, speed + slideTime);
     }
-}
+  });
 
-setInterval(slide, speed + slideTime);
+  // =========================================
+  // 8. FULLSCREEN MENU TOGGLE
+  // =========================================
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const fullscreenMenu = document.getElementById('fullscreenMenu');
+    const menuClose = document.getElementById('menuClose');
+    const menuLinks = document.querySelectorAll('[data-menu-close]');
 
-  </script>
+    if (!menuToggle || !fullscreenMenu) return;
+
+    function openMenu() {
+      fullscreenMenu.classList.add('active');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMenu() {
+      fullscreenMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+
+    menuToggle.addEventListener('click', openMenu);
+    menuClose?.addEventListener('click', closeMenu);
+
+    menuLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && fullscreenMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+
+    fullscreenMenu.addEventListener('click', (e) => {
+      if (e.target === fullscreenMenu) closeMenu();
+    });
+  });
+</script>
+
 </body>
 </html>
