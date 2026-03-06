@@ -14,6 +14,10 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
   <style>
 /* =========================================
    1. CSS VARIABLES & THEME SETUP
@@ -33,6 +37,127 @@
   --border-color: rgba(0, 0, 0, 0.1);
   --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Add this after your existing :root variables */
+.fullscreen-menu-overlay {
+  --overlay-text: #f0f0f0;
+  --overlay-text-muted: #b0b0b0;
+  --overlay-border: rgba(255, 255, 255, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.12);
+}
+
+[data-bs-theme="light"] .fullscreen-menu-overlay {
+  --overlay-text: #1a1a1a;
+  --overlay-text-muted: #6c757d;
+  --overlay-border: rgba(0, 0, 0, 0.15);
+  --overlay-accent: rgba(163, 0, 0, 0.06);
+}
+/* Text Selection */
+::selection,
+::-moz-selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* =========================================
+   2. GLOBAL STYLES
+   ========================================= */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+p { color: var(--text-muted); }
+
+a {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Utility Classes */
+.bg-surface { background-color: var(--bg-surface) !important; }
+.bg-alt { background-color: var(--bg-alt) !important; }
+.text-main { color: var(--text-main) !important; }
+
+/* =========================================
+   3. BUTTONS (Consolidated)
+   ========================================= */
+/* Primary Button */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.5);
+}
+
+.btn-primary:active {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(1px);
+}
+
+/* Outline Primary */
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: white !important;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-outline-primary:active {
+  background-color: var(--primary-hover) !important;
+  color: white !important;
+  border-color: var(--primary-hover) !important;
+  transform: translateY(2px);
+  box-shadow: none !important;
+}
+
+/* Hero Button Overrides */
+.hero .btn-primary {
+  background-color: white;
+  color: var(--primary);
+  border: none;
+  font-weight: 600;
+}
+
+.hero .btn-primary:hover {
+  background-color: #f0f0f0;
+  color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.hero .btn-primary:active {
+  background-color: var(--primary-hover);
+  color: white;
+  transform: translateY(1px);
 }
 
 /* =========================================
@@ -274,127 +399,6 @@
   --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
-/* Add this after your existing :root variables */
-.fullscreen-menu-overlay {
-  --overlay-text: #f0f0f0;
-  --overlay-text-muted: #b0b0b0;
-  --overlay-border: rgba(255, 255, 255, 0.15);
-  --overlay-accent: rgba(163, 0, 0, 0.12);
-}
-
-[data-bs-theme="light"] .fullscreen-menu-overlay {
-  --overlay-text: #1a1a1a;
-  --overlay-text-muted: #6c757d;
-  --overlay-border: rgba(0, 0, 0, 0.15);
-  --overlay-accent: rgba(163, 0, 0, 0.06);
-}
-/* Text Selection */
-::selection,
-::-moz-selection {
-  background: var(--primary);
-  color: white;
-}
-
-/* =========================================
-   2. GLOBAL STYLES
-   ========================================= */
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-main);
-  font-weight: 700;
-}
-
-p { color: var(--text-muted); }
-
-a {
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-/* Utility Classes */
-.bg-surface { background-color: var(--bg-surface) !important; }
-.bg-alt { background-color: var(--bg-alt) !important; }
-.text-main { color: var(--text-main) !important; }
-
-/* =========================================
-   3. BUTTONS (Consolidated)
-   ========================================= */
-/* Primary Button */
-.btn-primary {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: white;
-  transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-  border-color: var(--primary-hover);
-  transform: translateY(-1px);
-}
-
-.btn-primary:focus,
-.btn-primary.focus {
-  box-shadow: 0 0 0 0.25rem rgba(163, 0, 0, 0.5);
-}
-
-.btn-primary:active {
-  background-color: var(--primary-hover);
-  border-color: var(--primary-hover);
-  transform: translateY(1px);
-}
-
-/* Outline Primary */
-.btn-outline-primary {
-  color: var(--primary);
-  border-color: var(--primary);
-  transition: all 0.2s ease;
-}
-
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-  color: white !important;
-  background-color: var(--primary-hover);
-  border-color: var(--primary-hover);
-}
-
-.btn-outline-primary:active {
-  background-color: var(--primary-hover) !important;
-  color: white !important;
-  border-color: var(--primary-hover) !important;
-  transform: translateY(2px);
-  box-shadow: none !important;
-}
-
-/* Hero Button Overrides */
-.hero .btn-primary {
-  background-color: white;
-  color: var(--primary);
-  border: none;
-  font-weight: 600;
-}
-
-.hero .btn-primary:hover {
-  background-color: #f0f0f0;
-  color: var(--primary-hover);
-  transform: translateY(-2px);
-}
-
-.hero .btn-primary:active {
-  background-color: var(--primary-hover);
-  color: white;
-  transform: translateY(1px);
-}
-
 
 /* =========================================
    4. NAVBAR
@@ -661,7 +665,7 @@ a {
 
 /* Light theme overlay - more transparent */
 [data-bs-theme="light"] .fullscreen-menu-overlay {
-  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --bg-overlay: rgba(255, 255, 255, 0.5);
   --overlay-text: #1a1a1a;
   --overlay-text-muted: #6c757d;
   --overlay-border: rgba(0, 0, 0, 0.15);
@@ -671,7 +675,7 @@ a {
 /* Dark theme overlay - more transparent */
 [data-bs-theme="dark"] .fullscreen-menu-overlay,
 .fullscreen-menu-overlay {
-  --bg-overlay: rgba(18, 18, 18, 0.75);
+  --bg-overlay: rgba(18, 18, 18, 0.5);
   --overlay-text: #f0f0f0;
   --overlay-text-muted: #b0b0b0;
   --overlay-border: rgba(255, 255, 255, 0.15);
@@ -1614,124 +1618,637 @@ body.menu-open::before {
 /* =========================================
    9. HERO SECTION
    ========================================= */
-.hero {
+/* =========================================
+   PREMIUM LAW FIRM THEME (DUAL MODE)
+   ========================================= */
+
+/* --- CORE VARIABLES --- */
+:root {
+  --primary: #A30000;
+  --primary-hover: #7a0000;
+  
+  /* Default to Dark Mode Variables */
+  --bg-body: #0a0a0a;
+  --bg-surface: #141414;
+  --bg-surface-alt: #1a1a1a;
+  --text-main: #f4f4f4;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  --hero-overlay: rgba(0,0,0,0.7);
+}
+
+/* --- LIGHT MODE OVERRIDES --- */
+[data-bs-theme="light"] {
+  --bg-body: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f8f9fa;
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --hero-overlay: rgba(0,0,0,0.5); /* Slightly lighter overlay for readability on white */
+}
+
+/* --- GLOBAL TYPOGRAPHY --- */
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .serif-font {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-main);
+}
+
+/* =========================================
+   1. CINEMATIC HERO (VIDEO BG)
+   ========================================= */
+.hero-cinematic {
   position: relative;
-  padding: 6rem 0;
-  background: linear-gradient(135deg, #A30000 0%, #5e0000 50%, #1a1a1a 100%);
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: white; /* Hero text is always white for contrast against video */
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+  object-fit: cover;
+  /* Video is always slightly darkened */
+  filter: brightness(0.5) contrast(1.1); 
+}
+
+.hero-img-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+  z-index: -3;
+  filter: brightness(0.4);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* Gradient ensures text readability regardless of theme */
+  background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  z-index: -1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
   color: white;
 }
 
-.hero h1, .hero p, .hero .lead, .hero .h2, .hero small {
-  color: white !important;
+.hero-title span {
+  color: var(--primary);
+  font-style: italic;
 }
 
-.hero .stats { margin-top: 2rem; }
-
-/* =========================================
-   10. CARDS & COMPONENTS
-   ========================================= */
-.practice-card, .card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--bs-border-color);
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+.hero-lead {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  font-weight: 300;
 }
 
-.practice-card h5,
-.card-body { color: var(--text-main); }
-
-.practice-card:hover,
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(163, 0, 0, 0.2);
-  border-color: rgba(163, 0, 0, 0.3);
-}
-
-/* Icon Containers */
-.practice-card .bg-alt {
-  background-color: rgba(163, 0, 0, 0.08) !important;
-}
-
-[data-bs-theme="dark"] .practice-card .bg-alt {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Icon Color */
-.practice-card i.text-primary {
-  color: #8B0000 !important;
-}
-
-/* =========================================
-   11. PARTNER SCROLLER
-   ========================================= */
-.partner-list {
-  display: inline-flex;
-  gap: 200px;
-  padding-right: 20px;
-}
-
-.partner-item {
-  flex-shrink: 0;
-  width: 320px;
-  padding: 12px 0;
-}
-
-.partner-wrapper {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--bs-border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 450px !important;
-  height: 130px;
-  margin-right: 12px;
+/* Buttons */
+.btn-premium {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--primary);
   transition: all 0.3s ease;
 }
 
-.partner-logo {
-  font-size: 2rem;
+.btn-premium:hover {
+  background: transparent;
+  color: white;
+  border-color: white;
+}
+
+.btn-premium-outline {
+  background: transparent;
+  color: white;
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
   font-weight: 600;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
 }
 
-.partner-scroller-inner { display: flex; }
+.btn-premium-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: white;
+}
 
-.partner-marquee {
-  overflow: hidden;
-  width: 100%;
+
+/* =========================================
+   2. SERVICES (ARCHITECTURAL GRID)
+   ========================================= */
+.section-services {
+  background-color: var(--bg-body);
+  padding: 8rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.section-header {
+  margin-bottom: 5rem;
+}
+
+.section-label {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 3rem;
+  color: var(--text-main);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1px; /* Creates the grid lines */
+  background-color: var(--border-color); 
+  border: 1px solid var(--border-color);
+}
+
+.service-item {
+  background-color: var(--bg-surface);
+  padding: 3rem;
+  transition: all 0.4s ease;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
 }
 
+/* Hover Effect: Slight lift and accent bar */
+.service-item:hover {
+  background-color: var(--bg-surface-alt);
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.service-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 0;
+  background-color: var(--primary);
+  transition: height 0.4s ease;
+}
+
+.service-item:hover::before {
+  height: 100%;
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  transition: color 0.3s ease;
+}
+
+.service-item:hover .service-icon {
+  color: var(--primary);
+}
+
+.service-title {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.service-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* =========================================
+   3. STATS (PARALLAX STRIP)
+   ========================================= */
+.stats-strip {
+  /* Dark image background */
+  background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: white;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+
+.stat-label {
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: block;
+}
+
+/* =========================================
+   4. CASE RESULTS (LEGAL BRIEF STYLE)
+   ========================================= */
+.section-cases {
+  background-color: rgba(10, 10, 10, 0.3);
+  padding: 8rem 0;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+/* Light Theme */
+[data-bs-theme="light"] .section-cases {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark Theme */
+[data-bs-theme="dark"] .section-cases {
+  background-color: rgba(10, 10, 10, 0.3);
+}
+
+/* =========================================
+   CASE CARDS
+   ========================================= */
+.case-card {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  transition: all 0.3s ease;
+  position: relative;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Light Theme Case Cards */
+[data-bs-theme="light"] .case-card {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme Case Cards */
+[data-bs-theme="dark"] .case-card {
+  background: rgba(20, 20, 20, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Case Card Hover - No Shadow, No Transform */
+.case-card:hover {
+  border-color: var(--primary);
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================================
+   CASE CARD TEXT
+   ========================================= */
+.case-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+[data-bs-theme="light"] .case-tag {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-bs-theme="dark"] .case-tag {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.case-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+[data-bs-theme="light"] .case-amount {
+  color: #1a1a1a;
+}
+
+[data-bs-theme="dark"] .case-amount {
+  color: white;
+}
+
+.case-amount span {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+}
+
+[data-bs-theme="light"] .case-amount span {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-bs-theme="dark"] .case-amount span {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.case-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+}
+
+[data-bs-theme="light"] .case-desc {
+  color: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .case-desc {
+  color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   CASE REVIEW BUTTON
+   ========================================= */
+.btn-case-review {
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: white;
+}
+
+/* Light Theme Button */
+[data-bs-theme="light"] .btn-case-review {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  color: #1a1a1a;
+  background-color: transparent;
+}
+
+[data-bs-theme="light"] .btn-case-review:hover {
+  border-color: var(--primary);
+  color: white;
+  background-color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+/* Dark Theme Button */
+[data-bs-theme="dark"] .btn-case-review {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  background-color: transparent;
+}
+
+[data-bs-theme="dark"] .btn-case-review:hover {
+  border-color: var(--primary);
+  color: white;
+  background-color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+/* =========================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================= */
+@media (max-width: 576px) {
+  .btn-case-review {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    text-align: center;
+  }
+  
+  .case-review-wrapper {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-number {
+    font-size: 3rem;
+  }
+  
+  .btn-premium-outline {
+    margin-left: 0;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .case-amount {
+    font-size: 2.5rem;
+  }
+  
+  .case-card {
+    padding: 2rem;
+  }
+}
+/* =========================================
+   PARTNER SCROLLER - PREMIUM LAW FIRM STYLE
+   ========================================= */
+
+/* 1. The Viewport (Container) */
+.partner-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* This creates the fade effect on the left and right edges */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+/* 2. The Moving Track */
 .partner-track {
   display: flex;
+  gap: 2rem; /* Space between cards */
   width: max-content;
-  animation: fast-scroll 25s linear infinite;
+  /* Smooth, slow animation for a premium feel */
+  animation: scroll-partners 45s linear infinite;
+  will-change: transform;
 }
 
+/* Pause animation on hover so users can read/click */
 .partner-marquee:hover .partner-track {
   animation-play-state: paused;
 }
 
-@keyframes fast-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* 3. The Partner Card */
+.partner-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  
+  /* Sizing */
+  min-width: 280px;
+  height: 110px;
+  padding: 1.25rem 2rem;
+  
+  /* Styling using your variables */
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* Slightly sharper radius for a professional look */
+  
+  /* Transitions */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
-.partner-wrapper:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(163, 0, 0, 0.1);
+/* 4. Card Hover Effects */
+.partner-card:hover {
+  transform: translateY(-4px);
   border-color: var(--primary);
+  box-shadow: 0 10px 25px -5px rgba(163, 0, 0, 0.15); /* Red-tinted shadow */
+  background-color: var(--bg-surface);
 }
 
-[data-bs-theme="dark"] .partner-logo {
-  filter: brightness(0) invert(1);
-  opacity: 0.8;
+/* 5. Logo & Text Styling */
+.partner-logo-img {
+  max-height: 50px; /* Uniform height for all logos */
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%); /* Optional: Makes logos black/white until hovered */
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover .partner-logo-img {
+  filter: grayscale(0%); /* Restore color on hover */
+  opacity: 1;
+}
+
+.partner-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+/* 6. Animation Keyframes */
+@keyframes scroll-partners {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Moves exactly half the width (1 set of items) */
+}
+
+/* 7. Dark Mode Adjustments */
+[data-bs-theme="dark"] .partner-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-bs-theme="dark"] .partner-logo-img {
+  filter: brightness(0) invert(1); /* Force logos to white in dark mode */
+  opacity: 0.6;
+}
+
+[data-bs-theme="dark"] .partner-card:hover .partner-logo-img {
+  opacity: 1;
+  /* Keep them white in dark mode, or remove filter to show original colors if preferred */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .partner-card {
+    min-width: 220px;
+    height: 90px;
+    padding: 1rem;
+  }
+  .partner-logo-img {
+    max-height: 40px;
+  }
+  .partner-name {
+    font-size: 0.85rem;
+  }
 }
 
 /* =========================================
    12. ABOUT SECTION
    ========================================= */
+   .about-background {
+    background-color: rgba(255, 255, 255) !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  }
+  [data-bs-theme="dark"] .about-background {
+    background-color: rgba(20, 20, 20) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
 #about p.text-primary,
 #about .row .text-primary {
   color: var(--primary) !important;
@@ -2037,6 +2554,850 @@ body.menu-open::before {
     padding-right: 0;
   }
 }
+/* =========================================
+   🎥 CONTINUOUS VIDEO BACKGROUND (ADD THIS)
+   ========================================= */
+.continuous-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.video-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  filter: brightness(0.5) contrast(1.1);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+/* =========================================
+   NAVBAR TRANSPARENT (ADD/OVERRIDE)
+   ========================================= */
+.custom-navbar {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  padding: 1rem 0;
+}
+
+/* Navbar scrolled state */
+.custom-navbar.scrolled {
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 0;
+}
+
+/* Light mode navbar */
+[data-bs-theme="light"] .custom-navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="light"] .custom-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Navbar links - white for video contrast */
+.custom-navbar .nav-link {
+  color: white !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* Light mode navbar links */
+[data-bs-theme="light"] .custom-navbar .nav-link {
+  color: var(--text-main) !important;
+}
+
+[data-bs-theme="light"] .custom-navbar .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* Navbar brand */
+.custom-navbar .navbar-brand {
+  color: white !important;
+}
+
+[data-bs-theme="light"] .custom-navbar .navbar-brand {
+  color: white !important;
+  transition: all 0.3s ease;
+}
+
+/* =========================================
+   HERO SECTION (ADD/OVERRIDE)
+   ========================================= */
+.hero-cinematic {
+  background: transparent !important;
+}
+
+/* =========================================
+   SERVICES SECTION (ADD/OVERRIDE)
+   ========================================= */
+.section-services {
+  position: relative;
+  background: transparent !important;
+  padding: 8rem 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--bg-body) 100%
+  );
+  z-index: 2;
+}
+
+/* Glass Effect Service Cards */
+.service-item {
+  background-color: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Light Mode Service Cards */
+[data-bs-theme="light"] .service-item {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================
+   MOBILE RESPONSIVE (ADD/OVERRIDE)
+   ========================================= */
+@media (max-width: 768px) {
+  .continuous-video-bg {
+    display: none;
+  }
+  
+  .hero-cinematic {
+    background: linear-gradient(135deg, #8a0000 0%, #4a0000 60%, #111111 100%);
+  }
+  
+  .custom-navbar {
+    background: rgba(10, 10, 10, 0.95) !important;
+  }
+  
+  [data-bs-theme="light"] .custom-navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+/* =========================================
+   🎥 VIDEO BACKGROUND FIXES (ADD THIS)
+   ========================================= */
+
+/* 1. Make Video Overlay Lighter (for better text visibility) */
+.video-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  ) !important;
+}
+
+/* 2. Hero Overlay - Lighter (remove dark section effect) */
+.hero-cinematic .hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.3) 0%,
+    rgba(0,0,0,0.15) 50%,
+    rgba(0,0,0,0.05) 100%
+  ) !important;
+}
+
+/* 3. Service Cards - MORE Transparent */
+.service-item {
+  background-color: rgba(20, 20, 20, 0.55) !important; /* Was 0.85 */
+  backdrop-filter: blur(20px) !important; /* Increased blur */
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Light Mode Service Cards - More Transparent */
+[data-bs-theme="light"] .service-item {
+  background-color: rgba(255, 255, 255, 0.65) !important; /* Was 0.9 */
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 4. Navbar - ALWAYS Transparent with Blur (No Solid on Scroll) */
+.custom-navbar {
+  background: rgba(10, 10, 10, 0.3) !important; /* Semi-transparent always */
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease !important;
+  padding: 1rem 0 !important;
+}
+
+/* Navbar scrolled - Still transparent, just slightly more blur */
+.custom-navbar.scrolled {
+  background: rgba(10, 10, 10, 0.4) !important; /* Still transparent */
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  padding: 0.75rem 0 !important;
+}
+
+/* Light mode navbar - Transparent with blur */
+[data-bs-theme="light"] .custom-navbar {
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-bs-theme="light"] .custom-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.4) !important; /* Still transparent */
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* 5. Navbar Text - ALWAYS White (Even in Light Mode Over Video) */
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-language-toggle {
+  color: white !important;
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .navbar-brand:hover {
+  color: var(--primary) !important;
+}
+
+.custom-navbar .navbar-language-toggle {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 6. Services Section Title - White Over Video */
+.section-services .section-label {
+  color: var(--primary) !important; /* Keep red */
+}
+
+.section-services .section-title {
+  color: white !important; /* White for video contrast */
+}
+
+/* 7. Service Card Text - White Over Video */
+.service-title,
+.service-desc,
+.service-icon {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.service-item:hover .service-icon {
+  color: var(--primary) !important;
+}
+
+/* 8. Service Card Hover - More Visible */
+.service-item:hover {
+  background-color: rgba(30, 30, 30, 0.7) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-bs-theme="light"] .service-item:hover {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 9. Mobile - Ensure Text Readability */
+@media (max-width: 768px) {
+  .continuous-video-bg {
+    display: none;
+  }
+  
+  .hero-cinematic {
+    background: linear-gradient(135deg, #8a0000 0%, #4a0000 60%, #111111 100%) !important;
+  }
+  
+  .hero-cinematic,
+  .hero-cinematic h1,
+  .hero-cinematic h2,
+  .hero-cinematic p,
+  .hero-cinematic .hero-title,
+  .hero-cinematic .hero-lead {
+    color: white !important;
+  }
+  
+  .custom-navbar {
+    background: rgba(10, 10, 10, 0.95) !important;
+  }
+  
+  [data-bs-theme="light"] .custom-navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+/* =========================================
+   🎥 CONTINUOUS VIDEO BACKGROUND (FIXED)
+   ========================================= */
+.continuous-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.video-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  filter: brightness(0.5) contrast(1.1);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+/* =========================================
+   NAVBAR - TRANSPARENT WITH BLUR
+   ========================================= */
+.custom-navbar {
+  background: rgba(10, 10, 10, 0.3) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  padding: 1rem 0;
+}
+
+.custom-navbar.scrolled {
+  background: rgba(10, 10, 10, 0.4) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 0.75rem 0;
+}
+
+[data-bs-theme="light"] .custom-navbar {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="light"] .custom-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Navbar Text - Always White Over Video */
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-language-toggle {
+  color: white !important;
+}
+
+.custom-navbar .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* =========================================
+   HERO SECTION - TRANSPARENT
+   ========================================= */
+.hero-cinematic {
+  background: transparent !important;
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-cinematic .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.3) 0%,
+    rgba(0,0,0,0.15) 50%,
+    rgba(0,0,0,0.05) 100%
+  );
+  z-index: -1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: white !important;
+}
+
+.hero-title span {
+  color: var(--primary);
+  font-style: italic;
+}
+
+.hero-lead {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.9) !important;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  font-weight: 300;
+}
+
+/* =========================================
+   SERVICES SECTION - TRANSPARENT
+   ========================================= */
+.section-services {
+  position: relative;
+  background: transparent !important;
+  padding: 8rem 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--bg-body) 100%
+  );
+  z-index: 2;
+}
+
+.section-services .section-title {
+  color: white !important;
+}
+
+.section-services .section-label {
+  color: var(--primary) !important;
+}
+
+/* =========================================
+   SERVICE CARDS - 30% TRANSPARENT
+   ========================================= */
+.service-item {
+  background-color: rgba(20, 20, 20, 0.30) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="light"] .service-item {
+  background-color: rgba(255, 255, 255, 0.30) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.service-item:hover {
+  background-color: rgba(30, 30, 30, 0.50) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-bs-theme="light"] .service-item:hover {
+  background-color: rgba(255, 255, 255, 0.50) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.service-title,
+.service-desc,
+.service-icon {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.service-item:hover .service-icon {
+  color: var(--primary) !important;
+}
+
+/* =========================================
+   MOBILE - KEEP VIDEO ENABLED
+   ========================================= */
+@media (max-width: 768px) {
+  .continuous-video-bg {
+    display: block !important;
+  }
+  
+  .video-background {
+    filter: brightness(0.6) contrast(1.1);
+  }
+  
+  .hero-cinematic {
+    background: linear-gradient(135deg, #8a0000 0%, #4a0000 60%, #111111 100%);
+  }
+  
+  .hero-cinematic .hero-overlay {
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,0.5) 0%,
+      rgba(0,0,0,0.3) 50%,
+      rgba(0,0,0,0.1) 100%
+    ) !important;
+  }
+  
+  .custom-navbar {
+    background: rgba(10, 10, 10, 0.6) !important;
+  }
+  
+  [data-bs-theme="light"] .custom-navbar {
+    background: rgba(255, 255, 255, 0.6) !important;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-item {
+    padding: 2rem;
+  }
+  
+  .service-title,
+  .service-desc,
+  .service-icon {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* =========================================
+   🃏 SERVICE CARDS - NO SHADOW ON HOVER
+   ========================================= */
+
+/* Remove shadow on hover - keep 30% transparency */
+.service-item:hover {
+  background-color: rgba(20, 20, 20, 0.30) !important;
+  box-shadow: none !important; /* Remove shadow */
+  transform: none !important; /* Remove any lift effect */
+}
+
+[data-bs-theme="light"] .service-item:hover {
+  background-color: rgba(255, 255, 255, 0.30) !important;
+  box-shadow: none !important; /* Remove shadow */
+  transform: none !important; /* Remove any lift effect */
+}
+
+/* Keep other hover effects (icon color, accent bar) */
+.service-item:hover .service-icon {
+  color: var(--primary) !important;
+}
+
+.service-item:hover::before {
+  height: 100%;
+}
+
+/* =========================================
+   🎬 HERO SECTION - REMOVE BLACK OVERLAY
+   ========================================= */
+
+/* Make hero overlay completely transparent */
+.hero-cinematic .hero-overlay {
+  background: transparent !important;
+  opacity: 0 !important;
+}
+
+/* Ensure video brightness is adjusted instead of overlay */
+.hero-video-bg {
+  filter: brightness(0.7) contrast(1.1) !important; /* Slightly darker video instead of overlay */
+}
+
+/* Keep text readable with direct text shadow */
+.hero-title {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hero-lead {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure hero section stays transparent */
+.hero-cinematic {
+  background: transparent !important;
+}
+
+/* =========================================
+   📱 NAVBAR - TRANSPARENT AT TOP + BLURRED ON SCROLL
+   ========================================= */
+
+/* Navbar at top - Completely Transparent */
+.custom-navbar {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease !important;
+  padding: 1rem 0 !important;
+}
+
+/* Navbar scrolled - Blurred Background */
+.custom-navbar.scrolled {
+  background: rgba(10, 10, 10, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding: 0.75rem 0 !important;
+}
+
+/* Light mode navbar at top - Transparent */
+[data-bs-theme="light"] .custom-navbar {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Light mode navbar scrolled - Blurred */
+[data-bs-theme="light"] .custom-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* =========================================
+   📝 NAVBAR TEXT - ALWAYS WHITE (Over Video)
+   ========================================= */
+
+/* All navbar text - White */
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-brand span {
+  color: white !important;
+}
+
+/* Navbar hover - Primary color */
+.custom-navbar .nav-link:hover,
+.custom-navbar .navbar-brand:hover {
+  color: var(--primary) !important;
+}
+
+/* Language toggle button - White text */
+.custom-navbar .navbar-language-toggle {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.custom-navbar .navbar-language-toggle:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background: rgba(163, 0, 0, 0.2) !important;
+}
+
+/* Theme toggle button - White icon */
+.custom-navbar #theme-toggle {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+.custom-navbar #theme-toggle:hover {
+  border-color: var(--primary) !important;
+}
+
+/* Menu toggle button - White icon */
+.custom-navbar #menu-toggle {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+.custom-navbar #menu-toggle:hover {
+  border-color: var(--primary) !important;
+}
+
+/* Contact button - Keep primary style */
+.custom-navbar .btn-primary {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
+}
+
+.custom-navbar .btn-primary:hover {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: white !important;
+}
+
+/* =========================================
+   📱 MOBILE NAVBAR
+   ========================================= */
+@media (max-width: 992px) {
+  .custom-navbar {
+    background: rgba(10, 10, 10, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+  }
+  
+  [data-bs-theme="light"] .custom-navbar {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+/* =========================================
+    NAVBAR FIX - FORCE TRANSPARENT AT TOP
+   ========================================= */
+
+/* Navbar at top - COMPLETELY transparent on BOTH themes */
+.custom-navbar:not(.scrolled) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Navbar scrolled - Blurred background */
+.custom-navbar.scrolled {
+  background: rgba(10, 10, 10, 0.5) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Light theme navbar at top - Still transparent */
+[data-bs-theme="light"] .custom-navbar:not(.scrolled) {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Light theme navbar scrolled - Light blurred */
+[data-bs-theme="light"] .custom-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  .nav-link, .custom-navbar, .navbar-brand{
+    color: var(--text-main) !important;
+  }
+
+  .navbar-language-toggle, #theme-toggle, #menu-toggle{
+    color: var(--text-main) !important;
+    border-color: rgba(0, 0, 0, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+  /* Navbar hover - Primary red */
+  .custom-navbar, .nav-link:hover,
+  .custom-navbar, .navbar-brand:hover,
+  .navbar-language-toggle:hover {
+    color: #A30000 !important;
+  }
+}
+
+/* =========================================
+   📝 NAVBAR TEXT - FORCE WHITE (Over Video)
+   ========================================= */
+
+/* ALL navbar text - WHITE always */
+[data-bs-theme="light"] .custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-brand span {
+  color: white !important;
+}
+
+
+
+/* Language toggle - White */
+.custom-navbar .navbar-language-toggle {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.custom-navbar .navbar-language-toggle:hover {
+  border-color: #A30000 !important;
+  color: #A30000 !important;
+  background: rgba(163, 0, 0, 0.2) !important;
+}
+
+/* Theme toggle button - White icon */
+.custom-navbar #theme-toggle {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+.custom-navbar #theme-toggle:hover {
+  border-color: #A30000 !important;
+}
+
+/* Menu toggle button - White icon */
+.custom-navbar #menu-toggle {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+.custom-navbar #menu-toggle:hover {
+  border-color: #A30000 !important;
+}
+
+/* Contact button - Keep red */
+.custom-navbar .btn-primary {
+  background: #A30000 !important;
+  border-color: #A30000 !important;
+  color: white !important;
+}
+
+.custom-navbar .btn-primary:hover {
+  background: #7a0000 !important;
+  border-color: #7a0000 !important;
+  color: white !important;
+}
+
+/* =========================================
+   📱 MOBILE NAVBAR - Always Blurred
+   ========================================= */
+@media (max-width: 992px) {
+  .custom-navbar {
+    background: rgba(10, 10, 10, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  
+  [data-bs-theme="light"] .custom-navbar {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+}
 </style>
 
 </head>
@@ -2064,6 +3425,129 @@ body.menu-open::before {
   </div>
 </div>
 
+<!-- Full Screen Menu - Add data-lang to ALL items -->
+<div class="fullscreen-menu-overlay" id="fullscreenMenu">
+    <div class="menu-close-btn" id="menuClose">
+        <i class="bi bi-x-lg"></i>
+    </div>
+    <div class="menu-content">
+        <!-- Left Side - Main Navigation -->
+        <div class="menu-left">
+            <a href="#services" class="menu-link" data-menu-close data-lang="nav_services">Practice Areas</a>
+            <a href="#cases" class="menu-link" data-menu-close data-lang="nav_cases">Case Results</a>
+            <a href="#partners" class="menu-link" data-menu-close data-lang="nav_partners">Partners</a>
+            <a href="#about" class="menu-link" data-menu-close data-lang="nav_about">About</a>
+            <a href="#contact" class="menu-link" data-menu-close data-lang="nav_contact">Contact Us</a>
+        </div>
+        <!-- Right Side - Practices & Industries -->
+        <div class="menu-right">
+            <div class="menu-column">
+                <h6 class="menu-column-title" data-lang="menu_practices_title">PRACTICES</h6>
+                <ul class="menu-list">
+                    <li><a href="#" data-menu-close data-lang="menu_practice_1">Corporate Law and M&A</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_2">International Arbitration and Cross-Border Disputes</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_3">Capital Markets</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_4">Special Situations</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_5">Healthcare and Life Science</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_6">Infrastructure and PPP</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_7">Banking and Finance Law</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_8">Dispute Resolution</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_9">Sanctions Law</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_10">Real Estate. Land. Construction</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_11">Tax Advisory and Litigation</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_12">Employment Law</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_13">Private Clients</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_14">Intellectual Property</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_15">Customs Law and Foreign Economic Activity</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_16">Compliance</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_17">Currency Regulation</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_18">Investment Support</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_practice_19">Bankruptcy</a></li>
+                </ul>
+            </div>
+            <div class="menu-column">
+                <h6 class="menu-column-title" data-lang="menu_industries_title">INDUSTRIES</h6>
+                <ul class="menu-list">
+                    <li><a href="#" data-menu-close data-lang="menu_industry_1">Energy and Natural Resources</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_2">Agriculture</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_3">Retail</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_4">Transport and Logistics</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_5">Technology, Media and Telecommunications</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_6">Healthcare and Life Sciences</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_7">Real Estate</a></li>
+                    <li><a href="#" data-menu-close data-lang="menu_industry_8">Financial Services and Fintech</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Bottom Section -->
+        <div class="menu-bottom">
+            <div class="menu-social-icons">
+                <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn" class="btn btn-social-icon">
+                    <i class="bi bi-linkedin fs-5"></i>
+                </a>
+                <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram" class="btn btn-social-icon">
+                    <i class="bi bi-instagram fs-5"></i>
+                </a>
+                <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram" class="btn btn-social-icon">
+                    <i class="bi bi-telegram fs-5"></i>
+                </a>
+                <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube" class="btn btn-social-icon">
+                    <i class="bi bi-youtube fs-5"></i>
+                </a>
+                <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" class="btn btn-social-icon">
+                    <i class="bi bi-facebook fs-5"></i>
+                </a>
+            </div>
+            <div class="menu-language-selector">
+                <div class="dropdown">
+                    <button class="btn btn-language dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-globe me-2"></i>
+                        <span id="overlayCurrentLang">EN</span>
+                        <i class="bi bi-chevron-down ms-2 dropdown-arrow"></i>
+                    </button>
+                    <ul class="dropdown-menu language-dropdown-menu">
+                        <li>
+                            <a class="dropdown-item lang-btn" data-lang-select="en" data-menu-close>
+                                <span class="lang-flag">🇬🇧</span>
+                                <span class="lang-name">English</span>
+                                <i class="bi bi-check lang-check"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item lang-btn" data-lang-select="ru" data-menu-close>
+                                <span class="lang-flag">🇷🇺</span>
+                                <span class="lang-name">Русский</span>
+                                <i class="bi bi-check lang-check"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item lang-btn" data-lang-select="uz" data-menu-close>
+                                <span class="lang-flag">🇺🇿</span>
+                                <span class="lang-name">O'zbek</span>
+                                <i class="bi bi-check lang-check"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button id="overlay-theme-toggle" class="btn btn-theme-toggle rounded-circle d-flex align-items-center justify-content-center" aria-label="Toggle dark mode">
+                <i class="bi bi-moon-stars-fill"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================
+     CONTINUOUS VIDEO BACKGROUND (ADD THIS)
+     ========================================= -->
+<div class="continuous-video-bg">
+  <video class="video-background" autoplay muted loop playsinline preload="auto" poster="imgs/hero.png">
+    <source src="videos/8731207-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+
 <!-- =========================================
      NAVIGATION
      ========================================= -->
@@ -2072,7 +3556,7 @@ body.menu-open::before {
     <a class="navbar-brand d-flex align-items-center" href="#">
       <img src="imgs/humoLegalLogo-rm-ups1.png" alt="HUMO LEGAL logo" class="me-2" 
            style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 6px; padding: 4px;">
-      <span class="fw-bold fs-5">HUMO LEGAL</span>
+      <span class="fw-bold fs-5 navbar-brand">HUMO LEGAL</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -2140,282 +3624,156 @@ body.menu-open::before {
   </div>
 </nav>
 
-<!-- Full Screen Menu Overlay -->
-<div class="fullscreen-menu-overlay" id="fullscreenMenu">
-  <div class="menu-close-btn" id="menuClose">
-    <i class="bi bi-x-lg"></i>
+<!-- HERO SECTION -->
+<header class="hero-cinematic">
+  <div class="hero-overlay"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 hero-content" data-aos="fade-up" data-aos-duration="1000">
+        <h1 class="hero-title">
+          HUMO LEGAL <br>
+          <span>law firm</span>
+        </h1>
+        <p class="hero-lead" data-lang="hero_desc">
+          We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.
+        </p>
+        <div class="d-flex flex-wrap">
+          <a href="#contact" class="btn-premium" data-lang="btn_consult">Request Consultation</a>
+          <a href="#cases" class="btn-premium-outline" data-lang="btn_results">View Results</a>
+        </div>
+      </div>
+    </div>
   </div>
   
-  <div class="menu-content">
-    <!-- Left Side - Main Navigation -->
-    <div class="menu-left">
-      <a href="#services" class="menu-link" data-menu-close data-lang="nav_services">Practice Areas</a>
-      <a href="#cases" class="menu-link" data-menu-close data-lang="nav_cases">Case Results</a>
-      <a href="#partners" class="menu-link" data-menu-close data-lang="nav_partners">Partners</a>
-      <a href="#about" class="menu-link" data-menu-close data-lang="nav_about">About</a>
-      <a href="#contact" class="menu-link" data-menu-close data-lang="nav_contact">Contact Us</a>
-    </div>
-    
-    <!-- Right Side - Practices & Industries -->
-    <div class="menu-right">
-      <div class="menu-column">
-        <h6 class="menu-column-title">PRACTICES</h6>
-        <ul class="menu-list">
-          <li><a href="#" data-menu-close>Corporate Law and M&A</a></li>
-          <li><a href="#" data-menu-close>International Arbitration and Cross-Border Disputes</a></li>
-          <li><a href="#" data-menu-close>Capital Markets</a></li>
-          <li><a href="#" data-menu-close>Special Situations</a></li>
-          <li><a href="#" data-menu-close>Healthcare and Life Science</a></li>
-          <li><a href="#" data-menu-close>Infrastructure and PPP</a></li>
-          <li><a href="#" data-menu-close>Banking and Finance Law</a></li>
-          <li><a href="#" data-menu-close>Dispute Resolution</a></li>
-          <li><a href="#" data-menu-close>Sanctions Law</a></li>
-          <li><a href="#" data-menu-close>Real Estate. Land. Construction</a></li>
-          <li><a href="#" data-menu-close>Tax Advisory and Litigation</a></li>
-          <li><a href="#" data-menu-close>Employment Law</a></li>
-          <li><a href="#" data-menu-close>Private Clients</a></li>
-          <li><a href="#" data-menu-close>Intellectual Property</a></li>
-          <li><a href="#" data-menu-close>Customs Law and Foreign Economic Activity</a></li>
-          <li><a href="#" data-menu-close>Compliance</a></li>
-          <li><a href="#" data-menu-close>Currency Regulation</a></li>
-          <li><a href="#" data-menu-close>Investment Support</a></li>
-          <li><a href="#" data-menu-close>Bankruptcy</a></li>
-        </ul>
-      </div>
-      
-      <div class="menu-column">
-        <h6 class="menu-column-title">INDUSTRIES</h6>
-        <ul class="menu-list">
-          <li><a href="#" data-menu-close>Energy and Natural Resources</a></li>
-          <li><a href="#" data-menu-close>Agriculture</a></li>
-          <li><a href="#" data-menu-close>Retail</a></li>
-          <li><a href="#" data-menu-close>Transport and Logistics</a></li>
-          <li><a href="#" data-menu-close>Technology, Media and Telecommunications</a></li>
-          <li><a href="#" data-menu-close>Healthcare and Life Sciences</a></li>
-          <li><a href="#" data-menu-close>Real Estate</a></li>
-          <li><a href="#" data-menu-close>Financial Services and Fintech</a></li>
-        </ul>
-      </div>
-    </div>
-    
-    <!-- Bottom Section - Social, Language, Theme -->
-    <div class="menu-bottom">
-      <div class="menu-social-icons">
-        <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn" class="btn btn-social-icon">
-          <i class="bi bi-linkedin fs-5"></i>
-        </a>
-        <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram" class="btn btn-social-icon">
-          <i class="bi bi-instagram fs-5"></i>
-        </a>
-        <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram" class="btn btn-social-icon">
-          <i class="bi bi-telegram fs-5"></i>
-        </a>
-        <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube" class="btn btn-social-icon">
-          <i class="bi bi-youtube fs-5"></i>
-        </a>
-        <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" class="btn btn-social-icon">
-          <i class="bi bi-facebook fs-5"></i>
-        </a>
-      </div>
-      
-      <div class="menu-language-selector">
-        <div class="dropdown">
-          <button class="btn btn-language dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-globe me-2"></i>
-            <span id="overlayCurrentLang">EN</span>
-            <i class="bi bi-chevron-down ms-2 dropdown-arrow"></i>
-          </button>
-          <ul class="dropdown-menu language-dropdown-menu">
-            <li>
-              <a class="dropdown-item lang-btn" data-lang-select="en" data-menu-close>
-                <span class="lang-flag">🇬🇧</span>
-                <span class="lang-name">English</span>
-                <i class="bi bi-check lang-check"></i>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item lang-btn" data-lang-select="ru" data-menu-close>
-                <span class="lang-flag">🇷🇺</span>
-                <span class="lang-name">Русский</span>
-                <i class="bi bi-check lang-check"></i>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item lang-btn" data-lang-select="uz" data-menu-close>
-                <span class="lang-flag">🇺🇿</span>
-                <span class="lang-name">O'zbek</span>
-                <i class="bi bi-check lang-check"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-        
-      <button id="overlay-theme-toggle" class="btn btn-theme-toggle rounded-circle d-flex align-items-center justify-content-center" aria-label="Toggle dark mode">
-        <i class="bi bi-moon-stars-fill"></i>
-      </button>
-    </div>
-  </div>
-</div>
-
-<header class="hero" data-aos="fade-up">
-    <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style="z-index: 0; pointer-events: none;">
-      <img src="imgs/humoLegalLogo-rm-ups1.png" alt="Background Logo" class="bg-logo-animate">
-    </div>
-   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-7">
-        <h1 class="display-4 fw-bold mb-3" data-lang="hero_title">HUMO LEGAL <br>law firm</h1>
-        <p class="lead mb-4 opacity-75" data-lang="hero_desc">We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.</p>
-
-        <div class="d-flex flex-wrap gap-3">
-          <a href="#contact" class="btn btn-primary btn-lg px-4 border-light" data-aos="fade-right" data-aos-delay="100" data-lang="btn_consult">Request Consultation</a>
-          <a href="#cases" class="btn btn-outline-secondary btn-lg px-4" data-aos="fade-left" data-aos-delay="200" data-lang="btn_results">View Results</a>
-        </div>
-
-        <div class="mt-5 stats d-flex gap-5 flex-wrap" data-aos="fade-up" data-aos-delay="300">
-          <div>
-            <div class="h2 mb-0">3000+</div>
-            <small class="text-white opacity-75" data-lang="stats_cases">Successful Cases</small>
-          </div>
-          <div>
-            <div class="h2 mb-0">220+</div>
-            <small class="text-white opacity-75" data-lang="stats_clients">Trusted Clients</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-5 d-none d-lg-block">
-        <div class="card border-0 shadow-lg overflow-hidden" data-aos="fade-left" data-aos-delay="400" style="border-radius: 20px;">
-           <img src="imgs/hero.png" class="card-img-top" alt="Law Office" style="height: 400px; object-fit: cover;">
-        </div>
-      </div>
-    </div>
+  <div class="position-absolute bottom-0 start-50 translate-middle-x pb-5 animate-bounce">
+    <i class="bi bi-chevron-down text-white-50 fs-4"></i>
   </div>
 </header>
 
-<section id="services" class="py-5 bg-alt" data-aos="fade-up">
+<!-- SERVICES SECTION -->
+<section id="services" class="section-services">
   <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-8 text-center">
-        <h2 class="fw-bold" data-lang="sec_services_title">Our Practice Areas</h2>
-        <p class="text-muted" data-lang="sec_services_desc">Comprehensive legal solutions tailored to your specific business needs.</p>
-      </div>
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-label" data-lang="sec_expertise_label">Our Expertise</span>
+      <h2 class="section-title" data-lang="sec_services_title">Practice Areas</h2>
     </div>
-    
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="practice-card p-4 h-100 d-flex flex-column">
-          <div class="d-flex align-items-center mb-4">
-            <div class="me-3 p-2 rounded bg-alt">
-                <i class="bi bi-building fs-3 text-primary"></i>
-            </div>
-            <h5 class="fw-bold mb-0" data-lang="serv_corp_title">Corporate<br>Compliance</h5>
-          </div>
-          <p class="flex-grow-1" data-lang="serv_corp_desc">Navigating complex regulations and ensuring your business stays compliant with evolving laws.</p>
+
+    <div class="service-grid">
+      <!-- Item 1 -->
+      <div class="service-item" data-aos="fade-up" data-aos-delay="100">
+        <div>
+          <i class="bi bi-building service-icon"></i>
+          <h3 class="service-title" data-lang="serv_corp_title">Corporate Compliance</h3>
         </div>
+        <p class="service-desc" data-lang="serv_corp_desc">Navigating complex regulations and ensuring your business stays compliant with evolving laws.</p>
       </div>
 
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="practice-card p-4 h-100 d-flex flex-column">
-          <div class="d-flex align-items-center mb-4">
-            <div class="me-3 p-2 rounded bg-alt">
-                <i class="bi bi-people fs-3 text-primary"></i>
-            </div>
-            <h5 class="fw-bold mb-0" data-lang="serv_labor_title">Labor &<br>Employment</h5>
-          </div>
-          <p class="flex-grow-1" data-lang="serv_labor_desc">Expert advice on employment contracts, disputes, and workplace safety regulations.</p>
+      <!-- Item 2 -->
+      <div class="service-item" data-aos="fade-up" data-aos-delay="200">
+        <div>
+          <i class="bi bi-people service-icon"></i>
+          <h3 class="service-title" data-lang="serv_labor_title">Labor & Employment</h3>
         </div>
+        <p class="service-desc" data-lang="serv_labor_desc">Expert advice on employment contracts, disputes, and workplace safety regulations.</p>
       </div>
 
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="practice-card p-4 h-100 d-flex flex-column">
-          <div class="d-flex align-items-center mb-4">
-            <div class="me-3 p-2 rounded bg-alt">
-                <i class="bi bi-hammer fs-3 text-primary"></i>
-            </div>
-            <h5 class="fw-bold mb-0" data-lang="serv_disp_title">Dispute<br>Resolution</h5>
-          </div>
-          <p class="flex-grow-1" data-lang="serv_disp_desc">Strategic representation in litigation and arbitration to protect your interests.</p>
+      <!-- Item 3 -->
+      <div class="service-item" data-aos="fade-up" data-aos-delay="300">
+        <div>
+          <i class="bi bi-hammer service-icon"></i>
+          <h3 class="service-title" data-lang="serv_disp_title">Dispute Resolution</h3>
         </div>
+        <p class="service-desc" data-lang="serv_disp_desc">Strategic representation in litigation and arbitration to protect your interests.</p>
       </div>
 
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-        <div class="practice-card p-4 h-100 d-flex flex-column">
-          <div class="d-flex align-items-center mb-4">
-             <div class="me-3 p-2 rounded bg-alt">
-                <i class="bi bi-lightbulb fs-3 text-primary"></i>
-            </div>
-            <h5 class="fw-bold mb-0" data-lang="serv_ip_title">Intellectual<br>Property</h5>
-          </div>
-          <p class="flex-grow-1" data-lang="serv_ip_desc">Protecting your innovations, trademarks, and creative assets from infringement.</p>
+      <!-- Item 4 -->
+      <div class="service-item" data-aos="fade-up" data-aos-delay="400">
+        <div>
+          <i class="bi bi-lightbulb service-icon"></i>
+          <h3 class="service-title" data-lang="serv_ip_title">Intellectual Property</h3>
         </div>
+        <p class="service-desc" data-lang="serv_ip_desc">Protecting your innovations, trademarks, and creative assets from infringement.</p>
       </div>
 
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-        <div class="practice-card p-4 h-100 d-flex flex-column">
-          <div class="d-flex align-items-center mb-4">
-            <div class="me-3 p-2 rounded bg-alt">
-                <i class="bi bi-diagram-3 fs-3 text-primary"></i>
-            </div>
-            <h5 class="fw-bold mb-0" data-lang="serv_ma_title">Mergers &<br>Acquisitions</h5>
-          </div>
-          <p class="flex-grow-1" data-lang="serv_ma_desc">Guiding you through complex transactions, due diligence, and integration processes.</p>
+      <!-- Item 5 -->
+      <div class="service-item" data-aos="fade-up" data-aos-delay="500">
+        <div>
+          <i class="bi bi-diagram-3 service-icon"></i>
+          <h3 class="service-title" data-lang="serv_ma_title">Mergers & Acquisitions</h3>
         </div>
+        <p class="service-desc" data-lang="serv_ma_desc">Guiding you through complex transactions, due diligence, and integration processes.</p>
       </div>
 
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
-        <div class="practice-card p-4 h-100 d-flex flex-column">
-          <div class="d-flex align-items-center mb-4">
-             <div class="me-3 p-2 rounded bg-alt">
-                <i class="bi bi-graph-up-arrow fs-3 text-primary"></i>
-            </div>
-            <h5 class="fw-bold mb-0" data-lang="serv_tax_title">Business<br>Taxation</h5>
-          </div>
-          <p class="flex-grow-1" data-lang="serv_tax_desc">Optimizing tax strategies and resolving disputes with tax authorities efficiently.</p>
+      <!-- Item 6 -->
+      <div class="service-item" data-aos="fade-up" data-aos-delay="600">
+        <div>
+          <i class="bi bi-graph-up-arrow service-icon"></i>
+          <h3 class="service-title" data-lang="serv_tax_title">Business Taxation</h3>
         </div>
+        <p class="service-desc" data-lang="serv_tax_desc">Optimizing tax strategies and resolving disputes with tax authorities efficiently.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="cases" class="py-5" data-aos="fade-up">
+<!-- STATS STRIP -->
+<section class="stats-strip">
   <div class="container">
-    <h2 class="mb-5 text-center fw-bold" data-aos="fade-up" data-lang="sec_cases_title">Selected Case Results</h2>
-    <div class="row gy-4">
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="card h-100">
-          <div class="card-body p-4 text-center">
-            <h3 class="display-6 fw-bold mb-3">5.5 <span class="fs-5" data-lang="case_sums">billion sums</span></h3>
-            <hr class="w-25 mx-auto opacity-25">
-            <p class="mb-0 mt-3" data-lang="case_1_desc">Victory in the Supreme Court: Fine recovery case canceled successfully.</p>
-          </div>
+    <div class="row">
+      <div class="col-md-4 stat-box" data-aos="zoom-in" data-aos-delay="100">
+        <span class="stat-number">5000+</span>
+        <span class="stat-label" data-lang="stats_cases">Successful Cases</span>
+      </div>
+      <div class="col-md-4 stat-box" data-aos="zoom-in" data-aos-delay="200">
+        <span class="stat-number">6000+</span>
+        <span class="stat-label" data-lang="stats_clients">Trusted Clients</span>
+      </div>
+      <!-- Stats Section - Add data-lang to Years Experience -->
+      <div class="col-md-4 stat-box" data-aos="zoom-in" data-aos-delay="300">
+        <span class="stat-number">15+</span>
+        <span class="stat-label" data-lang="stats_experience">Years Experience</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE RESULTS -->
+<section id="cases" class="section-cases">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+        <span class="section-label" data-lang="sec_track_label">Track Record</span>
+        <h2 class="section-title" data-lang="sec_cases_title">Selected Case Results</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="case-card">
+            <span class="case-tag" data-lang="case_tag_1">Supreme Court Victory</span>
+            <div class="case-amount">5.5 <span data-lang="case_sums">billion sums</span></div>
+            <p class="case-desc" data-lang="case_1_desc">Victory in the Supreme Court: Fine recovery case canceled successfully.</p>
         </div>
       </div>
 
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="card h-100">
-          <div class="card-body p-4 text-center">
-            <h3 class="display-6 fw-bold mb-3">9.6 <span class="fs-5" data-lang="case_sums">billion sums</span></h3>
-            <hr class="w-25 mx-auto opacity-25">
-            <p class="mb-0 mt-3" data-lang="case_2_desc">Supreme Court win for returning NDS tax to the company's account.</p>
-          </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="case-card">
+            <span class="case-tag" data-lang="case_tag_2">Tax Dispute</span>
+            <div class="case-amount">9.6 <span data-lang="case_sums">billion sums</span></div>
+            <p class="case-desc" data-lang="case_2_desc">Supreme Court win for returning NDS tax to the company's account.</p>
         </div>
       </div>
 
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="card h-100">
-          <div class="card-body p-4 text-center">
-            <h3 class="display-6 fw-bold mb-3">11 <span class="fs-5" data-lang="case_sums">billion sums</span></h3>
-            <hr class="w-25 mx-auto opacity-25">
-            <p class="mb-0 mt-3" data-lang="case_3_desc">Leasing company debt collection case — funds returned to client.</p>
-          </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="case-card">
+            <span class="case-tag" data-lang="case_tag_3">Debt Collection</span>
+            <div class="case-amount">11 <span data-lang="case_sums">billion sums</span></div>
+            <p class="case-desc" data-lang="case_3_desc">Leasing company debt collection case — funds returned to client.</p>
         </div>
       </div>
     </div>
-
-    <div class="mt-5 text-center" data-aos="fade-up" data-aos-delay="400">
-      <a href="#contact" class="btn btn-outline-primary px-4 py-2" data-lang="btn_case_review">Request a Case Review</a>
+    
+    <div class="text-center mt-5" data-aos="fade-up">
+        <a href="#contact" class="btn-case-review" data-lang="btn_case_review">Request a Case Review</a>
     </div>
   </div>
 </section>
@@ -2427,159 +3785,82 @@ body.menu-open::before {
     
     <div class="partner-marquee">
         <div class="partner-track">
-            <div class="partner-list">
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 128px; height: 128px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">MaxProduct</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Astellas</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 90px; height: 90px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Statura</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
-                    </div>
-                </div>
-
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 128px; height: 128px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">MaxProduct</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Astellas</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Statura</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
-                    </div>
-                </div>
-
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/maxproduct.png" alt="MaxProduct" class="me-2" style="width: 128px; height: 128px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">MaxProduct</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Aziya Iron Steel</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Trast Leasing</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/astellas.png" alt="Astellas" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Astellas</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/statura.png" alt="Statura" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Statura</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/uz-gerb.png" alt="Civil Aviation Agency" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Civil Aviation Agency</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Aziya Kabel" class="me-2" style="width: 80px; height: 80px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Artikul Aziya Kabel</span>
-                    </div>
-                </div>
-                <div class="partner-item">
-                    <div class="partner-wrapper d-flex align-items-center">
-                        <img src="imgs/golden-fish-group.png" alt="Golden Fish Group" class="me-2" style="width: 100px; height: 100px; object-fit: contain;">
-                        <span class="partner-logo fw-bold text-muted">Golden Fish Group</span>
-                    </div>
-                </div>
+            
+            <!-- SET 1: Original Items -->
+            <div class="partner-card">
+                <img src="imgs/maxproduct.png" alt="MaxProduct" class="partner-logo-img">
+                <span class="partner-name">MaxProduct</span>
             </div>
+            <div class="partner-card">
+                <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="partner-logo-img">
+                <span class="partner-name">Aziya Iron Steel</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="partner-logo-img">
+                <span class="partner-name">Trast Leasing</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/astellas.png" alt="Astellas" class="partner-logo-img">
+                <span class="partner-name">Astellas</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/statura.png" alt="Statura" class="partner-logo-img">
+                <span class="partner-name">Statura</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/uz-gerb.png" alt="Civil Aviation" class="partner-logo-img">
+                <span class="partner-name">Civil Aviation Agency</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Kabel" class="partner-logo-img">
+                <span class="partner-name">Artikul Aziya Kabel</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/golden-fish-group.png" alt="Golden Fish" class="partner-logo-img">
+                <span class="partner-name">Golden Fish Group</span>
+            </div>
+
+            <!-- SET 2: Duplicate Items for Seamless Loop -->
+            <!-- Note: For a CSS-only infinite loop, you need exactly two sets of items. 
+                 The animation moves -50%, which aligns Set 2 perfectly where Set 1 started. -->
+            <div class="partner-card">
+                <img src="imgs/maxproduct.png" alt="MaxProduct" class="partner-logo-img">
+                <span class="partner-name">MaxProduct</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/aziya-iron-steel.png" alt="Aziya Iron" class="partner-logo-img">
+                <span class="partner-name">Aziya Iron Steel</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/trast-leasing.png" alt="Trast Leasing" class="partner-logo-img">
+                <span class="partner-name">Trast Leasing</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/astellas.png" alt="Astellas" class="partner-logo-img">
+                <span class="partner-name">Astellas</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/statura.png" alt="Statura" class="partner-logo-img">
+                <span class="partner-name">Statura</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/uz-gerb.png" alt="Civil Aviation" class="partner-logo-img">
+                <span class="partner-name">Civil Aviation Agency</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/artikul-aziya-kabel.png" alt="Artikul Kabel" class="partner-logo-img">
+                <span class="partner-name">Artikul Aziya Kabel</span>
+            </div>
+            <div class="partner-card">
+                <img src="imgs/golden-fish-group.png" alt="Golden Fish" class="partner-logo-img">
+                <span class="partner-name">Golden Fish Group</span>
+            </div>
+
         </div>
     </div>
 </section>
 
-<section id="about" class="py-5" data-aos="fade-up">
+<section id="about" class="py-5 about-background" data-aos="fade-up">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 mb-4 mb-lg-0">
@@ -2639,17 +3920,18 @@ body.menu-open::before {
             </div>
             <div>
                 <small class="text-muted d-block" data-lang="contact_label_email">Email Us</small>
-                <a href="mailto:humolegal@mail.ru" class="text-decoration-none fw-bold text-main">humolegal@mail.ru</a>
+                <a href="mailto:legalhumo@gmail.com" class="text-decoration-none fw-bold text-main">legalhumo@gmail.com</a>
             </div>
         </div>
 
+        <!-- Contact Section Address -->
         <div class="d-flex mb-3 align-items-center">
             <div class="bg-surface p-3 rounded-circle shadow-sm me-3 text-primary">
                 <i class="bi bi-geo-alt-fill fs-5"></i>
             </div>
             <div>
                 <small class="text-muted d-block" data-lang="contact_label_visit">Visit Us</small>
-                <span>Atlas Business Tower, 25 Mirzo Ulugbek St., Tashkent</span>
+                <span data-lang="contact_address">Atlas Business Tower, 25 Mirzo Ulugbek St., Tashkent</span>
             </div>
         </div>
       </div>
@@ -2700,33 +3982,32 @@ body.menu-open::before {
   </div>
 </section>
 
+<!-- Footer -->
 <footer class="py-4 text-center text-md-start" data-aos="fade-up">
-  <div class="container">
-    <div class="row align-items-center">
-        <div class="col-md-4 mb-3 mb-md-0">
-             <div class="fw-bold fs-5">HUMO LEGAL</div>
-             <small class="opacity-75">© <span id="year"></span> <span data-lang="footer_rights">All rights reserved.</span></small>
-        </div>
-        
-        <div class="col-md-4 mb-3 mb-md-0 text-center">
-            <div class="d-inline-flex gap-3">
-              <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram"><i class="bi bi-telegram fs-5"></i></a>
-              <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram"><i class="bi bi-instagram fs-5"></i></a>
-              <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
-              <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook"><i class="bi bi-facebook fs-5"></i></a>
-              <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube"><i class="bi bi-youtube fs-5"></i></a>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="fw-bold fs-5">HUMO LEGAL</div>
+                <small class="opacity-75">© <span id="year"></span> <span data-lang="footer_rights">All rights reserved.</span></small>
             </div>
-            <small class="d-block opacity-75 mt-2">
-                 Powered by <a href="https://t.me/as_abrorov" target="_blank" class="text-white fw-bold opacity-100" style="text-decoration: underline;">A A</a>
-             </small>
-        </div>
-        
-        <div class="col-md-4 text-md-end">
-            <small class="d-block opacity-75">Atlas Business Tower, Tashkent</small>
-            <small class="d-block opacity-75">humolegal@mail.ru</small>
+            <div class="col-md-4 mb-3 mb-md-0 text-center">
+                <div class="d-inline-flex gap-3">
+                    <a href="https://t.me/humolegal" target="_blank" aria-label="Telegram"><i class="bi bi-telegram fs-5"></i></a>
+                    <a href="https://instagram.com/humo_legal?igshid=ZDdkNTZiNTM=" target="_blank" aria-label="Instagram"><i class="bi bi-instagram fs-5"></i></a>
+                    <a href="https://www.linkedin.com/company/humo-legal/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+                    <a href="https://facebook.com/profile.php?id=100088977404806&mibextid=ZbWKwL" target="_blank" aria-label="Facebook"><i class="bi bi-facebook fs-5"></i></a>
+                    <a href="https://www.youtube.com/@humolegal9334" target="_blank" aria-label="YouTube"><i class="bi bi-youtube fs-5"></i></a>
+                </div>
+                <small class="d-block opacity-75 mt-2">
+                    <span data-lang="footer_powered">Powered by</span> <a href="https://t.me/as_abrorov" target="_blank" class="text-white fw-bold opacity-100" style="text-decoration: underline;">A A</a>
+                </small>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <small class="d-block opacity-75" data-lang="footer_address">Atlas Business Tower, Tashkent</small>
+                <small class="d-block opacity-75">legalhumo@gmail.com</small>
+            </div>
         </div>
     </div>
-  </div>
 </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -2802,164 +4083,369 @@ body.menu-open::before {
   if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
   if (overlayThemeToggle) overlayThemeToggle.addEventListener('click', toggleTheme);
 
-  // =========================================
-  // 4. LANGUAGE SELECTION FUNCTIONALITY
-  // =========================================
-  const translationsData = {
+// =========================================
+// 4. LANGUAGE SELECTION FUNCTIONALITY (COMPLETE)
+// =========================================
+const translationsData = {
     "en": {
-      "nav_services": "Practice Areas", "nav_cases": "Case Results",
-      "nav_partners": "Partners", "nav_about": "About", "nav_contact": "Contact Us",
-      "hero_title": "HUMO LEGAL <br>law firm",
-      "hero_desc": "We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.",
-      "btn_consult": "Request Consultation", "btn_results": "View Results",
-      "stats_cases": "Successful Cases", "stats_clients": "Trusted Clients",
-      "sec_services_title": "Our Practice Areas",
-      "sec_services_desc": "Comprehensive legal solutions tailored to your specific business needs.",
-      "serv_corp_title": "Corporate<br>Compliance",
-      "serv_corp_desc": "Navigating complex regulations and ensuring your business stays compliant with evolving laws.",
-      "serv_labor_title": "Labor &<br>Employment",
-      "serv_labor_desc": "Expert advice on employment contracts, disputes, and workplace safety regulations.",
-      "serv_disp_title": "Dispute<br>Resolution",
-      "serv_disp_desc": "Strategic representation in litigation and arbitration to protect your interests.",
-      "serv_ip_title": "Intellectual<br>Property",
-      "serv_ip_desc": "Protecting your innovations, trademarks, and creative assets from infringement.",
-      "serv_ma_title": "Mergers &<br>Acquisitions",
-      "serv_ma_desc": "Guiding you through complex transactions, due diligence, and integration processes.",
-      "serv_tax_title": "Business<br>Taxation",
-      "serv_tax_desc": "Optimizing tax strategies and resolving disputes with tax authorities efficiently.",
-      "sec_cases_title": "Selected Case Results",
-      "case_1_desc": "Victory in the Supreme Court: Fine recovery case canceled successfully.",
-      "case_sums": "Billion sums",
-      "case_2_desc": "Supreme Court win for returning NDS tax to the company's account.",
-      "case_3_desc": "Leasing company debt collection case — funds returned to client.",
-      "btn_case_review": "Request a Case Review",
-      "sec_partners_title": "Our Partners",
-      "sec_about_title": "About HUMO LEGAL",
-      "sec_about_lead": "Your strategic legal partner in Uzbekistan.",
-      "sec_about_text": "“HUMO LEGAL” law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.",
-      "about_val_title": "Core Values",
-      "about_val_text": "Client-first approach, full confidentiality, and deep legal expertise across multiple domains.",
-      "about_exp_title": "Experience",
-      "about_exp_text": "Successful representation in lease disputes, tax claims, and corporate reorganizations.",
-      "why_title": "Why Choose Us?",
-      "why_1": "98% Success Rate in Economic Courts",
-      "why_2": "24/7 Client Support Availability",
-      "why_3": "Transparent Fee Structure",
-      "why_4": "International Legal Standards",
-      "sec_contact_title": "Get a Free Consultation",
-      "sec_contact_desc": "Call us, send an email, or use the contact form below. We will get back within one business day.",
-      "contact_label_call": "Call Us", "contact_label_email": "Email Us", "contact_label_visit": "Visit Us",
-      "form_title": "Send us a message", "form_name": "Full name", "form_email": "Email address",
-      "form_msg": "Brief message", "form_btn": "Send message",
-      "footer_rights": "All rights reserved."
+        // Navigation
+        "nav_services": "Practice Areas",
+        "nav_cases": "Case Results",
+        "nav_partners": "Partners",
+        "nav_about": "About",
+        "nav_contact": "Contact Us",
+        
+        // Hero
+        "hero_title": "HUMO LEGAL <br>law firm",
+        "hero_desc": "We don't just provide legal services. We care about our clients! Trusted by hundreds of businesses across Uzbekistan.",
+        "btn_consult": "Request Consultation",
+        "btn_results": "View Results",
+        
+        // Stats
+        "stats_cases": "Successful Cases",
+        "stats_clients": "Trusted Clients",
+        "stats_experience": "Years Experience",
+        
+        // Services
+        "sec_expertise_label": "Our Expertise",
+        "sec_services_title": "Our Practice Areas",
+        "sec_services_desc": "Comprehensive legal solutions tailored to your specific business needs.",
+        "serv_corp_title": "Corporate<br>Compliance",
+        "serv_corp_desc": "Navigating complex regulations and ensuring your business stays compliant with evolving laws.",
+        "serv_labor_title": "Labor &<br>Employment",
+        "serv_labor_desc": "Expert advice on employment contracts, disputes, and workplace safety regulations.",
+        "serv_disp_title": "Dispute<br>Resolution",
+        "serv_disp_desc": "Strategic representation in litigation and arbitration to protect your interests.",
+        "serv_ip_title": "Intellectual<br>Property",
+        "serv_ip_desc": "Protecting your innovations, trademarks, and creative assets from infringement.",
+        "serv_ma_title": "Mergers &<br>Acquisitions",
+        "serv_ma_desc": "Guiding you through complex transactions, due diligence, and integration processes.",
+        "serv_tax_title": "Business<br>Taxation",
+        "serv_tax_desc": "Optimizing tax strategies and resolving disputes with tax authorities efficiently.",
+        
+        // Cases
+        "sec_track_label": "Track Record",
+        "sec_cases_title": "Selected Case Results",
+        "case_tag_1": "Supreme Court Victory",
+        "case_tag_2": "Tax Dispute",
+        "case_tag_3": "Debt Collection",
+        "case_sums": "billion sums",
+        "case_1_desc": "Victory in the Supreme Court: Fine recovery case canceled successfully.",
+        "case_2_desc": "Supreme Court win for returning NDS tax to the company's account.",
+        "case_3_desc": "Leasing company debt collection case — funds returned to client.",
+        "btn_case_review": "Request a Case Review",
+        
+        // Partners
+        "sec_partners_title": "Our Trusted Partners",
+        
+        // About
+        "sec_about_title": "About HUMO LEGAL",
+        "sec_about_lead": "Your strategic legal partner in Uzbekistan.",
+        "sec_about_text": "\"HUMO LEGAL\" law firm provides legal services across civil, economic and administrative law to individuals and legal entities. Our attorneys prepare complex legal documents, represent clients in court proceedings, and achieve measurable results in high-stakes cases.",
+        "about_val_title": "Core Values",
+        "about_val_text": "Client-first approach, full confidentiality, and deep legal expertise across multiple domains.",
+        "about_exp_title": "Experience",
+        "about_exp_text": "Successful representation in lease disputes, tax claims, and corporate reorganizations.",
+        "why_title": "Why Choose Us?",
+        "why_1": "98% Success Rate in Economic Courts",
+        "why_2": "24/7 Client Support Availability",
+        "why_3": "Transparent Fee Structure",
+        "why_4": "International Legal Standards",
+        
+        // Contact
+        "sec_contact_title": "Get a Free Consultation",
+        "sec_contact_desc": "Call us, send an email, or use the contact form below. We will get back within one business day.",
+        "contact_label_call": "Call Us",
+        "contact_label_email": "Email Us",
+        "contact_label_visit": "Visit Us",
+        "contact_address": "Atlas Business Tower, 25 Mirzo Ulugbek St., Tashkent",
+        "form_title": "Send us a message",
+        "form_name": "Full name",
+        "form_email": "Email address",
+        "form_msg": "Brief message",
+        "form_btn": "Send message",
+        
+        // Footer
+        "footer_rights": "All rights reserved.",
+        "footer_powered": "Powered by",
+        "footer_address": "Atlas Business Tower, Tashkent",
+        
+        // Full Screen Menu
+        "menu_practices_title": "PRACTICES",
+        "menu_practice_1": "Corporate Law and M&A",
+        "menu_practice_2": "International Arbitration and Cross-Border Disputes",
+        "menu_practice_3": "Capital Markets",
+        "menu_practice_4": "Special Situations",
+        "menu_practice_5": "Healthcare and Life Science",
+        "menu_practice_6": "Infrastructure and PPP",
+        "menu_practice_7": "Banking and Finance Law",
+        "menu_practice_8": "Dispute Resolution",
+        "menu_practice_9": "Sanctions Law",
+        "menu_practice_10": "Real Estate. Land. Construction",
+        "menu_practice_11": "Tax Advisory and Litigation",
+        "menu_practice_12": "Employment Law",
+        "menu_practice_13": "Private Clients",
+        "menu_practice_14": "Intellectual Property",
+        "menu_practice_15": "Customs Law and Foreign Economic Activity",
+        "menu_practice_16": "Compliance",
+        "menu_practice_17": "Currency Regulation",
+        "menu_practice_18": "Investment Support",
+        "menu_practice_19": "Bankruptcy",
+        "menu_industries_title": "INDUSTRIES",
+        "menu_industry_1": "Energy and Natural Resources",
+        "menu_industry_2": "Agriculture",
+        "menu_industry_3": "Retail",
+        "menu_industry_4": "Transport and Logistics",
+        "menu_industry_5": "Technology, Media and Telecommunications",
+        "menu_industry_6": "Healthcare and Life Sciences",
+        "menu_industry_7": "Real Estate",
+        "menu_industry_8": "Financial Services and Fintech"
     },
     "ru": {
-      "nav_services": "Сферы практики", "nav_cases": "Результаты дел",
-      "nav_partners": "Партнеры", "nav_about": "О нас", "nav_contact": "Контакты",
-      "hero_title": "Юридическая фирма <br>HUMO LEGAL",
-      "hero_desc": "Мы не просто оказываем юридические услуги. Мы заботимся о наших клиентах! Нам доверяют сотни компаний по всему Узбекистану.",
-      "btn_consult": "Заказать консультацию", "btn_results": "Смотреть результаты",
-      "stats_cases": "Успешных дел", "stats_clients": "Довольных клиентов",
-      "sec_services_title": "Наши сферы практики",
-      "sec_services_desc": "Комплексные юридические решения, адаптированные под нужды вашего бизнеса.",
-      "serv_corp_title": "Корпоративный<br>Комплаенс",
-      "serv_corp_desc": "Навигация в сложных правилах и обеспечение соответствия вашего бизнеса законам.",
-      "serv_labor_title": "Трудовое<br>Право",
-      "serv_labor_desc": "Экспертные консультации по трудовым договорам, спорам и правилам безопасности.",
-      "serv_disp_title": "Разрешение<br>Споров",
-      "serv_disp_desc": "Стратегическое представительство в судах и арбитраже для защиты ваших интересов.",
-      "serv_ip_title": "Интеллектуальная<br>Собственность",
-      "serv_ip_desc": "Защита ваших инноваций, торговых марок и творческих активов от нарушений.",
-      "serv_ma_title": "Слияния и<br>Поглощения",
-      "serv_ma_desc": "Сопровождение сложных сделок, due diligence и процессов интеграции.",
-      "serv_tax_title": "Бизнес<br>Налогообложение",
-      "serv_tax_desc": "Оптимизация налоговых стратегий и эффективное разрешение споров с налоговыми органами.",
-      "sec_cases_title": "Избранные результаты",
-      "case_1_desc": "Победа в Верховном суде: Дело о взыскании штрафа успешно отменено.",
-      "case_sums": "Миллиард сумов",
-      "case_2_desc": "Победа в Верховном суде по возврату НДС на счет компании.",
-      "case_3_desc": "Дело о взыскании долга с лизинговой компании — средства возвращены клиенту.",
-      "btn_case_review": "Запросить обзор дела",
-      "sec_partners_title": "Наши партнеры",
-      "sec_about_title": "О HUMO LEGAL",
-      "sec_about_lead": "Ваш стратегический юридический партнер в Узбекистане.",
-      "sec_about_text": "Юридическая фирма «HUMO LEGAL» предоставляет услуги в области гражданского, экономического и административного права. Наши адвокаты готовят сложные документы, представляют клиентов в суде и добиваются результатов.",
-      "about_val_title": "Ценности",
-      "about_val_text": "Интересы клиента на первом месте, полная конфиденциальность и глубокая экспертиза.",
-      "about_exp_title": "Опыт",
-      "about_exp_text": "Успешное представительство в спорах об аренде, налоговых исках и реорганизации.",
-      "why_title": "Почему мы?",
-      "why_1": "98% Успешных дел в экономических судах",
-      "why_2": "Поддержка клиентов 24/7",
-      "why_3": "Прозрачная структура оплаты",
-      "why_4": "Международные стандарты",
-      "sec_contact_title": "Бесплатная консультация",
-      "sec_contact_desc": "Позвоните нам, отправьте email или используйте форму ниже. Мы ответим в течение дня.",
-      "contact_label_call": "Позвонить", "contact_label_email": "Написать", "contact_label_visit": "Приехать",
-      "form_title": "Отправить сообщение", "form_name": "ФИО", "form_email": "Email адрес",
-      "form_msg": "Краткое сообщение", "form_btn": "Отправить",
-      "footer_rights": "Все права защищены."
+        // Navigation
+        "nav_services": "Сферы практики",
+        "nav_cases": "Результаты дел",
+        "nav_partners": "Партнеры",
+        "nav_about": "О нас",
+        "nav_contact": "Контакты",
+        
+        // Hero
+        "hero_title": "Юридическая фирма <br>HUMO LEGAL",
+        "hero_desc": "Мы не просто оказываем юридические услуги. Мы заботимся о наших клиентах! Нам доверяют сотни компаний по всему Узбекистану.",
+        "btn_consult": "Заказать консультацию",
+        "btn_results": "Смотреть результаты",
+        
+        // Stats
+        "stats_cases": "Успешных дел",
+        "stats_clients": "Довольных клиентов",
+        "stats_experience": "Лет опыта",
+        
+        // Services
+        "sec_expertise_label": "Наша экспертиза",
+        "sec_services_title": "Наши сферы практики",
+        "sec_services_desc": "Комплексные юридические решения, адаптированные под нужды вашего бизнеса.",
+        "serv_corp_title": "Корпоративный<br>Комплаенс",
+        "serv_corp_desc": "Навигация в сложных правилах и обеспечение соответствия вашего бизнеса законам.",
+        "serv_labor_title": "Трудовое<br>Право",
+        "serv_labor_desc": "Экспертные консультации по трудовым договорам, спорам и правилам безопасности.",
+        "serv_disp_title": "Разрешение<br>Споров",
+        "serv_disp_desc": "Стратегическое представительство в судах и арбитраже для защиты ваших интересов.",
+        "serv_ip_title": "Интеллектуальная<br>Собственность",
+        "serv_ip_desc": "Защита ваших инноваций, торговых марок и творческих активов от нарушений.",
+        "serv_ma_title": "Слияния и<br>Поглощения",
+        "serv_ma_desc": "Сопровождение сложных сделок, due diligence и процессов интеграции.",
+        "serv_tax_title": "Бизнес<br>Налогообложение",
+        "serv_tax_desc": "Оптимизация налоговых стратегий и эффективное разрешение споров с налоговыми органами.",
+        
+        // Cases
+        "sec_track_label": "Наши достижения",
+        "sec_cases_title": "Избранные результаты",
+        "case_tag_1": "Победа в Верховном суде",
+        "case_tag_2": "Налоговый спор",
+        "case_tag_3": "Взыскание долга",
+        "case_sums": "миллиард сумов",
+        "case_1_desc": "Победа в Верховном суде: Дело о взыскании штрафа успешно отменено.",
+        "case_2_desc": "Победа в Верховном суде по возврату НДС на счет компании.",
+        "case_3_desc": "Дело о взыскании долга с лизинговой компании — средства возвращены клиенту.",
+        "btn_case_review": "Запросить обзор дела",
+        
+        // Partners
+        "sec_partners_title": "Наши партнеры",
+        
+        // About
+        "sec_about_title": "О HUMO LEGAL",
+        "sec_about_lead": "Ваш стратегический юридический партнер в Узбекистане.",
+        "sec_about_text": "Юридическая фирма «HUMO LEGAL» предоставляет услуги в области гражданского, экономического и административного права. Наши адвокаты готовят сложные документы, представляют клиентов в суде и добиваются результатов.",
+        "about_val_title": "Ценности",
+        "about_val_text": "Интересы клиента на первом месте, полная конфиденциальность и глубокая экспертиза.",
+        "about_exp_title": "Опыт",
+        "about_exp_text": "Успешное представительство в спорах об аренде, налоговых исках и реорганизации.",
+        "why_title": "Почему мы?",
+        "why_1": "98% Успешных дел в экономических судах",
+        "why_2": "Поддержка клиентов 24/7",
+        "why_3": "Прозрачная структура оплаты",
+        "why_4": "Международные стандарты",
+        
+        // Contact
+        "sec_contact_title": "Бесплатная консультация",
+        "sec_contact_desc": "Позвоните нам, отправьте email или используйте форму ниже. Мы ответим в течение дня.",
+        "contact_label_call": "Позвонить",
+        "contact_label_email": "Написать",
+        "contact_label_visit": "Приехать",
+        "contact_address": "Бизнес-центр Atlas, ул. Мирзо Улугбека 25, Ташкент",
+        "form_title": "Отправить сообщение",
+        "form_name": "ФИО",
+        "form_email": "Email адрес",
+        "form_msg": "Краткое сообщение",
+        "form_btn": "Отправить",
+        
+        // Footer
+        "footer_rights": "Все права защищены.",
+        "footer_powered": "Разработано",
+        "footer_address": "Бизнес-центр Atlas, Ташкент",
+        
+        // Full Screen Menu
+        "menu_practices_title": "ПРАКТИКИ",
+        "menu_practice_1": "Корпоративное право и M&A",
+        "menu_practice_2": "Международный арбитраж и трансграничные споры",
+        "menu_practice_3": "Рынки капитала",
+        "menu_practice_4": "Особые ситуации",
+        "menu_practice_5": "Здравоохранение и фармацевтика",
+        "menu_practice_6": "Инфраструктура и ГЧП",
+        "menu_practice_7": "Банковское и финансовое право",
+        "menu_practice_8": "Разрешение споров",
+        "menu_practice_9": "Санкционное право",
+        "menu_practice_10": "Недвижимость. Земля. Строительство",
+        "menu_practice_11": "Налоговый консалтинг и litigation",
+        "menu_practice_12": "Трудовое право",
+        "menu_practice_13": "Частные клиенты",
+        "menu_practice_14": "Интеллектуальная собственность",
+        "menu_practice_15": "Таможенное право и ВЭД",
+        "menu_practice_16": "Комплаенс",
+        "menu_practice_17": "Валютное регулирование",
+        "menu_practice_18": "Инвестиционная поддержка",
+        "menu_practice_19": "Банкротство",
+        "menu_industries_title": "ОТРАСЛИ",
+        "menu_industry_1": "Энергетика и природные ресурсы",
+        "menu_industry_2": "Сельское хозяйство",
+        "menu_industry_3": "Ритейл",
+        "menu_industry_4": "Транспорт и логистика",
+        "menu_industry_5": "Технологии, медиа и телекоммуникации",
+        "menu_industry_6": "Здравоохранение и фармацевтика",
+        "menu_industry_7": "Недвижимость",
+        "menu_industry_8": "Финансовые услуги и финтех"
     },
     "uz": {
-      "nav_services": "Xizmatlar", "nav_cases": "Natijalar",
-      "nav_partners": "Hamkorlar", "nav_about": "Biz haqimizda", "nav_contact": "Aloqa",
-      "hero_title": "HUMO LEGAL <br>yuridik firmasi",
-      "hero_desc": "Biz shunchaki yuridik xizmat ko'rsatmaymiz. Biz mijozlarimiz haqida qayg'uramiz! O'zbekiston bo'ylab yuzlab bizneslarning ishonchi.",
-      "btn_consult": "Konsultatsiya olish", "btn_results": "Natijalarni ko'rish",
-      "stats_cases": "Muvaffaqiyatli ishlar", "stats_clients": "Ishonchli mijozlar",
-      "sec_services_title": "Bizning xizmatlar",
-      "sec_services_desc": "Sizning biznes ehtiyojlaringizga moslashtirilgan keng qamrovli yuridik yechimlar.",
-      "serv_corp_title": "Korporativ<br>Muvofiqlik",
-      "serv_corp_desc": "Murakkab qoidalarni tushunish va biznesingiz qonunlarga muvofiq bo'lishini ta'minlash.",
-      "serv_labor_title": "Mehnat<br>Huquqi",
-      "serv_labor_desc": "Mehnat shartnomalari, nizolar va ish joyi xavfsizligi bo'yicha ekspert maslahatlari.",
-      "serv_disp_title": "Nizolarni<br>Hal qilish",
-      "serv_disp_desc": "Manfaatlaringizni himoya qilish uchun sud va arbitrajda strategik vakillik.",
-      "serv_ip_title": "Intellektual<br>Mulk",
-      "serv_ip_desc": "Innovatsiyalar, savdo belgilari va ijodiy aktivlaringizni himoya qilish.",
-      "serv_ma_title": "Birlashish va<br>Sotib olish",
-      "serv_ma_desc": "Murakkab bitimlar, tekshiruvlar va integratsiya jarayonlarida yordam.",
-      "serv_tax_title": "Biznes<br>Soliq",
-      "serv_tax_desc": "Soliq strategiyalarini optimallashtirish va soliq organlari bilan nizolarni hal qilish.",
-      "sec_cases_title": "Tanlangan natijalar",
-      "case_1_desc": "Oliy sudda g'alaba: Jarimani undirish ishi muvaffaqiyatli bekor qilindi.",
-      "case_sums": "Milliard so'm",
-      "case_2_desc": "QQS solig'ini kompaniya hisobiga qaytarish bo'yicha Oliy sud qarori.",
-      "case_3_desc": "Lizing kompaniyasidan qarz undirish ishi — mablag'lar mijozga qaytarildi.",
-      "btn_case_review": "Ishni ko'rib chiqish",
-      "sec_partners_title": "Bizning hamkorlar",
-      "sec_about_title": "HUMO LEGAL haqida",
-      "sec_about_lead": "O'zbekistondagi strategik yuridik hamkoringiz.",
-      "sec_about_text": "“HUMO LEGAL” yuridik firmasi fuqarolik, iqtisodiy va ma'muriy huquq bo'yicha xizmatlar ko'rsatadi. Advokatlarimiz murakkab hujjatlarni tayyorlaydi va sudda mijoz manfaatlarini himoya qiladi.",
-      "about_val_title": "Qadriyatlar",
-      "about_val_text": "Mijoz manfaati birinchi o'rinda, to'liq maxfiylik va chuqur yuridik tajriba.",
-      "about_exp_title": "Tajriba",
-      "about_exp_text": "Ijara nizolari, soliq da'volari va korporativ qayta tashkil etishda muvaffaqiyatli vakillik.",
-      "why_title": "Nega aynan biz?",
-      "why_1": "Iqtisodiy sudlarda 98% muvaffaqiyat",
-      "why_2": "24/7 Mijozlarni qo'llab-quvvatlash",
-      "why_3": "Shaffof to'lov tizimi",
-      "why_4": "Xalqaro yuridik standartlar",
-      "sec_contact_title": "Bepul konsultatsiya",
-      "sec_contact_desc": "Bizga qo'ng'iroq qiling, xat yozing yoki formani to'ldiring. Bir ish kuni ichida javob beramiz.",
-      "contact_label_call": "Qo'ng'iroq", "contact_label_email": "Email", "contact_label_visit": "Manzil",
-      "form_title": "Xabar yuborish", "form_name": "To'liq ismingiz", "form_email": "Elektron pochta",
-      "form_msg": "Qisqacha xabar", "form_btn": "Yuborish",
-      "footer_rights": "Barcha huquqlar himoyalangan."
+        // Navigation
+        "nav_services": "Xizmatlar",
+        "nav_cases": "Natijalar",
+        "nav_partners": "Hamkorlar",
+        "nav_about": "Biz haqimizda",
+        "nav_contact": "Aloqa",
+        
+        // Hero
+        "hero_title": "HUMO LEGAL <br>yuridik firmasi",
+        "hero_desc": "Biz shunchaki yuridik xizmat ko'rsatmaymiz. Biz mijozlarimiz haqida qayg'uramiz! O'zbekiston bo'ylab yuzlab bizneslarning ishonchi.",
+        "btn_consult": "Konsultatsiya olish",
+        "btn_results": "Natijalarni ko'rish",
+        
+        // Stats
+        "stats_cases": "Muvaffaqiyatli ishlar",
+        "stats_clients": "Ishonchli mijozlar",
+        "stats_experience": "Yillik tajriba",
+        
+        // Services
+        "sec_expertise_label": "Bizning ekspertiza",
+        "sec_services_title": "Bizning xizmatlar",
+        "sec_services_desc": "Sizning biznes ehtiyojlaringizga moslashtirilgan keng qamrovli yuridik yechimlar.",
+        "serv_corp_title": "Korporativ<br>Muvofiqlik",
+        "serv_corp_desc": "Murakkab qoidalarni tushunish va biznesingiz qonunlarga muvofiq bo'lishini ta'minlash.",
+        "serv_labor_title": "Mehnat<br>Huquqi",
+        "serv_labor_desc": "Mehnat shartnomalari, nizolar va ish joyi xavfsizligi bo'yicha ekspert maslahatlari.",
+        "serv_disp_title": "Nizolarni<br>Hal qilish",
+        "serv_disp_desc": "Manfaatlaringizni himoya qilish uchun sud va arbitrajda strategik vakillik.",
+        "serv_ip_title": "Intellektual<br>Mulk",
+        "serv_ip_desc": "Innovatsiyalar, savdo belgilari va ijodiy aktivlaringizni himoya qilish.",
+        "serv_ma_title": "Birlashish va<br>Sotib olish",
+        "serv_ma_desc": "Murakkab bitimlar, tekshiruvlar va integratsiya jarayonlarida yordam.",
+        "serv_tax_title": "Biznes<br>Soliq",
+        "serv_tax_desc": "Soliq strategiyalarini optimallashtirish va soliq organlari bilan nizolarni hal qilish.",
+        
+        // Cases
+        "sec_track_label": "Bizning yutuqlar",
+        "sec_cases_title": "Tanlangan natijalar",
+        "case_tag_1": "Oliy sud g'alabasi",
+        "case_tag_2": "Soliq nizosi",
+        "case_tag_3": "Qarz undirish",
+        "case_sums": "milliard so'm",
+        "case_1_desc": "Oliy sudda g'alaba: Jarimani undirish ishi muvaffaqiyatli bekor qilindi.",
+        "case_2_desc": "QQS solig'ini kompaniya hisobiga qaytarish bo'yicha Oliy sud qarori.",
+        "case_3_desc": "Lizing kompaniyasidan qarz undirish ishi — mablag'lar mijozga qaytarildi.",
+        "btn_case_review": "Ishni ko'rib chiqish",
+        
+        // Partners
+        "sec_partners_title": "Bizning hamkorlar",
+        
+        // About
+        "sec_about_title": "HUMO LEGAL haqida",
+        "sec_about_lead": "O'zbekistondagi strategik yuridik hamkoringiz.",
+        "sec_about_text": "\"HUMO LEGAL\" yuridik firmasi fuqarolik, iqtisodiy va ma'muriy huquq bo'yicha xizmatlar ko'rsatadi. Advokatlarimiz murakkab hujjatlarni tayyorlaydi va sudda mijoz manfaatlarini himoya qiladi.",
+        "about_val_title": "Qadriyatlar",
+        "about_val_text": "Mijoz manfaati birinchi o'rinda, to'liq maxfiylik va chuqur yuridik tajriba.",
+        "about_exp_title": "Tajriba",
+        "about_exp_text": "Ijara nizolari, soliq da'volari va korporativ qayta tashkil etishda muvaffaqiyatli vakillik.",
+        "why_title": "Nega aynan biz?",
+        "why_1": "Iqtisodiy sudlarda 98% muvaffaqiyat",
+        "why_2": "24/7 Mijozlarni qo'llab-quvvatlash",
+        "why_3": "Shaffof to'lov tizimi",
+        "why_4": "Xalqaro yuridik standartlar",
+        
+        // Contact
+        "sec_contact_title": "Bepul konsultatsiya",
+        "sec_contact_desc": "Bizga qo'ng'iroq qiling, xat yozing yoki formani to'ldiring. Bir ish kuni ichida javob beramiz.",
+        "contact_label_call": "Qo'ng'iroq",
+        "contact_label_email": "Email",
+        "contact_label_visit": "Manzil",
+        "contact_address": "Atlas Business Tower, Mirzo Ulug'bek ko'chasi 25, Toshkent",
+        "form_title": "Xabar yuborish",
+        "form_name": "To'liq ismingiz",
+        "form_email": "Elektron pochta",
+        "form_msg": "Qisqacha xabar",
+        "form_btn": "Yuborish",
+        
+        // Footer
+        "footer_rights": "Barcha huquqlar himoyalangan.",
+        "footer_powered": "Tomonidan ishlab chiqilgan",
+        "footer_address": "Atlas Business Tower, Toshkent",
+        
+        // Full Screen Menu
+        "menu_practices_title": "AMALIYOTLAR",
+        "menu_practice_1": "Korporativ huquq va M&A",
+        "menu_practice_2": "Xalqaro arbitraj va transchegaraviy nizolar",
+        "menu_practice_3": "Kapital bozorlari",
+        "menu_practice_4": "Maxsus vaziyatlar",
+        "menu_practice_5": "Sog'liqni saqlash va farmatsevtika",
+        "menu_practice_6": "Infrastruktur va DXT",
+        "menu_practice_7": "Bank va moliya huquqi",
+        "menu_practice_8": "Nizolarni hal qilish",
+        "menu_practice_9": "Sanksiya huquqi",
+        "menu_practice_10": "Ko'chmas mulk. Yer. Qurilish",
+        "menu_practice_11": "Soliq maslahati va litigation",
+        "menu_practice_12": "Mehnat huquqi",
+        "menu_practice_13": "Xususiy mijozlar",
+        "menu_practice_14": "Intellektual mulk",
+        "menu_practice_15": "Bojxona huquqi va TIF",
+        "menu_practice_16": "Komplaens",
+        "menu_practice_17": "Valyuta tartibga solish",
+        "menu_practice_18": "Investitsiya qo'llab-quvvatlash",
+        "menu_practice_19": "Bankrotlik",
+        "menu_industries_title": "SOHALAR",
+        "menu_industry_1": "Energetika va tabiiy resurslar",
+        "menu_industry_2": "Qishloq xo'jaligi",
+        "menu_industry_3": "Chakana savdo",
+        "menu_industry_4": "Transport va logistika",
+        "menu_industry_5": "Texnologiya, media va telekommunikatsiya",
+        "menu_industry_6": "Sog'liqni saqlash va farmatsevtika",
+        "menu_industry_7": "Ko'chmas mulk",
+        "menu_industry_8": "Moliyaviy xizmatlar va fintech"
     }
-  };
+};
 
-  let currentLanguage = localStorage.getItem("lang") || "en";
+let currentLanguage = localStorage.getItem("lang") || "en";
 
-  function initLanguage(lang) {
+function initLanguage(lang) {
     const translations = translationsData[lang];
     if (!translations) return;
     
+    // Translate ALL elements with data-lang attribute
     document.querySelectorAll("[data-lang]").forEach(el => {
-      const key = el.getAttribute("data-lang");
-      if (translations[key]) el.innerHTML = translations[key];
+        const key = el.getAttribute("data-lang");
+        if (translations[key]) {
+            el.innerHTML = translations[key];
+        }
     });
     
+    // Update language display
     const langLabels = { "en": "EN", "ru": "RU", "uz": "UZ" };
     const currentLangDisplay = document.getElementById("currentLang");
     const overlayCurrentLangDisplay = document.getElementById("overlayCurrentLang");
@@ -2969,42 +4455,39 @@ body.menu-open::before {
     
     // Update active state in dropdowns
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.closest('.dropdown-item')?.classList.remove('active');
-      if (btn.getAttribute('data-lang-select') === lang) {
-        btn.closest('.dropdown-item')?.classList.add('active');
-      }
+        btn.closest('.dropdown-item')?.classList.remove('active');
+        if (btn.getAttribute('data-lang-select') === lang) {
+            btn.closest('.dropdown-item')?.classList.add('active');
+        }
     });
-  }
+}
 
-  function loadLanguage(lang) {
+function loadLanguage(lang) {
     const translations = translationsData[lang];
     if (!translations) return;
-
+    
+    // Add transition effect
     const elements = document.querySelectorAll("[data-lang]");
     elements.forEach(el => el.classList.add("lang-switching"));
-
+    
     setTimeout(() => {
-      elements.forEach(el => {
-        const key = el.getAttribute("data-lang");
-        if (translations[key]) el.innerHTML = translations[key];
-      });
-      initLanguage(lang);
-      elements.forEach(el => el.classList.remove("lang-switching"));
+        initLanguage(lang);
+        elements.forEach(el => el.classList.remove("lang-switching"));
     }, 300);
-  }
+}
 
-  document.querySelectorAll(".lang-btn").forEach(btn => {
+// Language button event listeners
+document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const lang = btn.getAttribute("data-lang-select");
-      if (lang !== currentLanguage) {
-        currentLanguage = lang;
-        localStorage.setItem("lang", lang);
-        loadLanguage(lang);
-      }
+        e.preventDefault();
+        const lang = btn.getAttribute("data-lang-select");
+        if (lang !== currentLanguage) {
+            currentLanguage = lang;
+            localStorage.setItem("lang", lang);
+            loadLanguage(lang);
+        }
     });
-  });
-
+});
   // =========================================
   // 5. MAP THEME UPDATES
   // =========================================
@@ -3111,6 +4594,23 @@ body.menu-open::before {
       if (e.target === fullscreenMenu) closeMenu();
     });
   });
+
+// =========================================
+// 9. NAVBAR SCROLL EFFECT
+// =========================================
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.custom-navbar');
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+});
+
+// Trigger on page load in case already scrolled
+window.dispatchEvent(new Event('scroll'));
 </script>
 
 </body>
